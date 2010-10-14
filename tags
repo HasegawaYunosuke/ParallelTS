@@ -1,0 +1,3 @@
+Mmain	main.c	/^int main(int argc, char **argv)$/
+init	init.c	/^void init(int argc, char **argv)$/
+mif	read_data.c	/^void mif(int argc, char **argv)$/
