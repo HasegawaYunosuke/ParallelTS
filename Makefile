@@ -1,6 +1,15 @@
-CC = gcc
-BASEFILE = main.c check.c init.c read_data.c
+vpath %.c src
+vpath %.h include
+vpath %.o object
 
-nompi:	$(BASEFILE)
-	$(CC) $(BASEFILE)
-	rm *.o
+CPPFLAGS = -I include
+BASEFILE = main.c init.c check.c read_data.c
+MPIFILE = mpi.c
+CC = gcc
+
+%.o: ${BASEFILE}
+	${CC} -c ${CPPFLAGS} $^
+	mv *.o object/
+
+a.out: object/*.o
+	${CC} ${CPPFLAGS} $^ -o a.out
