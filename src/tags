@@ -2,3 +2,5 @@ Mmain	main.c	/^int main(int argc, char **argv)$/
 cif	check.c	/^void cif(int argc, char **argv)$/
 init	init.c	/^void init(int argc, char **argv)$/
 mif	read_data.c	/^void mif(int argc, char **argv)$/
+rfop	file_manage.c	/^void rfop(char ** argv, FILE * rfp)$/
+rif_sd	read_data.c	/^void rif_sd(FILE * rfp)$/

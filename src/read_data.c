@@ -7,7 +7,7 @@ void mif(int argc, char **argv)
 {
     FILE * rfp;
 
-    rfop(argv, rfp);
+    rfp = rfop(argv);
     rif_sd(rfp);
     fclose(rfp);
 }
@@ -17,13 +17,11 @@ void rif_sd(FILE * rfp)
     char buf[RBUFFSIZE];
 
     for(;;) {
-        printf("TEST\n");
         if(fgets(buf, RLINESIZE, rfp) == NULL) {
             break;
         }
         else {
-            printf("TEST2\n");
-            /*DEL*/printf("READ:%s\n", buf);
+            /*DEL*/printf("READ:%s", buf);
         }
     }
 }
