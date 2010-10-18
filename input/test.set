@@ -1,1 +1,19 @@
-Test Document
+prob:eil51.tsp
+time[sec]:10
+multi[ON/OFF]:OFF
+MPI[ON/OFF]:OFF
+result[simple/navi]:simple
+deb1[ON/OFF]:OFF
+deb2[ON/OFF]:OFF
+deb3[ON/OFF]:OFF
+deb4[ON/OFF]:OFF
+
+
+
+
+
+p_worse[%]:5
+p_wloop:
+p_loop:
+p_TLS:
+p_TLT:

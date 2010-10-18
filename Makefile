@@ -9,9 +9,10 @@ MPIFLAG = -DMPIMODE
 DEBUGFLAG1 = -DDEBUG1
 CC = gcc
 
-%.o: ${BASEFILE}
+all: ${BASEFILE}
 	${CC} -c ${CPPFLAGS} $^
 	mv *.o object/
+	${CC} ${CPPFLAGS} $^ -o a.out
 
 a: object/*.o
 	${CC} ${CPPFLAGS} $^ -o a.out
