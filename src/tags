@@ -1,6 +1,12 @@
 Mmain	main.c	/^int main(int argc, char **argv)$/
+arld	read_data.c	/^void arld(char * rld, int li)$/
 cif	check.c	/^void cif(int argc, char **argv)$/
+gdbl	read_data.c	/^int gdbl(char * rld)$/
+gdna	read_data.c	/^void gdna(char * rld, int di, char * pn)$/
+gdnu	read_data.c	/^int gdnu(char * rld, int di)$/
 init	init.c	/^void init(int argc, char **argv)$/
+itpn	read_data.c	/^void itpn(char * rld)$/
 mif	read_data.c	/^void mif(int argc, char **argv)$/
-rfop	file_manage.c	/^void rfop(char ** argv, FILE * rfp)$/
+rfop	file_manage.c	/^FILE * rfop(char ** argv)$/
 rif_sd	read_data.c	/^void rif_sd(FILE * rfp)$/
+ssti	read_data.c	/^void ssti(char * rld)$/

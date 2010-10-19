@@ -37,6 +37,7 @@ void arld(char * rld, int li)
     }
     /* Search Time */
     else if(li == 2) {
+        ssti(rld);
     }
     /* ON/OFF Muli-core Mode */
     else if(li == 3) {
@@ -89,32 +90,69 @@ void arld(char * rld, int li)
 
 void itpn(char * rld)
 {
-    int i, j;
-    int pssi = 0; /* Problem Size String Index */
-    int ps;
-    char pss[64]; /* Problem Size String */
+    int di; /* Data Index */
+    int ps; /* Problem Size */
     char pn[64]; /* Problem Name */
+
+    di = gdbl(rld);
+    ps = gdnu(rld, di);
+    /*DEL*/printf("ps == %d\n", ps);
+    gdna(rld, di, pn);
+    /*DEL*/printf("pn == %s\n", pn);
+}
+
+void ssti(char * rld)
+{
+    int di = -1; /* Data Index */
+    int st; /* Search Time */
+
+    di = gdbl(rld);
+    st = gdnu(rld, di);
+    /*DEL*/printf("st == %d[sec]\n", st);
+}
+
+int gdbl(char * rld)
+{
+    int i;
 
     for(i = 0;; i++) {
         if(rld[i] == ':') {
-            for(j = i + 1;; j++) {
-                if(rld[j] == '\n' || rld[j] == '\0') {
-                    break;
-                }
-                else {
-                    else if(rld[j] == '.') {
-                        ps = atoi(pss);
-                        /*DEL*/printf("ps == %d\n", ps);
-                    }
-                    else if(rld[j] >= '0' && rld[j] <= '9') {
-                        pss[pssi] = rld[j]; pssi++;
-                    }
-                }
-            }
+            return i + 1;
         }
-        if(rld[j] == '\n' || rld[j] == '\0') {
-            break;
+        else if(rld[i] == '\0') {
+            return -1;
         }
     }
 }
 
+int gdnu(char * rld, int di)
+{
+    int i;
+    int pssi = 0; /* Problem Size String Index */
+    char pss[64]; /* Problem Size String */
+
+    for(i = di;; i++) {
+        if(rld[i] == '\n' || rld[i] == '\0') {
+            return atoi(pss);
+        }
+        else {
+            if(rld[i] >= '0' && rld[i] <= '9') {
+                pss[pssi] = rld[i]; pssi++;
+            }
+        }
+    }
+}
+
+void gdna(char * rld, int di, char * pn)
+{
+    int i;
+    int pni = 0; /* Problem Name Index */
+
+    for(i = di;; i++) {
+        if(rld[i] == '\n' || rld[i] == '\0') {
+            pn[pni] = '\0';
+            break;
+        }
+        pn[pni] = rld[i]; pni++;
+    }
+}
