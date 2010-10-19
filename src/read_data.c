@@ -49,18 +49,23 @@ void arld(char * rld, int li)
     }
     /* What type of result do you use ? */
     else if(li == 5) {
+        wtres(rld);
     }
     /* Output Debug-Log-Data:type1 */
     else if(li == 6) {
+        gdld1(rld);
     }
     /* Output Debug-Log-Data:type2 */
     else if(li == 7) {
+        gdld2(rld);
     }
     /* Output Debug-Log-Data:type3 */
     else if(li == 8) {
+        gdld3(rld);
     }
     /* Output Debug-Log-Data:type4 */
     else if(li == 9) {
+        gdld4(rld);
     }
     /* On Sale */
     /*else if(li == 10) {
@@ -75,9 +80,11 @@ void arld(char * rld, int li)
     }*/
     /* The Percentage of Permission toward Worse */
     else if(li == 15) {
+        gppw(rld);
     }
     /* The Number of Permission toward Worse */
     else if(li == 16) {
+        gplw(rld);
     }
     /* The Number of Loop */
     else if(li == 17) {
@@ -210,5 +217,167 @@ int gonoff(char * rld, int di)
     else {
         /*todo*///error("itpn():rld error\n");
         exit(1);
+    }
+}
+
+void wtres(char * rld)
+{
+    int i;
+    int di = -1; /* Data Index */
+    int sdi = 0; /* String Data Index */
+    char sd[64]; /* String Data */
+
+    if((di = gdbl(rld)) >= 0) {
+        for(i = di;; i++) {
+            if(rld[i] == '\n' || rld[i] == '\0') {
+                sd[sdi] = '\0';
+                break;
+            }
+            sd[sdi] = rld[i]; sdi++;
+        }
+    }
+    else {
+        /*todo*///error("wtres():rld error\n");
+        exit(1);
+    }
+
+    if(strcmp(sd, "simple") == 0) {
+        /*DEL*/printf("wtres():simple\n");
+    }
+    else if(strcmp(sd, "navi") == 0) {
+        /*DEL*/printf("wtres():navi\n");
+    }
+    else {
+        /*todo*///error("wtres():strcmd() error\n");
+        exit(1);
+    }
+}
+
+void gdld1(char * rld)
+{
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        if(gonoff(rld, di)) {
+            /*DEL*/printf("gdld1():ON\n");
+        }
+        else {
+            /*DEL*/printf("gdld1():OFF\n");
+        }
+    }
+    else {
+        /*todo*///error("gdld1():rld error\n");
+        exit(1);
+    }
+}
+
+void gdld2(char * rld)
+{
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        if(gonoff(rld, di)) {
+            /*DEL*/printf("gdld2():ON\n");
+        }
+        else {
+            /*DEL*/printf("gdld2():OFF\n");
+        }
+    }
+    else {
+        /*todo*///error("gdld2():rld error\n");
+        exit(1);
+    }
+}
+
+void gdld3(char * rld)
+{
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        if(gonoff(rld, di)) {
+            /*DEL*/printf("gdld3():ON\n");
+        }
+        else {
+            /*DEL*/printf("gdld3():OFF\n");
+        }
+    }
+    else {
+        /*todo*///error("gdld3():rld error\n");
+        exit(1);
+    }
+}
+
+void gdld4(char * rld)
+{
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        if(gonoff(rld, di)) {
+            /*DEL*/printf("gdld4():ON\n");
+        }
+        else {
+            /*DEL*/printf("gdld4():OFF\n");
+        }
+    }
+    else {
+        /*todo*///error("gdld4():rld error\n");
+        exit(1);
+    }
+}
+
+void gppw(char * rld)
+{
+    int di = -1; /* Data Index */
+    double pw; /* Percentage toward Worse[%] */
+
+    if((di = gdbl(rld)) >= 0) {
+        pw = (double)gdnu(rld, di);
+        /*DEL*/printf("gppw():pw == %f\n", pw);
+    }
+    else {
+        /*todo*///error("gppw():rld error\n");
+        exit(1);
+    }
+}
+
+void gplw(char * rld)
+{
+    int pn; /* Part of Number */
+    int di = -1; /* Data Index */
+    char pv[8]; /* Part of Variable */
+
+    if((di = gdbl(rld)) >= 0) {
+        pn = gnxn(di, rld);
+        printf("gnxn():pn == %d\n", pn);
+    }
+    else {
+        /*todo*///error("gplw():rld error\n");
+        exit(1);
+    }
+}
+
+int gnxn(int di, char * rld)
+{
+    int i;
+    char pns[16]; /* Part of Number: String ver */
+    int pnsi = 0; /* Part of Number: String ver  Index */
+    int pn = 1;
+    /*DEL*/int tspsize = 2;
+
+    for(i = di;; i++) {
+        if(rld[i] == '\n' || rld[i] == '\0') {
+            pns[pnsi] = '\0';
+            if(atoi(pns) != 0) {
+                pn *= atoi(pns);
+            }
+            return pn;
+        }
+
+        if(rld[i] >= '0' && rld[i] <= '9') {
+            pns[pnsi] = rld[i]; pnsi++;
+        }
+        else if(rld[i] == 'N') {
+            pn *= tspsize;
+        }
     }
 }

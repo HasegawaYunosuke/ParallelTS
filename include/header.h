@@ -16,6 +16,14 @@ void init(int argc, char **argv); /*Initialize*/
                 void smcm(char * rld); /* Set Multi-core Mode */
                     int gonoff(char * rld, int di); /* Get ON or OFF */
                 void smpim(char * rld); /* Set MPI Mode */
+                void wtres(char * rld); /* What type of result do you use ? */
+                void gdld1(char * rld); /* Get Debug-Log-Data:type1 */
+                void gdld2(char * rld); /* Get Debug-Log-Data:type2 */
+                void gdld3(char * rld); /* Get Debug-Log-Data:type3 */
+                void gdld4(char * rld); /* Get Debug-Log-Data:type4 */
+                void gppw(char * rld); /* Get Parameter: Percentage toward Worse */
+                void gplw(char * rld); /* Get Parameter: Loop times toward Worse */
+                    int gnxn(int di, char * rld); /* Get [Number] * [N(ex:tsp-size)] */
 
 #ifdef MPIMODE
 void mpi_test(void);
