@@ -1,7 +1,7 @@
 prob:eil51.tsp
 time[sec]:10
-multi[ON/OFF]:OFF
-MPI[ON/OFF]:OFF
+multi[ON/OFF]:ON
+MPI[ON/OFF]:ON
 result[simple/navi]:simple
 deb1[ON/OFF]:OFF
 deb2[ON/OFF]:OFF

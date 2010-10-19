@@ -39,11 +39,13 @@ void arld(char * rld, int li)
     else if(li == 2) {
         ssti(rld);
     }
-    /* ON/OFF Muli-core Mode */
+    /* ON/OFF Multi-core Mode */
     else if(li == 3) {
+        smcm(rld);
     }
     /* ON/OFF MPI Mode */
     else if(li == 4) {
+        smpim(rld);
     }
     /* What type of result do you use ? */
     else if(li == 5) {
@@ -94,11 +96,16 @@ void itpn(char * rld)
     int ps; /* Problem Size */
     char pn[64]; /* Problem Name */
 
-    di = gdbl(rld);
-    ps = gdnu(rld, di);
-    /*DEL*/printf("ps == %d\n", ps);
-    gdna(rld, di, pn);
-    /*DEL*/printf("pn == %s\n", pn);
+    if((di = gdbl(rld)) >= 0) {
+        ps = gdnu(rld, di);
+        /*DEL*/printf("ps == %d\n", ps);
+        gdna(rld, di, pn);
+        /*DEL*/printf("pn == %s\n", pn);
+    }
+    else {
+        /*todo*///error("itpn():rld error\n");
+        exit(1);
+    }
 }
 
 void ssti(char * rld)
@@ -106,9 +113,14 @@ void ssti(char * rld)
     int di = -1; /* Data Index */
     int st; /* Search Time */
 
-    di = gdbl(rld);
-    st = gdnu(rld, di);
-    /*DEL*/printf("st == %d[sec]\n", st);
+    if((di = gdbl(rld)) >= 0) {
+        st = gdnu(rld, di);
+        /*DEL*/printf("st == %d[sec]\n", st);
+    }
+    else {
+        /*todo*///error("itpn():rld error\n");
+        exit(1);
+    }
 }
 
 int gdbl(char * rld)
@@ -154,5 +166,49 @@ void gdna(char * rld, int di, char * pn)
             break;
         }
         pn[pni] = rld[i]; pni++;
+    }
+}
+
+void smcm(char * rld)
+{
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        if(gonoff(rld, di)) {
+            /*DEL*/printf("Multi-core Mode ON\n");
+        }
+    }
+    else {
+        /*todo*///error("itpn():rld error\n");
+        exit(1);
+    }
+}
+
+void smpim(char * rld)
+{
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        if(gonoff(rld, di)) {
+            /*DEL*/printf("MPI Mode ON\n");
+        }
+    }
+    else {
+        /*todo*///error("itpn():rld error\n");
+        exit(1);
+    }
+}
+
+int gonoff(char * rld, int di)
+{
+    if(rld[di + 1] == 'N') {
+        return ON;
+    }
+    else if(rld[di + 1] == 'F') {
+        return OFF;
+    }
+    else {
+        /*todo*///error("itpn():rld error\n");
+        exit(1);
     }
 }
