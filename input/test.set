@@ -14,6 +14,6 @@ deb4[ON/OFF]:OFF
 
 p_worse[%]:5
 p_wloop:8NNN
-p_loop:
-p_TLS:
-p_TLT:
+p_loop:100
+p_TLS:2N
+p_TLT:NNN

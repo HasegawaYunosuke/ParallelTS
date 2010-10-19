@@ -24,6 +24,9 @@ void init(int argc, char **argv); /*Initialize*/
                 void gppw(char * rld); /* Get Parameter: Percentage toward Worse */
                 void gplw(char * rld); /* Get Parameter: Loop times toward Worse */
                     int gnxn(int di, char * rld); /* Get [Number] * [N(ex:tsp-size)] */
+                void gplt(char * rld); /* Get Parameter: Loop times */
+                void gpst(char * rld); /* Get Parameter: Size of Tabu-list */
+                void gptt(char * rld); /* Get Parameter: Term of Tabu-list */
 
 #ifdef MPIMODE
 void mpi_test(void);

@@ -88,12 +88,15 @@ void arld(char * rld, int li)
     }
     /* The Number of Loop */
     else if(li == 17) {
+        gplt(rld);
     }
     /* The Size of Tabu-List */
     else if(li == 18) {
+        gpst(rld);
     }
     /* The Term of Validity of Tabu-List */
     else if(li == 19) {
+        gptt(rld);
     }
 }
 
@@ -344,11 +347,55 @@ void gplw(char * rld)
 {
     int pn; /* Part of Number */
     int di = -1; /* Data Index */
-    char pv[8]; /* Part of Variable */
 
     if((di = gdbl(rld)) >= 0) {
         pn = gnxn(di, rld);
-        printf("gnxn():pn == %d\n", pn);
+        printf("gplw():pn == %d\n", pn);
+    }
+    else {
+        /*todo*///error("gplw():rld error\n");
+        exit(1);
+    }
+}
+
+void gplt(char * rld)
+{
+    int pn; /* Part of Number */
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        pn = gnxn(di, rld);
+        printf("gplt():pn == %d\n", pn);
+    }
+    else {
+        /*todo*///error("gplw():rld error\n");
+        exit(1);
+    }
+}
+
+void gpst(char * rld)
+{
+    int pn; /* Part of Number */
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        pn = gnxn(di, rld);
+        printf("gpst():pn == %d\n", pn);
+    }
+    else {
+        /*todo*///error("gplw():rld error\n");
+        exit(1);
+    }
+}
+
+void gptt(char * rld)
+{
+    int pn; /* Part of Number */
+    int di = -1; /* Data Index */
+
+    if((di = gdbl(rld)) >= 0) {
+        pn = gnxn(di, rld);
+        printf("gptt():pn == %d\n", pn);
     }
     else {
         /*todo*///error("gplw():rld error\n");
@@ -381,3 +428,4 @@ int gnxn(int di, char * rld)
         }
     }
 }
+
