@@ -3,7 +3,7 @@ vpath %.h include
 vpath %.o object
 
 CPPFLAGS = -I include
-BASEFILE = main.c init.c check.c read_data.c file_manage.c
+BASEFILE = main.c init.c check.c read_data.c file_manage.c error.c
 MPIFILE = mpi.c
 MPIFLAG = -DMPIMODE
 DEBUGFLAG1 = -DDEBUG1
@@ -28,3 +28,6 @@ debugmpi: ${BASEFILE} ${MPIFILE}
 
 clean:
 	rm *.o
+
+ctags:
+	ctags src/*.c mpi/*.c

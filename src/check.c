@@ -2,5 +2,7 @@
 
 void cif(int argc, char **argv)
 {
-    printf("cif():argc==%d\n", argc);//DEL
+    if(argc != 2) {
+        oem("cif", "Wrong Number of Command-Line-Argument", argc);
+    }
 }

@@ -105,6 +105,7 @@ void itpn(char * rld)
     int di; /* Data Index */
     int ps; /* Problem Size */
     char pn[64]; /* Problem Name */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         ps = gdnu(rld, di);
@@ -113,7 +114,8 @@ void itpn(char * rld)
         /*DEL*/printf("pn == %s\n", pn);
     }
     else {
-        /*todo*///error("itpn():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("itpn", ms, 0);
         exit(1);
     }
 }
@@ -122,13 +124,15 @@ void ssti(char * rld)
 {
     int di = -1; /* Data Index */
     int st; /* Search Time */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         st = gdnu(rld, di);
         /*DEL*/printf("st == %d[sec]\n", st);
     }
     else {
-        /*todo*///error("itpn():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("ssti", ms, 0);
         exit(1);
     }
 }
@@ -182,6 +186,7 @@ void gdna(char * rld, int di, char * pn)
 void smcm(char * rld)
 {
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
@@ -189,7 +194,8 @@ void smcm(char * rld)
         }
     }
     else {
-        /*todo*///error("itpn():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("smcm", ms, 0);
         exit(1);
     }
 }
@@ -197,6 +203,7 @@ void smcm(char * rld)
 void smpim(char * rld)
 {
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
@@ -204,7 +211,8 @@ void smpim(char * rld)
         }
     }
     else {
-        /*todo*///error("itpn():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("smpim", ms, 0);
         exit(1);
     }
 }
@@ -229,6 +237,7 @@ void wtres(char * rld)
     int di = -1; /* Data Index */
     int sdi = 0; /* String Data Index */
     char sd[64]; /* String Data */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         for(i = di;; i++) {
@@ -240,7 +249,8 @@ void wtres(char * rld)
         }
     }
     else {
-        /*todo*///error("wtres():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("wtres", ms, 0);
         exit(1);
     }
 
@@ -251,7 +261,8 @@ void wtres(char * rld)
         /*DEL*/printf("wtres():navi\n");
     }
     else {
-        /*todo*///error("wtres():strcmd() error\n");
+        sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
+        oem("wtres", ms, 0);
         exit(1);
     }
 }
@@ -259,6 +270,7 @@ void wtres(char * rld)
 void gdld1(char * rld)
 {
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
@@ -269,7 +281,8 @@ void gdld1(char * rld)
         }
     }
     else {
-        /*todo*///error("gdld1():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gdld1", ms, 0);
         exit(1);
     }
 }
@@ -277,6 +290,7 @@ void gdld1(char * rld)
 void gdld2(char * rld)
 {
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
@@ -287,7 +301,8 @@ void gdld2(char * rld)
         }
     }
     else {
-        /*todo*///error("gdld2():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gdld2", ms, 0);
         exit(1);
     }
 }
@@ -295,6 +310,7 @@ void gdld2(char * rld)
 void gdld3(char * rld)
 {
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
@@ -305,7 +321,8 @@ void gdld3(char * rld)
         }
     }
     else {
-        /*todo*///error("gdld3():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gdld3", ms, 0);
         exit(1);
     }
 }
@@ -313,6 +330,7 @@ void gdld3(char * rld)
 void gdld4(char * rld)
 {
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
@@ -323,7 +341,8 @@ void gdld4(char * rld)
         }
     }
     else {
-        /*todo*///error("gdld4():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gdld4", ms, 0);
         exit(1);
     }
 }
@@ -332,13 +351,15 @@ void gppw(char * rld)
 {
     int di = -1; /* Data Index */
     double pw; /* Percentage toward Worse[%] */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         pw = (double)gdnu(rld, di);
         /*DEL*/printf("gppw():pw == %f\n", pw);
     }
     else {
-        /*todo*///error("gppw():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gppw", ms, 0);
         exit(1);
     }
 }
@@ -347,13 +368,15 @@ void gplw(char * rld)
 {
     int pn; /* Part of Number */
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         pn = gnxn(di, rld);
         printf("gplw():pn == %d\n", pn);
     }
     else {
-        /*todo*///error("gplw():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gplw", ms, 0);
         exit(1);
     }
 }
@@ -362,13 +385,15 @@ void gplt(char * rld)
 {
     int pn; /* Part of Number */
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         pn = gnxn(di, rld);
         printf("gplt():pn == %d\n", pn);
     }
     else {
-        /*todo*///error("gplw():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gplt", ms, 0);
         exit(1);
     }
 }
@@ -377,13 +402,15 @@ void gpst(char * rld)
 {
     int pn; /* Part of Number */
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         pn = gnxn(di, rld);
         printf("gpst():pn == %d\n", pn);
     }
     else {
-        /*todo*///error("gplw():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gplt", ms, 0);
         exit(1);
     }
 }
@@ -392,13 +419,15 @@ void gptt(char * rld)
 {
     int pn; /* Part of Number */
     int di = -1; /* Data Index */
+    char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         pn = gnxn(di, rld);
         printf("gptt():pn == %d\n", pn);
     }
     else {
-        /*todo*///error("gplw():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gplt", ms, 0);
         exit(1);
     }
 }

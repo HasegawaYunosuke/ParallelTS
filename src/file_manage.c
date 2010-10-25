@@ -3,11 +3,11 @@
 FILE * rfop(char ** argv)
 {
     FILE * rfp;
+    char ms[32];
 
     if((rfp = fopen((const char *)argv[1], "r")) == NULL) {
-        /*TODO:error_ms("mif():Can't Open file");*/
-        /*DEL*/fprintf(stderr, "mif():Can't Open file\n");
-        exit(1);
+        sprintf(ms, "Wrong Input-file:\"%s\"", argv[1]);
+        oem("mif", ms, 0);
     }
 
     return rfp;

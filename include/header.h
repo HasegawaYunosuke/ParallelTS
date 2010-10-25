@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-void init(int argc, char **argv); /*Initialize*/
-    void cif(int argc, char **argv); /*Check Input-Files*/
-    void mif(int argc, char **argv); /*Management Input-File*/
+void init(int argc, char **argv); /* Initialize */
+    void cif(int argc, char **argv); /* Check Input-Files */
+        void oem(char func[32], char ms[64], int da); /* Output Error Message */
+    void mif(int argc, char **argv); /* Management Input-File */
         FILE * rfop(char ** argv); /* Readonly-File Open */
         void rif_sd(FILE * rfp); /* Read Input-File & Store Data */
             void arld(char * rld, int li); /* Analysis Read-Line-Data */

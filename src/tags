@@ -2,11 +2,27 @@ Mmain	main.c	/^int main(int argc, char **argv)$/
 arld	read_data.c	/^void arld(char * rld, int li)$/
 cif	check.c	/^void cif(int argc, char **argv)$/
 gdbl	read_data.c	/^int gdbl(char * rld)$/
+gdld1	read_data.c	/^void gdld1(char * rld)$/
+gdld2	read_data.c	/^void gdld2(char * rld)$/
+gdld3	read_data.c	/^void gdld3(char * rld)$/
+gdld4	read_data.c	/^void gdld4(char * rld)$/
 gdna	read_data.c	/^void gdna(char * rld, int di, char * pn)$/
 gdnu	read_data.c	/^int gdnu(char * rld, int di)$/
+gnxn	read_data.c	/^int gnxn(int di, char * rld)$/
+gonoff	read_data.c	/^int gonoff(char * rld, int di)$/
+gplt	read_data.c	/^void gplt(char * rld)$/
+gplw	read_data.c	/^void gplw(char * rld)$/
+gppw	read_data.c	/^void gppw(char * rld)$/
+gpst	read_data.c	/^void gpst(char * rld)$/
+gptt	read_data.c	/^void gptt(char * rld)$/
 init	init.c	/^void init(int argc, char **argv)$/
 itpn	read_data.c	/^void itpn(char * rld)$/
 mif	read_data.c	/^void mif(int argc, char **argv)$/
+mpi_test	../mpi/mpi.c	/^void mpi_test(void)$/
+oem	error.c	/^void oem(char func[32], char ms[64], int da)$/
 rfop	file_manage.c	/^FILE * rfop(char ** argv)$/
 rif_sd	read_data.c	/^void rif_sd(FILE * rfp)$/
+smcm	read_data.c	/^void smcm(char * rld)$/
+smpim	read_data.c	/^void smpim(char * rld)$/
 ssti	read_data.c	/^void ssti(char * rld)$/
+wtres	read_data.c	/^void wtres(char * rld)$/
