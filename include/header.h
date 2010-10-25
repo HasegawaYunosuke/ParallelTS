@@ -64,7 +64,7 @@ struct _base_mode {
 };
 
 struct _individual_parameter {
-    double ppw; /* Percentage toward Worse */
+    double pw; /* Percentage toward Worse */
     int lw; /* Loop times toward Worse */
     int lt; /* Loop times */
     int stl; /* Size of Tabu-List */
