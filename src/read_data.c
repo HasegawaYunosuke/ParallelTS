@@ -109,9 +109,9 @@ void itpn(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         ps = gdnu(rld, di);
-        /*DEL*/printf("ps == %d\n", ps);
+        g_bd.ps = ps;
         gdna(rld, di, pn);
-        /*DEL*/printf("pn == %s\n", pn);
+        strcpy(g_bd.pn, pn);
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
@@ -128,7 +128,7 @@ void ssti(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         st = gdnu(rld, di);
-        /*DEL*/printf("st == %d[sec]\n", st);
+        g_bd.st = st;
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
@@ -190,7 +190,10 @@ void smcm(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
-            /*DEL*/printf("Multi-core Mode ON\n");
+            g_bm.mcm = ON;
+        }
+        else {
+            g_bm.mcm = OFF;
         }
     }
     else {
@@ -207,7 +210,10 @@ void smpim(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
-            /*DEL*/printf("MPI Mode ON\n");
+            g_bm.mpim = ON;
+        }
+        else {
+            g_bm.mpim = OFF;
         }
     }
     else {
@@ -219,6 +225,8 @@ void smpim(char * rld)
 
 int gonoff(char * rld, int di)
 {
+    char ms[32]; /* Message */
+
     if(rld[di + 1] == 'N') {
         return ON;
     }
@@ -226,7 +234,8 @@ int gonoff(char * rld, int di)
         return OFF;
     }
     else {
-        /*todo*///error("itpn():rld error\n");
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gonoff", ms, 0);
         exit(1);
     }
 }
@@ -255,10 +264,10 @@ void wtres(char * rld)
     }
 
     if(strcmp(sd, "simple") == 0) {
-        /*DEL*/printf("wtres():simple\n");
+        g_bm.tres = DEFAULT;
     }
     else if(strcmp(sd, "navi") == 0) {
-        /*DEL*/printf("wtres():navi\n");
+        g_bm.tres = TYPE1;
     }
     else {
         sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
@@ -274,10 +283,10 @@ void gdld1(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
-            /*DEL*/printf("gdld1():ON\n");
+            g_bm.dld1 = ON;
         }
         else {
-            /*DEL*/printf("gdld1():OFF\n");
+            g_bm.dld1 = OFF;
         }
     }
     else {
@@ -294,10 +303,10 @@ void gdld2(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
-            /*DEL*/printf("gdld2():ON\n");
+            g_bm.dld2 = ON;
         }
         else {
-            /*DEL*/printf("gdld2():OFF\n");
+            g_bm.dld2 = OFF;
         }
     }
     else {
@@ -314,10 +323,10 @@ void gdld3(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
-            /*DEL*/printf("gdld3():ON\n");
+            g_bm.dld3 = ON;
         }
         else {
-            /*DEL*/printf("gdld3():OFF\n");
+            g_bm.dld3 = OFF;
         }
     }
     else {
@@ -334,10 +343,10 @@ void gdld4(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         if(gonoff(rld, di)) {
-            /*DEL*/printf("gdld4():ON\n");
+            g_bm.dld4 = ON;
         }
         else {
-            /*DEL*/printf("gdld4():OFF\n");
+            g_bm.dld4 = OFF;
         }
     }
     else {
@@ -355,7 +364,7 @@ void gppw(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         pw = (double)gdnu(rld, di);
-        /*DEL*/printf("gppw():pw == %f\n", pw);
+        /*TODO*/printf("gppw():pw == %f\n", pw);
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
@@ -406,7 +415,7 @@ void gpst(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         pn = gnxn(di, rld);
-        printf("gpst():pn == %d\n", pn);
+        /*TODO*/printf("gpst():pn == %d\n", pn);
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
@@ -423,7 +432,7 @@ void gptt(char * rld)
 
     if((di = gdbl(rld)) >= 0) {
         pn = gnxn(di, rld);
-        printf("gptt():pn == %d\n", pn);
+        /*TODO*/printf("gptt():pn == %d\n", pn);
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
