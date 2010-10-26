@@ -1,13 +1,15 @@
 #include "header.h"
 
-FILE * rfop(char ** argv)
+FILE * rfop(char * argv, char bfn[32])
 {
     FILE * rfp;
-    char ms[32];
+    char ms[64];
+    char fn[32]; /* Function Name */
 
-    if((rfp = fopen((const char *)argv[1], "r")) == NULL) {
-        sprintf(ms, "Wrong Input-file:\"%s\"", argv[1]);
-        oem("mif", ms, 0);
+    if((rfp = fopen((const char *)argv, "r")) == NULL) {
+        sprintf(ms, "Wrong Input-file:\"%s\"", argv);
+        sprintf(fn, "%s()-->rfop", bfn);
+        oem(fn, ms, 0);
     }
 
     return rfp;

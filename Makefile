@@ -2,7 +2,7 @@ vpath %.c src mpi
 vpath %.h include
 vpath %.o object
 
-CPPFLAGS = -I include
+CPPFLAGS = -I include -g
 BASEFILE = main.c init.c check.c read_data.c file_manage.c error.c
 MPIFILE = mpi.c
 MPIFLAG = -DMPIMODE
@@ -28,6 +28,3 @@ debugmpi: ${BASEFILE} ${MPIFILE}
 
 clean:
 	rm *.o
-
-ctags:
-	ctags src/*.c mpi/*.c

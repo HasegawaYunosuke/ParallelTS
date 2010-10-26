@@ -3,12 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 void init(int argc, char **argv); /* Initialize */
     void cif(int argc, char **argv); /* Check Input-Files */
         void oem(char func[32], char ms[64], int da); /* Output Error Message */
+    void cnd(char dn[32]); /* Check Necessary Directory */
     void mif(int argc, char **argv); /* Management Input-File */
-        FILE * rfop(char ** argv); /* Readonly-File Open */
+        FILE * rfop(char * argv, char bfn[32]); /* Readonly-File Open */
         void rif_sd(FILE * rfp); /* Read Input-File & Store Data */
             void arld(char * rld, int li); /* Analysis Read-Line-Data */
                 void itpn(char * rld); /* Input TSPLIB's problem name */
@@ -30,6 +33,7 @@ void init(int argc, char **argv); /* Initialize */
                 void gplt(char * rld); /* Get Parameter: Loop times */
                 void gpst(char * rld); /* Get Parameter: Size of Tabu-list */
                 void gptt(char * rld); /* Get Parameter: Term of Tabu-list */
+    void mtsplib(void); /* Management TSPLIB's Sample Problems */
 
 #ifdef MPIMODE
 void mpi_test(void);

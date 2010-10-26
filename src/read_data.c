@@ -5,11 +5,12 @@
 
 void mif(int argc, char **argv)
 {
-    FILE * rfp;
+    FILE * rfd; /* Readonly-File Disctpriter */
 
-    rfp = rfop(argv);
-    rif_sd(rfp);
-    fclose(rfp);
+    cnd("tsplib");
+    rfd = rfop(argv[1], "mif");
+    rif_sd(rfd);
+    fclose(rfd);
 }
 
 void rif_sd(FILE * rfp)
@@ -467,3 +468,14 @@ int gnxn(int di, char * rld)
     }
 }
 
+void mtsplib(void)
+{
+    char ofp[64]; /* Open File Path */
+    FILE * rfd; /* Readonly-File Disctpriter */
+    char ms[64]; /* Message */
+
+    sprintf(ofp, "tsplib/%s", g_bd.pn);
+    rfd = rfop(ofp, "mtsplib");
+    /*TODO*/
+    fclose(rfd);
+}
