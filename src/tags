@@ -1,7 +1,13 @@
 Mmain	main.c	/^int main(int argc, char **argv)$/
+abmem	memory.c	/^void abmem(void)$/
+ag_bd	memory.c	/^void ag_bd(void)$/
 arld	read_data.c	/^void arld(char * rld, int li)$/
+artsplibld	read_data.c	/^void artsplibld(char * rld, int li)$/
 cif	check.c	/^void cif(int argc, char **argv)$/
 cnd	check.c	/^void cnd(char dn[32])$/
+faam	memory.c	/^void faam(void)$/
+fg_bd	memory.c	/^void fg_bd(void)$/
+fin	finalize.c	/^void fin(void)$/
 gdbl	read_data.c	/^int gdbl(char * rld)$/
 gdld1	read_data.c	/^void gdld1(char * rld)$/
 gdld2	read_data.c	/^void gdld2(char * rld)$/
@@ -13,6 +19,7 @@ gnxn	read_data.c	/^int gnxn(int di, char * rld)$/
 gonoff	read_data.c	/^int gonoff(char * rld, int di)$/
 gplt	read_data.c	/^void gplt(char * rld)$/
 gplw	read_data.c	/^void gplw(char * rld)$/
+gpnth	read_data.c	/^void gpnth(char * rld)$/
 gppw	read_data.c	/^void gppw(char * rld)$/
 gpst	read_data.c	/^void gpst(char * rld)$/
 gptt	read_data.c	/^void gptt(char * rld)$/
@@ -23,6 +30,7 @@ mtsplib	read_data.c	/^void mtsplib(void)$/
 oem	error.c	/^void oem(char func[32], char ms[64], int da)$/
 rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/
 rif_sd	read_data.c	/^void rif_sd(FILE * rfp)$/
+rtsplib_sd	read_data.c	/^void rtsplib_sd(FILE * rfp)$/
 smcm	read_data.c	/^void smcm(char * rld)$/
 smpim	read_data.c	/^void smpim(char * rld)$/
 ssti	read_data.c	/^void ssti(char * rld)$/
