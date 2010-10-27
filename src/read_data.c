@@ -76,9 +76,11 @@ void arld(char * rld, int li)
     else if(li == 12) {
     }
     else if(li == 13) {
-    }
-    else if(li == 14) {
     }*/
+    /* The Number of Thread */
+    else if(li == 14) {
+        gpnth(rld);
+    }
     /* The Percentage of Permission toward Worse */
     else if(li == 15) {
         gppw(rld);
@@ -357,6 +359,25 @@ void gdld4(char * rld)
     }
 }
 
+void gpnth(char * rld)
+{
+    int di = -1; /* Data Index */
+    int nth = 1; /* Number of Thread */
+    char ms[32]; /* Message */
+
+    if((di = gdbl(rld)) >= 0) {
+        if((nth = gdnu(rld, di)) == 0) {
+            nth = 1;
+        }
+        g_bd.nth = nth;
+    }
+    else {
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gpnth", ms, 0/*TODO*/);
+        exit(1);
+    }
+}
+
 void gppw(char * rld)
 {
     int di = -1; /* Data Index */
@@ -473,9 +494,38 @@ void mtsplib(void)
     char ofp[64]; /* Open File Path */
     FILE * rfd; /* Readonly-File Disctpriter */
     char ms[64]; /* Message */
+    /*DEL*/int i,j;
 
     sprintf(ofp, "tsplib/%s", g_bd.pn);
     rfd = rfop(ofp, "mtsplib");
-    /*TODO*/
+    rtsplib_sd(rfd);
+
+    /*DELfor(j = 0; j < 3; j++) {
+        for(i = 0; i < g_bd.ps; i++) {
+            printf("btsp[%d][%d] == %f\n", j, i, g_bd.btsp[j][i]);
+        }
+    }DEL*/
+
     fclose(rfd);
+}
+
+void rtsplib_sd(FILE * rfp)
+{
+    int li; /* Line Index */
+    char buf[RBUFFSIZE];
+
+    for(li = 1;; li++) {
+        if(fgets(buf, RLINESIZE, rfp) == NULL) {
+            break;
+        }
+        else {
+            artsplibld(buf, li);
+        }
+    }
+}
+
+void artsplibld(char * rld, int li)
+{
+    /*TODO*/
+    printf("%s", rld);
 }

@@ -9,4 +9,5 @@ int main(int argc, char **argv)
 #ifdef DEBUG1
     printf("DEBUG TEST\n");
 #endif
+    fin();
 }
