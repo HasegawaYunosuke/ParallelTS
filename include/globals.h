@@ -2,6 +2,8 @@ struct _base_data {
     char pn[64]; /* Problem Name */
     int ps; /* Problem Size */
     int st; /* Search Time */
+    int nth; /* Number of Thread */
+    double ** btsp; /* Base TSPLIB's x-y Data */
 };
 
 struct _base_mode {

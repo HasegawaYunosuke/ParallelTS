@@ -27,13 +27,21 @@ void init(int argc, char **argv); /* Initialize */
                 void gdld2(char * rld); /* Get Debug-Log-Data:type2 */
                 void gdld3(char * rld); /* Get Debug-Log-Data:type3 */
                 void gdld4(char * rld); /* Get Debug-Log-Data:type4 */
+                void gpnth(char * rld); /* Get Parameter: Number of Thread */
                 void gppw(char * rld); /* Get Parameter: Percentage toward Worse */
                 void gplw(char * rld); /* Get Parameter: Loop times toward Worse */
                     int gnxn(int di, char * rld); /* Get [Number] * [N(ex:tsp-size)] */
                 void gplt(char * rld); /* Get Parameter: Loop times */
                 void gpst(char * rld); /* Get Parameter: Size of Tabu-list */
                 void gptt(char * rld); /* Get Parameter: Term of Tabu-list */
+    void abmem(void); /* Allocate Base-Memory */
+        void ag_bd(void); /* Allocate Global-Base-Data */
     void mtsplib(void); /* Management TSPLIB's Sample Problems */
+        void rtsplib_sd(FILE * rfp); /* Read TSPLIB's problems & Store Data */
+            void artsplibld(char * rld, int li); /* Analysis Read TSPLIB's Line-Data */
+void fin(void); /* Finalize */
+    void faam(void); /* Free All-Allocated Memory */
+        void fg_bd(void); /* Free Global-Base-Data */
 
 #ifdef MPIMODE
 void mpi_test(void);
