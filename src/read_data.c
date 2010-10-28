@@ -511,21 +511,145 @@ void mtsplib(void)
 
 void rtsplib_sd(FILE * rfp)
 {
-    int li; /* Line Index */
     char buf[RBUFFSIZE];
+    char mychmpbuf[RBUFFSIZE]; /* My-Chomp-Buffer */
+    int dlf = OFF; /* Data Line Flag */
+    int dli = 0; /* Data Line Index */
 
-    for(li = 1;; li++) {
+    for(;;) {
         if(fgets(buf, RLINESIZE, rfp) == NULL) {
+            if(dlf == OFF) {
+                oem("rtsplib_sd", "Wrong TSPLIB Problem.", 0);
+            }
             break;
         }
+        else if(dlf == OFF) {
+            mychmp(buf, mychmpbuf);
+            if(strcmp(mychmpbuf, "NODE_COORD_SECTION") == 0) {
+                dlf = ON;
+            }
+            else if(strcmp(mychmpbuf, "EDGE_WEIGHT_SECTION") == 0) {
+                oem("rtsplib_sd", "This Program is Only-Available: \"NODE_COORD_SECTION\"", 0);
+            }
+        }
+        else if(dlf == ON && dli < g_bd.ps) {
+            artsplibld(buf, dli);
+            dli++;
+        }
         else {
-            artsplibld(buf, li);
+            break;
         }
     }
 }
 
-void artsplibld(char * rld, int li)
+void mychmp(char * buf, char * mychmpbuf)
 {
+    int i;
+
+    for(i = 0; i < RBUFFSIZE; i++) {
+        if(buf[i] == ' ' || buf[i] == '\n') {
+            mychmpbuf[i] = '\0';
+            break;
+        }
+        else {
+            mychmpbuf[i] = buf[i];
+        }
+    }
+}
+
+void artsplibld(char * rld, int dli)
+{
+    int i, j, di; /* Index, Data-Index */
+    int sl = (int)strlen(rld); /* String Length */
+    int df = OFF; /* Data-Flag */
+    int cf = OFF; /* City-Flag */
+    int xf = OFF; /* X-Flag */
+    int yf = OFF; /* Y-Flag */
+    int csdi = 0;
+    int xsdi = 0;
+    int ysdi = 0;
+    char csd[128]; /* City String Data */
+    char xsd[128]; /* X String Data */
+    char ysd[128]; /* Y String Data */
+
+    if(strcmp(rld, "EOF\n") != 0) {
+        for(i = 0; i < sl; i++) {
+            if(cf == OFF && xf == OFF && yf == OFF) {
+                if(rld[i] >= '0' && rld[i] <= '9') {
+                    if(df == OFF) {
+                        df = ON;
+                    }
+                    csd[csdi] = rld[i];
+                    if(csdi < 128) {
+                        csdi++;
+                    }
+                    else {
+                        oem("artsplibld", "csd[]:Over Buffer Size", 128);
+                    }
+                }
+                else if(rld[i] == ' ' || rld[i] == '\t') {
+                    if(df == ON) {
+                        cf = ON; df = OFF;
+                        csd[csdi] = '\0';
+                    }
+                }
+            }
+            else if(cf == ON && xf == OFF && yf == OFF) {
+                if((rld[i] >= '0' && rld[i] <= '9') || rld[i] == '.' || rld[i] == 'e' || rld[i] == '+' || rld[i] == '-') {
+                    if(df == OFF) {
+                        df = ON;
+                    }
+                    xsd[xsdi] = rld[i];
+                    if(xsdi < 128) {
+                        xsdi++;
+                    }
+                    else {
+                        oem("artsplibld", "xsd[]:Over Buffer Size", 128);
+                    }
+                }
+                else if(rld[i] == ' ') {
+                    if(df == ON) {
+                        xf = ON; df = OFF;
+                        xsd[xsdi] = '\0';
+                    }
+                }
+            }
+            else if(cf == ON && xf == ON && yf == OFF) {
+                if((rld[i] >= '0' && rld[i] <= '9') || rld[i] == '.' || rld[i] == 'e' || rld[i] == '+' || rld[i] == '-') {
+                    if(df == OFF) {
+                        df = ON;
+                    }
+                    ysd[ysdi] = rld[i];
+                    if(ysdi < 128) {
+                        ysdi++;
+                    }
+                    else {
+                        oem("artsplibld", "ysd[]:Over Buffer Size", 128);
+                    }
+                }
+                else if(rld[i] == ' ') {
+                    if(df == ON) {
+                        yf = ON; df = OFF;
+                        ysd[ysdi] = '\0';
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    /*DEL*/printf("%d:(index,x,y) == (%s,%s,%s)\n", dli, csd, xsd, ysd);
+    /* Input City-Number */
+    g_bd.btsp[0][dli] = atof(csd);
+    g_bd.btsp[1][dli] = cs2f(xsd);
+    g_bd.btsp[2][dli] = cs2f(ysd);
+}
+
+double cs2f(char * xy_sd)
+{
+    double dd = 0; /* Double type Data */
+
     /*TODO*/
-    printf("%s", rld);
+
+    return dd;
 }

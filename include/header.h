@@ -38,7 +38,9 @@ void init(int argc, char **argv); /* Initialize */
         void ag_bd(void); /* Allocate Global-Base-Data */
     void mtsplib(void); /* Management TSPLIB's Sample Problems */
         void rtsplib_sd(FILE * rfp); /* Read TSPLIB's problems & Store Data */
-            void artsplibld(char * rld, int li); /* Analysis Read TSPLIB's Line-Data */
+            void artsplibld(char * rld, int dli); /* Analysis Read TSPLIB's Line-Data */
+                void mychmp(char * buf, char * mychmpbuf); /* My Chomp */
+                double cs2f(char * xy_sd); /* Combart String to Float-Data */
 void fin(void); /* Finalize */
     void faam(void); /* Free All-Allocated Memory */
         void fg_bd(void); /* Free Global-Base-Data */
