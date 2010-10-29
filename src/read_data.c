@@ -568,9 +568,9 @@ void artsplibld(char * rld, int dli)
     int csdi = 0;
     int xsdi = 0;
     int ysdi = 0;
-    char csd[128]; /* City String Data */
-    char xsd[128]; /* X String Data */
-    char ysd[128]; /* Y String Data */
+    char csd[128] = {0}; /* City String Data */
+    char xsd[128] = {0}; /* X String Data */
+    char ysd[128] = {0}; /* Y String Data */
 
     if(strcmp(rld, "EOF\n") != 0) {
         for(i = 0; i < sl; i++) {
