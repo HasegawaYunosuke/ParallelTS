@@ -638,7 +638,7 @@ void artsplibld(char * rld, int dli)
         }
     }
 
-    /*DEL*/printf("%d:(index,x,y) == (%s,%s,%s)\n", dli, csd, xsd, ysd);
+    /*DEL*/printf("%d:(index,x,y) == (%4s,%8s,%8s)\n", dli, csd, xsd, ysd);
     /* Input City-Number */
     g_bd.btsp[0][dli] = atof(csd);
     g_bd.btsp[1][dli] = cs2f(xsd);

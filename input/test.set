@@ -1,4 +1,4 @@
-prob:a280.tsp
+prob:
 time[sec]:10
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
