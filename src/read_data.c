@@ -638,18 +638,10 @@ void artsplibld(char * rld, int dli)
         }
     }
 
-    /*DEL*/printf("%d:(index,x,y) == (%4s,%8s,%8s)\n", dli, csd, xsd, ysd);
     /* Input City-Number */
     g_bd.btsp[0][dli] = atof(csd);
-    g_bd.btsp[1][dli] = cs2f(xsd);
-    g_bd.btsp[2][dli] = cs2f(ysd);
-}
+    g_bd.btsp[1][dli] = atof(xsd);
+    g_bd.btsp[2][dli] = atof(ysd);
 
-double cs2f(char * xy_sd)
-{
-    double dd = 0; /* Double type Data */
-
-    /*TODO*/
-
-    return dd;
+    /*DEL*/printf("%d:(index,x,y) == (%3d,%8f,%8f)\n", dli, (int)g_bd.btsp[0][dli], g_bd.btsp[1][dli], g_bd.btsp[2][dli]);
 }
