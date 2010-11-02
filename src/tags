@@ -2,9 +2,10 @@ Mmain	main.c	/^int main(int argc, char **argv)$/
 abmem	memory.c	/^void abmem(void)$/
 ag_bd	memory.c	/^void ag_bd(void)$/
 arld	read_data.c	/^void arld(char * rld, int li)$/
-artsplibld	read_data.c	/^void artsplibld(char * rld, int li)$/
+artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/
 cif	check.c	/^void cif(int argc, char **argv)$/
 cnd	check.c	/^void cnd(char dn[32])$/
+dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, dou/
 faam	memory.c	/^void faam(void)$/
 fg_bd	memory.c	/^void fg_bd(void)$/
 fin	finalize.c	/^void fin(void)$/
@@ -27,10 +28,12 @@ init	init.c	/^void init(int argc, char **argv)$/
 itpn	read_data.c	/^void itpn(char * rld)$/
 mif	read_data.c	/^void mif(int argc, char **argv)$/
 mtsplib	read_data.c	/^void mtsplib(void)$/
+mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/
 oem	error.c	/^void oem(char func[32], char ms[64], int da)$/
 rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/
 rif_sd	read_data.c	/^void rif_sd(FILE * rfp)$/
 rtsplib_sd	read_data.c	/^void rtsplib_sd(FILE * rfp)$/
+sgd	read_data.c	/^void sgd(void)$/
 smcm	read_data.c	/^void smcm(char * rld)$/
 smpim	read_data.c	/^void smpim(char * rld)$/
 ssti	read_data.c	/^void ssti(char * rld)$/

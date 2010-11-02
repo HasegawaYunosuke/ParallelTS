@@ -4,6 +4,7 @@ struct _base_data {
     int st; /* Search Time */
     int nth; /* Number of Thread */
     double ** btsp; /* Base TSPLIB's x-y Data */
+    double ** bgd; /* Base Graph Data */
 };
 
 struct _base_mode {

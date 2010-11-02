@@ -499,14 +499,8 @@ void mtsplib(void)
     sprintf(ofp, "tsplib/%s", g_bd.pn);
     rfd = rfop(ofp, "mtsplib");
     rtsplib_sd(rfd);
-
-    /*DELfor(j = 0; j < 3; j++) {
-        for(i = 0; i < g_bd.ps; i++) {
-            printf("btsp[%d][%d] == %f\n", j, i, g_bd.btsp[j][i]);
-        }
-    }DEL*/
-
     fclose(rfd);
+    sgd();
 }
 
 void rtsplib_sd(FILE * rfp)
@@ -643,5 +637,18 @@ void artsplibld(char * rld, int dli)
     g_bd.btsp[1][dli] = atof(xsd);
     g_bd.btsp[2][dli] = atof(ysd);
 
-    /*DEL*/printf("%d:(index,x,y) == (%3d,%8f,%8f)\n", dli, (int)g_bd.btsp[0][dli], g_bd.btsp[1][dli], g_bd.btsp[2][dli]);
+    ///*DEL*/printf("%d:(index,x,y) == (%3d,%8f,%8f)\n", dli, (int)g_bd.btsp[0][dli], g_bd.btsp[1][dli], g_bd.btsp[2][dli]);
+}
+
+void sgd(void)
+{
+    int i;
+    int sc = 0; /* Start City number */
+    int ec = 0; /* City number */
+
+    for(sc = 0; sc < g_bd.ps; sc++) {
+        for(ec = 0; ec < g_bd.ps; ec++) {
+            g_bd.bgd[sc][ec] = dif_2p(g_bd.btsp[1][sc], g_bd.btsp[2][sc], g_bd.btsp[1][ec], g_bd.btsp[2][ec]);
+        }
+    }
 }

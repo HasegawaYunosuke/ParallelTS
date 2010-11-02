@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <math.h>
 
 void init(int argc, char **argv); /* Initialize */
     void cif(int argc, char **argv); /* Check Input-Files */
@@ -40,6 +41,8 @@ void init(int argc, char **argv); /* Initialize */
         void rtsplib_sd(FILE * rfp); /* Read TSPLIB's problems & Store Data */
             void artsplibld(char * rld, int dli); /* Analysis Read TSPLIB's Line-Data */
                 void mychmp(char * buf, char * mychmpbuf); /* My Chomp */
+        void sgd(void); /* Store Graph Data */
+            double dif_2p(double x1, double y1, double x2, double y2); /* Difference between 2-Point */
 void fin(void); /* Finalize */
     void faam(void); /* Free All-Allocated Memory */
         void fg_bd(void); /* Free Global-Base-Data */
