@@ -8,6 +8,7 @@ void oem(char func[32], char ms[64], int da)
     if(da != 0) {
         printf("\tError Number:%d\n", da);
     }
+    fnyfp();
 
     exit(1);
 }

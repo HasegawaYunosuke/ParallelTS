@@ -1,5 +1,12 @@
 #include "header.h"
 
+void ffi(void)
+{
+    g_iamc_f.f_btsp = OFF;
+    g_iamc_f.f_bgd = OFF;
+    g_iamc_f.f_ipm = OFF;
+}
+
 void abmem(void)
 {
     ag_bd();
@@ -26,6 +33,7 @@ void ag_bd(void)
             oem("ag_bd", "Can't Allocate Memory (double *)btsp", 0);
         }
     }
+    g_iamc_f.f_btsp = ON;
 
     if((g_bd.bgd = (double **)malloc(sizeof(double *) * g_bd.ps)) == NULL) {
         oem("ag_bd", "Can't Allocate Memory (double **)bgd", 0);
@@ -39,6 +47,7 @@ void ag_bd(void)
             oem("ag_bd", "Can't Allocate Memory (double *)bgd", 0);
         }
     }
+    g_iamc_f.f_bgd = ON;
 }
 
 void fg_bd(void)
@@ -55,4 +64,20 @@ void fg_bd(void)
         free(g_bd.bgd[i]);
     }
     free(g_bd.bgd);
+}
+
+void fnyfp(void)
+{
+    int i;
+
+    if(g_iamc_f.f_btsp == ON) {
+        for(i = 0; i < 3; i++) {
+            free(g_bd.btsp[i]);
+        }
+        free(g_bd.btsp);
+    }
+
+    if(g_iamc_f.f_bgd == ON && g_iamc_f.f_btsp == ON) {
+        fg_bd();
+    }
 }

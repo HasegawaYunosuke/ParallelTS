@@ -8,8 +8,10 @@
 #include <math.h>
 
 void init(int argc, char **argv); /* Initialize */
+    void ffi(void); /* First Flag Initialize */
     void cif(int argc, char **argv); /* Check Input-Files */
         void oem(char func[32], char ms[64], int da); /* Output Error Message */
+            void fnyfp(void); /* Free Not Yet Freed Pointer */
     void cnd(char dn[32]); /* Check Necessary Directory */
     void mif(int argc, char **argv); /* Management Input-File */
         FILE * rfop(char * argv, char bfn[32]); /* Readonly-File Open */
