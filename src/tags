@@ -1,14 +1,17 @@
 Mmain	main.c	/^int main(int argc, char **argv)$/
-abmem	memory.c	/^void abmem(void)$/
 ag_bd	memory.c	/^void ag_bd(void)$/
+aig_p	memory.c	/^void aig_p(void)$/
 arld	read_data.c	/^void arld(char * rld, int li)$/
 artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/
 cif	check.c	/^void cif(int argc, char **argv)$/
 cnd	check.c	/^void cnd(char dn[32])$/
 dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, dou/
 faam	memory.c	/^void faam(void)$/
+ffi	memory.c	/^void ffi(void)$/
 fg_bd	memory.c	/^void fg_bd(void)$/
+fig_p	memory.c	/^void fig_p(void)$/
 fin	finalize.c	/^void fin(void)$/
+fnyfp	memory.c	/^void fnyfp(void)$/
 gdbl	read_data.c	/^int gdbl(char * rld)$/
 gdld1	read_data.c	/^void gdld1(char * rld)$/
 gdld2	read_data.c	/^void gdld2(char * rld)$/

@@ -12,8 +12,9 @@ void init(int argc, char **argv); /* Initialize */
     void cif(int argc, char **argv); /* Check Input-Files */
         void oem(char func[32], char ms[64], int da); /* Output Error Message */
             void fnyfp(void); /* Free Not Yet Freed Pointer */
-    void cnd(char dn[32]); /* Check Necessary Directory */
+    void aig_p(void); /* Allocate Individual Global Pointer */
     void mif(int argc, char **argv); /* Management Input-File */
+        void cnd(char dn[32]); /* Check Necessary Directory */
         FILE * rfop(char * argv, char bfn[32]); /* Readonly-File Open */
         void rif_sd(FILE * rfp); /* Read Input-File & Store Data */
             void arld(char * rld, int li); /* Analysis Read-Line-Data */
@@ -37,8 +38,8 @@ void init(int argc, char **argv); /* Initialize */
                 void gplt(char * rld); /* Get Parameter: Loop times */
                 void gpst(char * rld); /* Get Parameter: Size of Tabu-list */
                 void gptt(char * rld); /* Get Parameter: Term of Tabu-list */
-    void abmem(void); /* Allocate Base-Memory */
-        void ag_bd(void); /* Allocate Global-Base-Data */
+    void ag_bd(void); /* Allocate Global-Base-Data */
+    void spara(void); /* Set Parameter data */
     void mtsplib(void); /* Management TSPLIB's Sample Problems */
         void rtsplib_sd(FILE * rfp); /* Read TSPLIB's problems & Store Data */
             void artsplibld(char * rld, int dli); /* Analysis Read TSPLIB's Line-Data */
@@ -48,6 +49,7 @@ void init(int argc, char **argv); /* Initialize */
 void fin(void); /* Finalize */
     void faam(void); /* Free All-Allocated Memory */
         void fg_bd(void); /* Free Global-Base-Data */
+        void fig_p(void); /* Free Initialize Global Parameter */
 
 #ifdef MPIMODE
 void mpi_test(void);

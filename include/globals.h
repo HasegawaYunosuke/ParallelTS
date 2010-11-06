@@ -35,4 +35,4 @@ struct _allocate_memory_check_flag {
 struct _base_data g_bd; /* Global Base Data */
 struct _base_mode g_bm; /* Global Base Mode */
 struct _individual_parameter * ig_p; /* Individual Global Parameter */
-struct _allocate_memory_check_flag g_iamc_f;
+struct _allocate_memory_check_flag g_amc_f; /* Global "_allocate_memory_check_flag" */

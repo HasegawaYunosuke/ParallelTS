@@ -373,20 +373,23 @@ void gpnth(char * rld)
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
-        oem("gpnth", ms, 0/*TODO*/);
+        oem("gpnth", ms, 0);
         exit(1);
     }
 }
 
 void gppw(char * rld)
 {
+    int i;
     int di = -1; /* Data Index */
     double pw; /* Percentage toward Worse[%] */
     char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
         pw = (double)gdnu(rld, di);
-        /*TODO*/printf("gppw():pw == %f\n", pw);
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].pw = pw;
+        }
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
@@ -397,13 +400,16 @@ void gppw(char * rld)
 
 void gplw(char * rld)
 {
-    int pn; /* Part of Number */
+    int i;
+    int lw; /* Loop times toward Worse */
     int di = -1; /* Data Index */
     char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
-        pn = gnxn(di, rld);
-        printf("gplw():pn == %d\n", pn);
+        lw = gnxn(di, rld);
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].lw = lw;
+        }
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
@@ -414,13 +420,16 @@ void gplw(char * rld)
 
 void gplt(char * rld)
 {
-    int pn; /* Part of Number */
+    int i;
+    int lt; /* Loop times */
     int di = -1; /* Data Index */
     char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
-        pn = gnxn(di, rld);
-        printf("gplt():pn == %d\n", pn);
+        lt = gnxn(di, rld);
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].lt = lt;
+        }
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
@@ -431,34 +440,40 @@ void gplt(char * rld)
 
 void gpst(char * rld)
 {
-    int pn; /* Part of Number */
+    int i;
+    int stl; /* Size of Tabu List */
     int di = -1; /* Data Index */
     char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
-        pn = gnxn(di, rld);
-        /*TODO*/printf("gpst():pn == %d\n", pn);
+        stl = gnxn(di, rld);
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].stl = stl;
+        }
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
-        oem("gplt", ms, 0);
+        oem("gpst", ms, 0);
         exit(1);
     }
 }
 
 void gptt(char * rld)
 {
-    int pn; /* Part of Number */
+    int i;
+    int ttl; /* Part of Number */
     int di = -1; /* Data Index */
     char ms[32]; /* Message */
 
     if((di = gdbl(rld)) >= 0) {
-        pn = gnxn(di, rld);
-        /*TODO*/printf("gptt():pn == %d\n", pn);
+        ttl = gnxn(di, rld);
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].ttl = ttl;
+        }
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
-        oem("gplt", ms, 0);
+        oem("gptt", ms, 0);
         exit(1);
     }
 }
@@ -494,7 +509,6 @@ void mtsplib(void)
     char ofp[64]; /* Open File Path */
     FILE * rfd; /* Readonly-File Disctpriter */
     char ms[64]; /* Message */
-    /*DEL*/int i,j;
 
     sprintf(ofp, "tsplib/%s", g_bd.pn);
     rfd = rfop(ofp, "mtsplib");

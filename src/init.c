@@ -4,7 +4,8 @@ void init(int argc, char **argv)
 {
     ffi();
     cif(argc, argv);
+    aig_p();
     mif(argc, argv);
-    abmem();
+    ag_bd();
     mtsplib();
 }
