@@ -18,17 +18,25 @@ struct _base_mode {
 };
 
 struct _individual_parameter {
-    double pw; /* Percentage toward Worse */
-    int lw; /* Loop times toward Worse */
-    int lt; /* Loop times */
-    int stl; /* Size of Tabu-List */
-    int ttl; /* Term of Tabu-List */
+    double pw; /* Percentage toward Worse (Previously Setting) */
+    int lw; /* Loop times toward Worse (Previously Setting) */
+    int lt; /* Loop times (Previously Setting) */
+    int clt; /* Current Loop times */
+    int stl; /* Size of Tabu-List (Previously Setting) */
+    int ttl; /* Term of Tabu-List (Previously Setting) */
+    pthread_t ptn; /* pthread Number */
+    int * csp; /* Current Solution Path */
+    double csd; /* Current Solution Distance */
+    int * bsp; /* Best Solution Path */
+    double bsd; /* Best Solution Distance */
 };
 
 struct _allocate_memory_check_flag {
     int f_btsp; /* Flag of "struct _base_data" */
     int f_bgd; /* Flag of "struct _base_mode" */
     int f_ipm; /* Flag of "struct _individual_parameter"'s memory */
+    int f_ipm_csp; /* Flag of "struct _individual_parameter"'s member "csp:Current Solution Path"'s memory */
+    int f_ipm_bsp; /* Flag of "struct _individual_parameter"'s member "csp:Current Solution Path"'s memory */
 };
 
 /* Global struct data */

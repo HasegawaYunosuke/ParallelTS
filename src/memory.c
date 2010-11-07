@@ -5,25 +5,21 @@ void ffi(void)
     g_amc_f.f_btsp = OFF;
     g_amc_f.f_bgd = OFF;
     g_amc_f.f_ipm = OFF;
-}
-
-void faam(void)
-{
-    fg_bd();
-    fig_p();
+    g_amc_f.f_ipm_csp = OFF;
+    g_amc_f.f_ipm_bsp = OFF;
 }
 
 void ag_bd(void)
 {
     int i, j;
 
-    if((g_bd.btsp = (double **)malloc(sizeof(double *) * 3)) == NULL) {
+    if((g_bd.btsp = (double **)malloc(sizeof(double) * 3)) == NULL) {
         oem("ag_bd", "Can't Allocate Memory (double **)btsp", 0);
     }
     for(i = 0; i < 3; i++) {
         if((g_bd.btsp[i] = (double *)calloc(g_bd.ps, sizeof(double))) == NULL) {
-            for(j = i; i > 0; i--) {
-                free(g_bd.btsp[i - 1]);
+            for(j = i; j > 0; j--) {
+                free(g_bd.btsp[j - 1]);
             }
             free(g_bd.btsp);
             oem("ag_bd", "Can't Allocate Memory (double *)btsp", 0);
@@ -36,8 +32,8 @@ void ag_bd(void)
     }
     for(i = 0; i < g_bd.ps; i++) {
         if((g_bd.bgd[i] = (double *)calloc(g_bd.ps, sizeof(double))) == NULL) {
-            for(j = i; i > 0; i--) {
-                free(g_bd.bgd[i - 1]);
+            for(j = i; j > 0; j--) {
+                free(g_bd.bgd[j - 1]);
             }
             free(g_bd.bgd);
             oem("ag_bd", "Can't Allocate Memory (double *)bgd", 0);
@@ -48,27 +44,35 @@ void ag_bd(void)
 
 void aig_p(void)
 {
+    int i, j;
+
     if((ig_p = (struct _individual_parameter *)malloc(sizeof(struct _individual_parameter) * g_bd.nth)) == NULL) {
         oem("aig_p", "Can't Allocate Memory ig_p", 0);
     }
     else {
         g_amc_f.f_ipm = ON;
     }
-}
 
-void fg_bd(void)
-{
-    int i;
-
-    for(i = 0; i < 3; i++) {
-        free(g_bd.btsp[i]);
+    for(i = 0; i < g_bd.nth; i++) {
+        if((ig_p[i].csp = (int *)calloc(g_bd.ps, sizeof(int))) == NULL) {
+            for(j = i; j > 0; j--) {
+                free(ig_p[j - 1].csp);
+            }
+            oem("aig_p", "Can't Allocate Memory ig_p.csp", i);
+        }
     }
-    free(g_bd.btsp);
+    g_amc_f.f_ipm_csp = ON;
 
-    for(i = 0; i < g_bd.ps; i++) {
-        free(g_bd.bgd[i]);
+    for(i = 0; i < g_bd.nth; i++) {
+        if((ig_p[i].bsp = (int *)calloc(g_bd.ps, sizeof(int))) == NULL) {
+            for(j = i; j > 0; j--) {
+                free(ig_p[j - 1].bsp);
+            }
+            oem("aig_p", "Can't Allocate Memory ig_p.bsp", i);
+        }
     }
-    free(g_bd.bgd);
+    g_amc_f.f_ipm_bsp = ON;
+
 }
 
 void fnyfp(void)
@@ -76,25 +80,20 @@ void fnyfp(void)
     int i;
 
     if(g_amc_f.f_btsp == ON) {
-        for(i = 0; i < 3; i++) {
-            free(g_bd.btsp[i]);
-        }
         free(g_bd.btsp);
+        g_amc_f.f_btsp = OFF;
     }
 
-    if(g_amc_f.f_btsp == ON) {
-        for(i = 0; i < g_bd.ps; i++) {
-            free(g_bd.bgd[i]);
-        }
+    if(g_amc_f.f_bgd == ON) {
         free(g_bd.bgd);
+        g_amc_f.f_bgd = OFF;
     }
 
-    if(g_amc_f.f_ipm == ON) {
-        free(ig_p);
+    if(g_amc_f.f_ipm_csp == ON) {
+        g_amc_f.f_ipm_csp = OFF;
     }
-}
 
-void fig_p(void)
-{
-    free(ig_p);
+    if(g_amc_f.f_ipm_bsp == ON) {
+        g_amc_f.f_ipm_bsp = OFF;
+    }
 }

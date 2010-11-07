@@ -33,6 +33,8 @@ mif	read_data.c	/^void mif(int argc, char **argv)$/
 mtsplib	read_data.c	/^void mtsplib(void)$/
 mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/
 oem	error.c	/^void oem(char func[32], char ms[64], int da)$/
+procedure	pthread.c	/^void * procedure(void * arg)$/
+ptp	pthread.c	/^void ptp(void)$/
 rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/
 rif_sd	read_data.c	/^void rif_sd(FILE * rfp)$/
 rtsplib_sd	read_data.c	/^void rtsplib_sd(FILE * rfp)$/

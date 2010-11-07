@@ -651,7 +651,7 @@ void artsplibld(char * rld, int dli)
     g_bd.btsp[1][dli] = atof(xsd);
     g_bd.btsp[2][dli] = atof(ysd);
 
-    ///*DEL*/printf("%d:(index,x,y) == (%3d,%8f,%8f)\n", dli, (int)g_bd.btsp[0][dli], g_bd.btsp[1][dli], g_bd.btsp[2][dli]);
+    /*DEL*/printf("%d:(index,x,y) == (%3d,%8f,%8f)\n", dli, (int)g_bd.btsp[0][dli], g_bd.btsp[1][dli], g_bd.btsp[2][dli]);
 }
 
 void sgd(void)

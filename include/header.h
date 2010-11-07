@@ -1,11 +1,13 @@
-#include "define.h"
-#include "globals.h"
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <math.h>
+#include <float.h>
+#include "define.h"
+#include "globals.h"
 
 void init(int argc, char **argv); /* Initialize */
     void ffi(void); /* First Flag Initialize */
@@ -46,11 +48,11 @@ void init(int argc, char **argv); /* Initialize */
                 void mychmp(char * buf, char * mychmpbuf); /* My Chomp */
         void sgd(void); /* Store Graph Data */
             double dif_2p(double x1, double y1, double x2, double y2); /* Difference between 2-Point */
+    void fiad(void); /* First Initialization of All Data */
+void ptp(void); /* pthread_Procedure */
+    void * procedure(void * arg); /*DEL*/
 void fin(void); /* Finalize */
-    void faam(void); /* Free All-Allocated Memory */
-        void fg_bd(void); /* Free Global-Base-Data */
-        void fig_p(void); /* Free Initialize Global Parameter */
-
+    void fnyfp(void); /* Free Not Yet Freed Pointer */
 #ifdef MPIMODE
 void mpi_test(void);
 #endif
