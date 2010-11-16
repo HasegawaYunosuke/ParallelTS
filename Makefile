@@ -2,7 +2,7 @@ vpath %.c src mpi
 vpath %.h include
 vpath %.o object
 
-CPPFLAGS = -I include -g
+CPPFLAGS = -I include -g -pthread -lm
 BASEFILE = main.c init.c check.c read_data.c file_manage.c error.c memory.c finalize.c math.c pthread.c
 MPIFILE = mpi.c
 MPIFLAG = -DMPIMODE

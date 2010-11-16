@@ -1,45 +1,51 @@
-Mmain	main.c	/^int main(int argc, char **argv)$/
-ag_bd	memory.c	/^void ag_bd(void)$/
-aig_p	memory.c	/^void aig_p(void)$/
-arld	read_data.c	/^void arld(char * rld, int li)$/
-artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/
-cif	check.c	/^void cif(int argc, char **argv)$/
-cnd	check.c	/^void cnd(char dn[32])$/
-dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, dou/
-faam	memory.c	/^void faam(void)$/
-ffi	memory.c	/^void ffi(void)$/
-fg_bd	memory.c	/^void fg_bd(void)$/
-fig_p	memory.c	/^void fig_p(void)$/
-fin	finalize.c	/^void fin(void)$/
-fnyfp	memory.c	/^void fnyfp(void)$/
-gdbl	read_data.c	/^int gdbl(char * rld)$/
-gdld1	read_data.c	/^void gdld1(char * rld)$/
-gdld2	read_data.c	/^void gdld2(char * rld)$/
-gdld3	read_data.c	/^void gdld3(char * rld)$/
-gdld4	read_data.c	/^void gdld4(char * rld)$/
-gdna	read_data.c	/^void gdna(char * rld, int di, char * pn)$/
-gdnu	read_data.c	/^int gdnu(char * rld, int di)$/
-gnxn	read_data.c	/^int gnxn(int di, char * rld)$/
-gonoff	read_data.c	/^int gonoff(char * rld, int di)$/
-gplt	read_data.c	/^void gplt(char * rld)$/
-gplw	read_data.c	/^void gplw(char * rld)$/
-gpnth	read_data.c	/^void gpnth(char * rld)$/
-gppw	read_data.c	/^void gppw(char * rld)$/
-gpst	read_data.c	/^void gpst(char * rld)$/
-gptt	read_data.c	/^void gptt(char * rld)$/
-init	init.c	/^void init(int argc, char **argv)$/
-itpn	read_data.c	/^void itpn(char * rld)$/
-mif	read_data.c	/^void mif(int argc, char **argv)$/
-mtsplib	read_data.c	/^void mtsplib(void)$/
-mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/
-oem	error.c	/^void oem(char func[32], char ms[64], int da)$/
-procedure	pthread.c	/^void * procedure(void * arg)$/
-ptp	pthread.c	/^void ptp(void)$/
-rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/
-rif_sd	read_data.c	/^void rif_sd(FILE * rfp)$/
-rtsplib_sd	read_data.c	/^void rtsplib_sd(FILE * rfp)$/
-sgd	read_data.c	/^void sgd(void)$/
-smcm	read_data.c	/^void smcm(char * rld)$/
-smpim	read_data.c	/^void smpim(char * rld)$/
-ssti	read_data.c	/^void ssti(char * rld)$/
-wtres	read_data.c	/^void wtres(char * rld)$/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+RBUFFSIZE	read_data.c	4;"	d	file:
+RLINESIZE	read_data.c	3;"	d	file:
+ag_bd	memory.c	/^void ag_bd(void)$/;"	f
+aig_p	memory.c	/^void aig_p(void)$/;"	f
+arld	read_data.c	/^void arld(char * rld, int li)$/;"	f
+artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/;"	f
+cif	check.c	/^void cif(int argc, char **argv)$/;"	f
+cnd	check.c	/^void cnd(char dn[32])$/;"	f
+dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, double y2)$/;"	f
+ffi	memory.c	/^void ffi(void)$/;"	f
+fiad	init.c	/^void fiad(void)$/;"	f
+fin	finalize.c	/^void fin(void)$/;"	f
+fnyfp	memory.c	/^void fnyfp(void)$/;"	f
+gdbl	read_data.c	/^int gdbl(char * rld)$/;"	f
+gdld1	read_data.c	/^void gdld1(char * rld)$/;"	f
+gdld2	read_data.c	/^void gdld2(char * rld)$/;"	f
+gdld3	read_data.c	/^void gdld3(char * rld)$/;"	f
+gdld4	read_data.c	/^void gdld4(char * rld)$/;"	f
+gdna	read_data.c	/^void gdna(char * rld, int di, char * pn)$/;"	f
+gdnu	read_data.c	/^int gdnu(char * rld, int di)$/;"	f
+gnxn	read_data.c	/^int gnxn(int di, char * rld)$/;"	f
+gonoff	read_data.c	/^int gonoff(char * rld, int di)$/;"	f
+gplt	read_data.c	/^void gplt(char * rld)$/;"	f
+gplw	read_data.c	/^void gplw(char * rld)$/;"	f
+gpnth	read_data.c	/^void gpnth(char * rld)$/;"	f
+gppw	read_data.c	/^void gppw(char * rld)$/;"	f
+gpst	read_data.c	/^void gpst(char * rld)$/;"	f
+gptt	read_data.c	/^void gptt(char * rld)$/;"	f
+init	init.c	/^void init(int argc, char **argv)$/;"	f
+itpn	read_data.c	/^void itpn(char * rld)$/;"	f
+main	main.c	/^int main(int argc, char **argv)$/;"	f
+mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
+mtsplib	read_data.c	/^void mtsplib(void)$/;"	f
+mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/;"	f
+oem	error.c	/^void oem(char func[32], char ms[64], int da)$/;"	f
+procedure	pthread.c	/^void * procedure(void * arg)$/;"	f
+ptp	pthread.c	/^void ptp(void)$/;"	f
+rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/;"	f
+rif_sd	read_data.c	/^void rif_sd(FILE * rfd)$/;"	f
+rtsplib_sd	read_data.c	/^void rtsplib_sd(FILE * rfp)$/;"	f
+sgd	read_data.c	/^void sgd(void)$/;"	f
+smcm	read_data.c	/^void smcm(char * rld)$/;"	f
+smpim	read_data.c	/^void smpim(char * rld)$/;"	f
+ssti	read_data.c	/^void ssti(char * rld)$/;"	f
+wtres	read_data.c	/^void wtres(char * rld)$/;"	f

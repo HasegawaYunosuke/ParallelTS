@@ -6,8 +6,6 @@ void init(int argc, char **argv)
     ffi();
     /* Command Line Argument Error Check */
     cif(argc, argv);
-    /* Memory Allocation about "struct ig_p" */
-    aig_p();
     /* Command Line Input File Management */
     mif(argc, argv);
     /* Memory Allocation about "struct g_bd" */

@@ -3,6 +3,7 @@
 #define RLINESIZE 256
 #define RBUFFSIZE 256
 
+
 void mif(int argc, char **argv)
 {
     FILE * rfd; /* Readonly-File Disctpriter */
@@ -13,13 +14,15 @@ void mif(int argc, char **argv)
     fclose(rfd);
 }
 
-void rif_sd(FILE * rfp)
+void rif_sd(FILE * rfd)
 {
     int li; /* Line Index */
     char buf[RBUFFSIZE];
 
     for(li = 1;; li++) {
-        if(fgets(buf, RLINESIZE, rfp) == NULL) {
+        memset(buf, '0', RBUFFSIZE);
+        buf[RBUFFSIZE - 1] = '\0';
+        if(fgets(buf, sizeof(buf), rfd) == NULL) {
             break;
         }
         else {
@@ -80,6 +83,8 @@ void arld(char * rld, int li)
     /* The Number of Thread */
     else if(li == 14) {
         gpnth(rld);
+        /* Memory Allocation about "struct ig_p" */
+        aig_p();
     }
     /* The Percentage of Permission toward Worse */
     else if(li == 15) {
@@ -119,7 +124,6 @@ void itpn(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("itpn", ms, 0);
-        exit(1);
     }
 }
 
@@ -136,7 +140,6 @@ void ssti(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("ssti", ms, 0);
-        exit(1);
     }
 }
 
@@ -202,7 +205,6 @@ void smcm(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("smcm", ms, 0);
-        exit(1);
     }
 }
 
@@ -222,7 +224,6 @@ void smpim(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("smpim", ms, 0);
-        exit(1);
     }
 }
 
@@ -239,7 +240,6 @@ int gonoff(char * rld, int di)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gonoff", ms, 0);
-        exit(1);
     }
 }
 
@@ -263,7 +263,6 @@ void wtres(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("wtres", ms, 0);
-        exit(1);
     }
 
     if(strcmp(sd, "simple") == 0) {
@@ -275,7 +274,6 @@ void wtres(char * rld)
     else {
         sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
         oem("wtres", ms, 0);
-        exit(1);
     }
 }
 
@@ -295,7 +293,6 @@ void gdld1(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gdld1", ms, 0);
-        exit(1);
     }
 }
 
@@ -315,7 +312,6 @@ void gdld2(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gdld2", ms, 0);
-        exit(1);
     }
 }
 
@@ -335,7 +331,6 @@ void gdld3(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gdld3", ms, 0);
-        exit(1);
     }
 }
 
@@ -355,7 +350,6 @@ void gdld4(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gdld4", ms, 0);
-        exit(1);
     }
 }
 
@@ -374,7 +368,6 @@ void gpnth(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gpnth", ms, 0);
-        exit(1);
     }
 }
 
@@ -394,7 +387,6 @@ void gppw(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gppw", ms, 0);
-        exit(1);
     }
 }
 
@@ -414,7 +406,6 @@ void gplw(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gplw", ms, 0);
-        exit(1);
     }
 }
 
@@ -434,7 +425,6 @@ void gplt(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gplt", ms, 0);
-        exit(1);
     }
 }
 
@@ -454,7 +444,6 @@ void gpst(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gpst", ms, 0);
-        exit(1);
     }
 }
 
@@ -474,7 +463,6 @@ void gptt(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gptt", ms, 0);
-        exit(1);
     }
 }
 
@@ -484,7 +472,6 @@ int gnxn(int di, char * rld)
     char pns[16]; /* Part of Number: String ver */
     int pnsi = 0; /* Part of Number: String ver  Index */
     int pn = 1;
-    /*DEL*/int tspsize = 2;
 
     for(i = di;; i++) {
         if(rld[i] == '\n' || rld[i] == '\0') {
@@ -499,7 +486,7 @@ int gnxn(int di, char * rld)
             pns[pnsi] = rld[i]; pnsi++;
         }
         else if(rld[i] == 'N') {
-            pn *= tspsize;
+            pn *= g_bd.ps;
         }
     }
 }

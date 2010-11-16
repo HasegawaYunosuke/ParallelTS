@@ -1,4 +1,4 @@
-prob:pr1002.tsp
+prob:eil51.tsp
 time[sec]:10
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
@@ -13,7 +13,7 @@ deb4[ON/OFF]:OFF
 
 p_nthread:5
 p_worse[%]:5
-p_wloop:8NNN
+p_wloop:8
 p_loop:100
-p_TLS:2N
+p_TLS:2
 p_TLT:NNN
