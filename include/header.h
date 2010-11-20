@@ -29,6 +29,7 @@ void init(int argc, char **argv); /* Initialize */
                     int gonoff(char * rld, int di); /* Get ON or OFF */
                 void smpim(char * rld); /* Set MPI Mode */
                 void wtres(char * rld); /* What type of result do you use ? */
+                void ipcm(char * rld); /*  Initial Path Creating Mode */
                 void gdld1(char * rld); /* Get Debug-Log-Data:type1 */
                 void gdld2(char * rld); /* Get Debug-Log-Data:type2 */
                 void gdld3(char * rld); /* Get Debug-Log-Data:type3 */
@@ -50,7 +51,12 @@ void init(int argc, char **argv); /* Initialize */
             double dif_2p(double x1, double y1, double x2, double y2); /* Difference between 2-Point */
     void fiad(void); /* First Initialization of All Data */
 void ptp(void); /* pthread_Procedure */
-    void * procedure(void * arg); /*DEL*/
+    void * threp(void * arg); /* Thread Procedure */
+        void initp(int * npthr); /* Initialize Path */
+            void cip_brn(int * npthr); /* Create Initial-Path By Random */
+                int grn(int max); /* Get Random Number */
+                void cuc_pa(int * ary, int target, int max, int flag); /* Check Used-City and Plug Array */
+            void cip_bnn(int * npthr); /* Create Initial-Path By Nearest Neighbor */
 void fin(void); /* Finalize */
     void fnyfp(void); /* Free Not Yet Freed Pointer */
 #ifdef MPIMODE

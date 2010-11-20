@@ -14,3 +14,9 @@ double dif_2p(double x1, double y1, double x2, double y2)
 
     return sqrt(x*x + y*y);
 }
+
+/* return 0 ~ (max - 1) */
+int grn(int max)
+{
+    return rand() % max;
+}

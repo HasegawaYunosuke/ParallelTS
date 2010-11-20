@@ -11,6 +11,7 @@ struct _base_mode {
     int mcm; /* Multi-core MODE (ON/OFF) */
     int mpim; /* MPI MODE (ON/OFF) */
     int tres; /* Type of Result MODE (DEFAULT/TYPE1~5) */
+    int ipcm; /* Initial Path Creating Mode (DEFAULT/TYPE1) */
     int dld1; /* Debug-Log-Data:type1 (ON/OFF) */
     int dld2; /* Debug-Log-Data:type2 (ON/OFF) */
     int dld3; /* Debug-Log-Data:type3 (ON/OFF) */

@@ -55,26 +55,28 @@ void arld(char * rld, int li)
     else if(li == 5) {
         wtres(rld);
     }
-    /* Output Debug-Log-Data:type1 */
+    /* Initialize Path Create Mode */
     else if(li == 6) {
+        ipcm(rld);
+    }
+    /* Output Debug-Log-Data:type1 */
+    else if(li == 7) {
         gdld1(rld);
     }
     /* Output Debug-Log-Data:type2 */
-    else if(li == 7) {
+    else if(li == 8) {
         gdld2(rld);
     }
     /* Output Debug-Log-Data:type3 */
-    else if(li == 8) {
+    else if(li == 9) {
         gdld3(rld);
     }
     /* Output Debug-Log-Data:type4 */
-    else if(li == 9) {
+    else if(li == 10) {
         gdld4(rld);
     }
     /* On Sale */
-    /*else if(li == 10) {
-    }
-    else if(li == 11) {
+    /*else if(li == 11) {
     }
     else if(li == 12) {
     }
@@ -274,6 +276,40 @@ void wtres(char * rld)
     else {
         sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
         oem("wtres", ms, 0);
+    }
+}
+
+void ipcm(char * rld)
+{
+    int i;
+    int di = -1; /* Data Index */
+    int sdi = 0; /* String Data Index */
+    char sd[64]; /* String Data */
+    char ms[32]; /* Message */
+
+    if((di = gdbl(rld)) >= 0) {
+        for(i = di;; i++) {
+            if(rld[i] == '\n' || rld[i] == '\0') {
+                sd[sdi] = '\0';
+                break;
+            }
+            sd[sdi] = rld[i]; sdi++;
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("ipcm", ms, 0);
+    }
+
+    if(strcmp(sd, "rand") == 0) {
+        g_bm.ipcm = DEFAULT;
+    }
+    else if(strcmp(sd, "nn") == 0) {
+        g_bm.ipcm = TYPE1;
+    }
+    else {
+        sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
+        oem("ipcm", ms, 0);
     }
 }
 

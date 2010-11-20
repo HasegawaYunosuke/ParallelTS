@@ -33,13 +33,13 @@ gppw	read_data.c	/^void gppw(char * rld)$/;"	f
 gpst	read_data.c	/^void gpst(char * rld)$/;"	f
 gptt	read_data.c	/^void gptt(char * rld)$/;"	f
 init	init.c	/^void init(int argc, char **argv)$/;"	f
+initp	init_path.c	/^void initp(int * npthr)$/;"	f
 itpn	read_data.c	/^void itpn(char * rld)$/;"	f
 main	main.c	/^int main(int argc, char **argv)$/;"	f
 mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
 mtsplib	read_data.c	/^void mtsplib(void)$/;"	f
 mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/;"	f
 oem	error.c	/^void oem(char func[32], char ms[64], int da)$/;"	f
-procedure	pthread.c	/^void * procedure(void * arg)$/;"	f
 ptp	pthread.c	/^void ptp(void)$/;"	f
 rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/;"	f
 rif_sd	read_data.c	/^void rif_sd(FILE * rfd)$/;"	f
@@ -48,4 +48,5 @@ sgd	read_data.c	/^void sgd(void)$/;"	f
 smcm	read_data.c	/^void smcm(char * rld)$/;"	f
 smpim	read_data.c	/^void smpim(char * rld)$/;"	f
 ssti	read_data.c	/^void ssti(char * rld)$/;"	f
+threp	pthread.c	/^void * threp(void * arg)$/;"	f
 wtres	read_data.c	/^void wtres(char * rld)$/;"	f

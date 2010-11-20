@@ -7,19 +7,24 @@ void ptp(void)
 
     for(i = 0; i < g_bd.nth; i++) {
         pid[i] = i;
-        pthread_create(&ig_p[i].ptn, NULL, procedure, (void *)&pid[i]);
+        pthread_create(&ig_p[i].ptn, NULL, threp, (void *)&pid[i]);
     }
     for(i = 0; i < g_bd.nth; i++) {
         pthread_join(ig_p[i].ptn, NULL);
     }
 }
 
-void * procedure(void * arg)
+void * threp(void * arg)
 {
-    if(pthread_equal(ig_p[*(int *)arg].ptn, pthread_self())) {
+    /*DEL*/
+    /*if(pthread_equal(ig_p[*(int *)arg].ptn, pthread_self())) {
         printf("HYA HHA---!!!\n");
     }
     else {
         printf("HIDEBUUUUUU!\n");
-    }
+    }*/
+    /*DEL*/
+
+    srand(time(NULL)); srand(*(int *)arg);
+    initp((int *)arg);
 }
