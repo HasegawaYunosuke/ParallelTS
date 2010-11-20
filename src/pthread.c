@@ -5,6 +5,8 @@ void ptp(void)
     int i;
     int pid[g_bd.nth];
 
+    pthread_mutex_init(&l_gpd_lock, NULL);
+
     for(i = 0; i < g_bd.nth; i++) {
         pid[i] = i;
         pthread_create(&ig_p[i].ptn, NULL, threp, (void *)&pid[i]);
@@ -25,6 +27,6 @@ void * threp(void * arg)
     }*/
     /*DEL*/
 
-    srand(time(NULL)); srand(*(int *)arg);
+    srand(time(NULL)*(*(int *)arg + 1));
     initp((int *)arg);
 }

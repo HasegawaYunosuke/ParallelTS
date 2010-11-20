@@ -11,7 +11,10 @@ aig_p	memory.c	/^void aig_p(void)$/;"	f
 arld	read_data.c	/^void arld(char * rld, int li)$/;"	f
 artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/;"	f
 cif	check.c	/^void cif(int argc, char **argv)$/;"	f
+cip_bnn	init_path.c	/^void cip_bnn(int * npthr)$/;"	f
+cip_brn	init_path.c	/^void cip_brn(int * npthr)$/;"	f
 cnd	check.c	/^void cnd(char dn[32])$/;"	f
+cuc_pa	init_path.c	/^void cuc_pa(int * ary, int max, int target, int flag)$/;"	f
 dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, double y2)$/;"	f
 ffi	memory.c	/^void ffi(void)$/;"	f
 fiad	init.c	/^void fiad(void)$/;"	f
@@ -32,9 +35,12 @@ gpnth	read_data.c	/^void gpnth(char * rld)$/;"	f
 gppw	read_data.c	/^void gppw(char * rld)$/;"	f
 gpst	read_data.c	/^void gpst(char * rld)$/;"	f
 gptt	read_data.c	/^void gptt(char * rld)$/;"	f
+grn	math.c	/^int grn(int max)$/;"	f
 init	init.c	/^void init(int argc, char **argv)$/;"	f
 initp	init_path.c	/^void initp(int * npthr)$/;"	f
+ipcm	read_data.c	/^void ipcm(char * rld)$/;"	f
 itpn	read_data.c	/^void itpn(char * rld)$/;"	f
+l_gpd	math.c	/^double l_gpd(int * path)$/;"	f
 main	main.c	/^int main(int argc, char **argv)$/;"	f
 mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
 mtsplib	read_data.c	/^void mtsplib(void)$/;"	f

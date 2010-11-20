@@ -11,7 +11,7 @@ deb4[ON/OFF]:OFF
 
 
 
-p_nthread:2
+p_nthread:100
 p_worse[%]:5
 p_wloop:8
 p_loop:100
