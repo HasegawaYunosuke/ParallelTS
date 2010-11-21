@@ -1,9 +1,9 @@
-prob:burma14.tsp
+prob:pcb3038.tsp
 time[sec]:10
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
 result[simple/navi]:simple
-initpa[rand/nn]:rand
+initpa[rand/nn]:nn
 deb1[ON/OFF]:OFF
 deb2[ON/OFF]:OFF
 deb3[ON/OFF]:OFF
@@ -11,7 +11,7 @@ deb4[ON/OFF]:OFF
 
 
 
-p_nthread:5
+p_nthread:1
 p_worse[%]:5
 p_wloop:8
 p_loop:100
