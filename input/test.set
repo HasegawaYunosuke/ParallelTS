@@ -1,4 +1,4 @@
-prob:eil51.tsp
+prob:burma14.tsp
 time[sec]:10
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
@@ -11,7 +11,7 @@ deb4[ON/OFF]:OFF
 
 
 
-p_nthread:100
+p_nthread:5
 p_worse[%]:5
 p_wloop:8
 p_loop:100

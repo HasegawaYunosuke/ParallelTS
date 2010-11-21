@@ -56,7 +56,7 @@ void ptp(void); /* pthread_Procedure */
             void cip_brn(int * npthr); /* Create Initial-Path By Random */
                 int grn(int max); /* Get Random Number */
                 void cuc_pa(int * ary, int target, int max, int flag); /* Check Used-City and Plug Array */
-                double gpd(int * path); /* Locked:Get Path-Distance */
+                double gpd(int * path, int * npthr); /* Locked:Get Path-Distance */
             void cip_bnn(int * npthr); /* Create Initial-Path By Nearest Neighbor */
 void fin(void); /* Finalize */
     void fnyfp(void); /* Free Not Yet Freed Pointer */

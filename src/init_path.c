@@ -30,9 +30,7 @@ void cip_brn(int * npthr)
         cuc_pa(yet, (g_bd.ps - i), ci, ucf);
     }
 
-    pthread_mutex_lock(&l_gpd_lock);
-    printf("%f\n",gpd(ig_p[*npthr].csp));
-    pthread_mutex_unlock(&l_gpd_lock);
+    ig_p[*npthr].csd = gpd(ig_p[*npthr].csp, npthr);
 }
 
 void cuc_pa(int * ary, int max, int target, int flag)

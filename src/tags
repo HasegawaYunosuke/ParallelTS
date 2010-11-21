@@ -29,6 +29,7 @@ gdna	read_data.c	/^void gdna(char * rld, int di, char * pn)$/;"	f
 gdnu	read_data.c	/^int gdnu(char * rld, int di)$/;"	f
 gnxn	read_data.c	/^int gnxn(int di, char * rld)$/;"	f
 gonoff	read_data.c	/^int gonoff(char * rld, int di)$/;"	f
+gpd	math.c	/^void gpd(int * path, int * npthr)$/;"	f
 gplt	read_data.c	/^void gplt(char * rld)$/;"	f
 gplw	read_data.c	/^void gplw(char * rld)$/;"	f
 gpnth	read_data.c	/^void gpnth(char * rld)$/;"	f
@@ -40,7 +41,6 @@ init	init.c	/^void init(int argc, char **argv)$/;"	f
 initp	init_path.c	/^void initp(int * npthr)$/;"	f
 ipcm	read_data.c	/^void ipcm(char * rld)$/;"	f
 itpn	read_data.c	/^void itpn(char * rld)$/;"	f
-l_gpd	math.c	/^double l_gpd(int * path)$/;"	f
 main	main.c	/^int main(int argc, char **argv)$/;"	f
 mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
 mtsplib	read_data.c	/^void mtsplib(void)$/;"	f

@@ -11,4 +11,6 @@ int main(int argc, char **argv)
     printf("DEBUG TEST\n");
 #endif
     fin();
+
+    return 0;
 }

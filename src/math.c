@@ -21,7 +21,7 @@ int grn(int max)
     return rand() % max;
 }
 
-double gpd(int * path)
+double gpd(int * path, int * npthr)
 {
     int i;
     double sum = 0.0; /* Sum of All Distance */
@@ -29,7 +29,7 @@ double gpd(int * path)
     for(i = 0; i < g_bd.ps - 1; i++) {
         sum += g_bd.bgd[(path[i] - 1)][(path[i + 1] - 1)];
     }
-    sum += g_bd.bgd[(path[g_bd.ps - 1])][(path[0] - 1)];
+    sum += g_bd.bgd[(path[g_bd.ps - 1] - 1)][(path[0] - 1)];
 
     return sum;
 }
