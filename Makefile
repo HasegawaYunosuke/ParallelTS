@@ -3,7 +3,7 @@ vpath %.h include
 vpath %.o object
 
 CPPFLAGS = -I include -g -pthread -lm
-BASEFILE = main.c init.c check.c read_data.c file_manage.c error.c memory.c finalize.c math.c pthread.c init_path.c
+BASEFILE = main.c init.c check.c read_data.c file_manage.c error.c memory.c finalize.c math.c pthread.c init_path.c timer.c
 MPIFILE = mpi.c
 MPIFLAG = -DMPIMODE
 DEBUGFLAG1 = -DDEBUG1

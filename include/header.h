@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include <math.h>
 #include <float.h>
+#include <sys/time.h>
 #include "define.h"
 #include "globals.h"
 
@@ -50,7 +51,9 @@ void init(int argc, char **argv); /* Initialize */
         void sgd(void); /* Store Graph Data */
             double dif_2p(double x1, double y1, double x2, double y2); /* Difference between 2-Point */
     void fiad(void); /* First Initialization of All Data */
+void st_t(void); /* Start Timer */
 void ptp(void); /* pthread_Procedure */
+    double diff_t(void); /* Difference of Time (How Long the Search start) */
     void * threp(void * arg); /* Thread Procedure */
         void initp(int * npthr); /* Initialize Path */
             void cip_brn(int * npthr); /* Create Initial-Path By Random */
