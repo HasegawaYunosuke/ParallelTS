@@ -57,6 +57,7 @@ void ptp(void); /* pthread_Procedure */
                 int grn(int max); /* Get Random Number */
                 void cuc_pa(int * ary, int target, int max, int flag); /* Check Used-City and Plug Array */
                 double gpd(int * path, int * npthr); /* Locked:Get Path-Distance */
+                void copyc_b(int * npthr); /* Copy Current Solution Path & Data as the Best Solution */
             void cip_bnn(int * npthr); /* Create Initial-Path By Nearest Neighbor */
                 int gnc_eu(int sc, int * yet, int surplus); /* Get Nearest City Except Used Cities */
                     int is_u(int city, int * ary, int max); /* Is This Used City? (return YES/NO) */

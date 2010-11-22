@@ -31,6 +31,7 @@ void cip_brn(int * npthr)
     }
 
     ig_p[*npthr].csd = gpd(ig_p[*npthr].csp, npthr);
+    copyc_b(npthr);
 }
 
 void cuc_pa(int * ary, int max, int target, int flag)
@@ -67,6 +68,7 @@ void cip_bnn(int * npthr)
     }
 
     ig_p[*npthr].csd = gpd(ig_p[*npthr].csp, npthr);
+    copyc_b(npthr);
 }
 
 int gnc_eu(int sc, int * yet, int surplus)
@@ -111,4 +113,14 @@ int guci_bc(int city, int * ary, int max)
     }
 
     oem("guci_bc", "Couldn't Find Out city", city);
+}
+
+void copyc_b(int * npthr)
+{
+    int i;
+
+    for(i = 0; i < g_bd.ps; i++) {
+        ig_p[*npthr].bsp[i] = ig_p[*npthr].csp[i];
+    }
+    ig_p[*npthr].bsd = ig_p[*npthr].csd;
 }
