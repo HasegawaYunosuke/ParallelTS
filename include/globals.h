@@ -3,6 +3,7 @@ struct _base_data {
     int ps; /* Problem Size */
     int st; /* Search Time */
     int nth; /* Number of Thread */
+    double kn_bs; /* Known Best Solution */
     double ** btsp; /* Base TSPLIB's x-y Data */
     double ** bgd; /* Base Graph Data */
 };

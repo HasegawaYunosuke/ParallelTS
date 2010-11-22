@@ -14,6 +14,8 @@ void init(int argc, char **argv)
     mtsplib();
     /* First Initialization of All Data */
     fiad();
+    /* Get Best Solution By Problem-Name */
+    gbs_bpn();
 }
 
 void fiad(void)

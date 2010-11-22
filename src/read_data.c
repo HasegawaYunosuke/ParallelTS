@@ -3,7 +3,6 @@
 #define RLINESIZE 256
 #define RBUFFSIZE 256
 
-
 void mif(int argc, char **argv)
 {
     FILE * rfd; /* Readonly-File Disctpriter */
@@ -688,6 +687,297 @@ void sgd(void)
         for(ec = sc; ec < g_bd.ps; ec++) {
             temp = dif_2p(g_bd.btsp[1][sc], g_bd.btsp[2][sc], g_bd.btsp[1][ec], g_bd.btsp[2][ec]);
             g_bd.bgd[sc][ec] = temp; g_bd.bgd[ec][sc] = temp;
-        }
+        } }
+}
+
+void gbs_bpn(void)
+{
+    char ms[32]; /* Message */
+
+    if(strcmp(g_bd.pn, "a280.tsp") == 0) {
+        g_bd.kn_bs = 2579.0;
+    }
+    else if(strcmp(g_bd.pn, "ali535.tsp") == 0) {
+        g_bd.kn_bs = 202339.0;
+    }
+    else if(strcmp(g_bd.pn, "att48.tsp") == 0) {
+        g_bd.kn_bs = 10628.0;
+    }
+    else if(strcmp(g_bd.pn, "att532.tsp") == 0) {
+        g_bd.kn_bs = 27686.0;
+    }
+    else if(strcmp(g_bd.pn, "berlin52.tsp") == 0) {
+        g_bd.kn_bs = 7542.0;
+    }
+    else if(strcmp(g_bd.pn, "bier127.tsp") == 0) {
+        g_bd.kn_bs = 118282.0;
+    }
+    else if(strcmp(g_bd.pn, "brd14051.tsp") == 0) {
+        g_bd.kn_bs = 469385.0;
+    }
+    else if(strcmp(g_bd.pn, "burma14.tsp") == 0) {
+        g_bd.kn_bs = 3323.0;
+    }
+    else if(strcmp(g_bd.pn, "ch130.tsp") == 0) {
+        g_bd.kn_bs = 6110.0;
+    }
+    else if(strcmp(g_bd.pn, "ch150.tsp") == 0) {
+        g_bd.kn_bs = 6528.0;
+    }
+    else if(strcmp(g_bd.pn, "d1291.tsp") == 0) {
+        g_bd.kn_bs = 50801.0;
+    }
+    else if(strcmp(g_bd.pn, "d15112.tsp") == 0) {
+        g_bd.kn_bs = 1573084.0;
+    }
+    else if(strcmp(g_bd.pn, "d1655.tsp") == 0) {
+        g_bd.kn_bs = 62128.0;
+    }
+    else if(strcmp(g_bd.pn, "d18512.tsp") == 0) {
+        g_bd.kn_bs = 645238.0;
+    }
+    else if(strcmp(g_bd.pn, "d198.tsp") == 0) {
+        g_bd.kn_bs = 15780.0;
+    }
+    else if(strcmp(g_bd.pn, "d2103.tsp") == 0) {
+        g_bd.kn_bs = 80450.0;
+    }
+    else if(strcmp(g_bd.pn, "d493.tsp") == 0) {
+        g_bd.kn_bs = 35002.0;
+    }
+    else if(strcmp(g_bd.pn, "d657.tsp") == 0) {
+        g_bd.kn_bs = 48912.0;
+    }
+    else if(strcmp(g_bd.pn, "dsj1000.tsp") == 0) {
+        g_bd.kn_bs = 18659688.0;
+    }
+    else if(strcmp(g_bd.pn, "eil101.tsp") == 0) {
+        g_bd.kn_bs = 629.0;
+    }
+    else if(strcmp(g_bd.pn, "eil51.tsp") == 0) {
+        g_bd.kn_bs = 426.0;
+    }
+    else if(strcmp(g_bd.pn, "eil76.tsp") == 0) {
+        g_bd.kn_bs = 538.0;
+    }
+    else if(strcmp(g_bd.pn, "fl1400.tsp") == 0) {
+        g_bd.kn_bs = 20127.0;
+    }
+    else if(strcmp(g_bd.pn, "fl1577.tsp") == 0) {
+        g_bd.kn_bs = 22249.0;
+    }
+    else if(strcmp(g_bd.pn, "fl3795.tsp") == 0) {
+        g_bd.kn_bs = 28772.0;
+    }
+    else if(strcmp(g_bd.pn, "fl417.tsp") == 0) {
+        g_bd.kn_bs = 11861.0;
+    }
+    else if(strcmp(g_bd.pn, "fnl4461.tsp") == 0) {
+        g_bd.kn_bs = 182566.0;
+    }
+    else if(strcmp(g_bd.pn, "gil262.tsp") == 0) {
+        g_bd.kn_bs = 2378.0;
+    }
+    else if(strcmp(g_bd.pn, "gr137.tsp") == 0) {
+        g_bd.kn_bs = 69853.0;
+    }
+    else if(strcmp(g_bd.pn, "gr202.tsp") == 0) {
+        g_bd.kn_bs = 40160.0;
+    }
+    else if(strcmp(g_bd.pn, "gr229.tsp") == 0) {
+        g_bd.kn_bs = 134602.0;
+    }
+    else if(strcmp(g_bd.pn, "gr431.tsp") == 0) {
+        g_bd.kn_bs = 171414.0;
+    }
+    else if(strcmp(g_bd.pn, "gr666.tsp") == 0) {
+        g_bd.kn_bs = 294358.0;
+    }
+    else if(strcmp(g_bd.pn, "gr96.tsp") == 0) {
+        g_bd.kn_bs = 55209.0;
+    }
+    else if(strcmp(g_bd.pn, "kroA100.tsp") == 0) {
+        g_bd.kn_bs = 21282.0;
+    }
+    else if(strcmp(g_bd.pn, "kroA150.tsp") == 0) {
+        g_bd.kn_bs = 26524.0;
+    }
+    else if(strcmp(g_bd.pn, "kroA200.tsp") == 0) {
+        g_bd.kn_bs = 29368.0;
+    }
+    else if(strcmp(g_bd.pn, "kroB100.tsp") == 0) {
+        g_bd.kn_bs = 22141.0;
+    }
+    else if(strcmp(g_bd.pn, "kroB150.tsp") == 0) {
+        g_bd.kn_bs = 26130.0;
+    }
+    else if(strcmp(g_bd.pn, "kroB200.tsp") == 0) {
+        g_bd.kn_bs = 29437.0;
+    }
+    else if(strcmp(g_bd.pn, "kroC100.tsp") == 0) {
+        g_bd.kn_bs = 20749.0;
+    }
+    else if(strcmp(g_bd.pn, "kroD100.tsp") == 0) {
+        g_bd.kn_bs = 21294.0;
+    }
+    else if(strcmp(g_bd.pn, "kroE100.tsp") == 0) {
+        g_bd.kn_bs = 22068.0;
+    }
+    else if(strcmp(g_bd.pn, "lin105.tsp") == 0) {
+        g_bd.kn_bs = 14379.0;
+    }
+    else if(strcmp(g_bd.pn, "lin318.tsp") == 0) {
+        g_bd.kn_bs = 42029.0;
+    }
+    else if(strcmp(g_bd.pn, "linhp318.tsp") == 0) {
+        g_bd.kn_bs = 41345.0;
+    }
+    else if(strcmp(g_bd.pn, "nrw1379.tsp") == 0) {
+        g_bd.kn_bs = 56638.0;
+    }
+    else if(strcmp(g_bd.pn, "p654.tsp") == 0) {
+        g_bd.kn_bs = 34643.0;
+    }
+    else if(strcmp(g_bd.pn, "pcb1173.tsp") == 0) {
+        g_bd.kn_bs = 56892.0;
+    }
+    else if(strcmp(g_bd.pn, "pcb3038.tsp") == 0) {
+        g_bd.kn_bs = 137694.0;
+    }
+    else if(strcmp(g_bd.pn, "pcb442.tsp") == 0) {
+        g_bd.kn_bs = 50778.0;
+    }
+    else if(strcmp(g_bd.pn, "pla33810.tsp") == 0) {
+        g_bd.kn_bs = 66048945.0;
+    }
+    else if(strcmp(g_bd.pn, "pla7397.tsp") == 0) {
+        g_bd.kn_bs = 23260728.0;
+    }
+    else if(strcmp(g_bd.pn, "pla85900.tsp") == 0) {
+        g_bd.kn_bs = 142382641.0;
+    }
+    else if(strcmp(g_bd.pn, "pr1002.tsp") == 0) {
+        g_bd.kn_bs = 259045.0;
+    }
+    else if(strcmp(g_bd.pn, "pr107.tsp") == 0) {
+        g_bd.kn_bs = 44303.0;
+    }
+    else if(strcmp(g_bd.pn, "pr124.tsp") == 0) {
+        g_bd.kn_bs = 59030.0;
+    }
+    else if(strcmp(g_bd.pn, "pr136.tsp") == 0) {
+        g_bd.kn_bs = 96772.0;
+    }
+    else if(strcmp(g_bd.pn, "pr144.tsp") == 0) {
+        g_bd.kn_bs = 58537.0;
+    }
+    else if(strcmp(g_bd.pn, "pr152.tsp") == 0) {
+        g_bd.kn_bs = 73682.0;
+    }
+    else if(strcmp(g_bd.pn, "pr226.tsp") == 0) {
+        g_bd.kn_bs = 80369.0;
+    }
+    else if(strcmp(g_bd.pn, "pr2392.tsp") == 0) {
+        g_bd.kn_bs = 378032.0;
+    }
+    else if(strcmp(g_bd.pn, "pr264.tsp") == 0) {
+        g_bd.kn_bs = 49135.0;
+    }
+    else if(strcmp(g_bd.pn, "pr299.tsp") == 0) {
+        g_bd.kn_bs = 48191.0;
+    }
+    else if(strcmp(g_bd.pn, "pr439.tsp") == 0) {
+        g_bd.kn_bs = 107217.0;
+    }
+    else if(strcmp(g_bd.pn, "pr76.tsp") == 0) {
+        g_bd.kn_bs = 108159.0;
+    }
+    else if(strcmp(g_bd.pn, "rat195.tsp") == 0) {
+        g_bd.kn_bs = 2323.0;
+    }
+    else if(strcmp(g_bd.pn, "rat575.tsp") == 0) {
+        g_bd.kn_bs = 6773.0;
+    }
+    else if(strcmp(g_bd.pn, "rat783.tsp") == 0) {
+        g_bd.kn_bs = 8806.0;
+    }
+    else if(strcmp(g_bd.pn, "rat99.tsp") == 0) {
+        g_bd.kn_bs = 1121.0;
+    }
+    else if(strcmp(g_bd.pn, "rd100.tsp") == 0) {
+        g_bd.kn_bs = 7910.0;
+    }
+    else if(strcmp(g_bd.pn, "rd400.tsp") == 0) {
+        g_bd.kn_bs = 15281.0;
+    }
+    else if(strcmp(g_bd.pn, "rl11849.tsp") == 0) {
+        g_bd.kn_bs = 923288.0;
+    }
+    else if(strcmp(g_bd.pn, "rl1304.tsp") == 0) {
+        g_bd.kn_bs = 252948.0;
+    }
+    else if(strcmp(g_bd.pn, "rl1323.tsp") == 0) {
+        g_bd.kn_bs = 270199.0;
+    }
+    else if(strcmp(g_bd.pn, "rl1889.tsp") == 0) {
+        g_bd.kn_bs = 316536.0;
+    }
+    else if(strcmp(g_bd.pn, "rl5915.tsp") == 0) {
+        g_bd.kn_bs = 565530.0;
+    }
+    else if(strcmp(g_bd.pn, "rl5934.tsp") == 0) {
+        g_bd.kn_bs = 556045.0;
+    }
+    else if(strcmp(g_bd.pn, "st70.tsp") == 0) {
+        g_bd.kn_bs = 675.0;
+    }
+    else if(strcmp(g_bd.pn, "ts225.tsp") == 0) {
+        g_bd.kn_bs = 126643.0;
+    }
+    else if(strcmp(g_bd.pn, "tsp225.tsp") == 0) {
+        g_bd.kn_bs = 3916.0;
+    }
+    else if(strcmp(g_bd.pn, "u1060.tsp") == 0) {
+        g_bd.kn_bs = 224094.0;
+    }
+    else if(strcmp(g_bd.pn, "u1432.tsp") == 0) {
+        g_bd.kn_bs = 152970.0;
+    }
+    else if(strcmp(g_bd.pn, "u159.tsp") == 0) {
+        g_bd.kn_bs = 42080.0;
+    }
+    else if(strcmp(g_bd.pn, "u1817.tsp") == 0) {
+        g_bd.kn_bs = 57201.0;
+    }
+    else if(strcmp(g_bd.pn, "u2152.tsp") == 0) {
+        g_bd.kn_bs = 64253.0;
+    }
+    else if(strcmp(g_bd.pn, "u2319.tsp") == 0) {
+        g_bd.kn_bs = 234256.0;
+    }
+    else if(strcmp(g_bd.pn, "u574.tsp") == 0) {
+        g_bd.kn_bs = 36905.0;
+    }
+    else if(strcmp(g_bd.pn, "u724.tsp") == 0) {
+        g_bd.kn_bs = 41910.0;
+    }
+    else if(strcmp(g_bd.pn, "ulysses16.tsp") == 0) {
+        g_bd.kn_bs = 6859.0;
+    }
+    else if(strcmp(g_bd.pn, "ulysses22.tsp") == 0) {
+        g_bd.kn_bs = 7013.0;
+    }
+    else if(strcmp(g_bd.pn, "usa13509.tsp") == 0) {
+        g_bd.kn_bs = 19982859.0;
+    }
+    else if(strcmp(g_bd.pn, "vm1084.tsp") == 0) {
+        g_bd.kn_bs = 239297.0;
+    }
+    else if(strcmp(g_bd.pn, "vm1748.tsp") == 0) {
+        g_bd.kn_bs = 336556.0;
+    }
+    else {
+        sprintf(ms, "Couldn't Find Out Problem %s's Known Best Solution", g_bd.pn);
+        oem("gbs_bpn", ms, 0);
     }
 }
