@@ -27,4 +27,7 @@ void * threp(void * arg)
 
     srand(time(NULL)*(*(int *)arg + 1));
     initp((int *)arg);
+    do {
+        ts_proc((int *)arg);
+    } while (diff_t() < (double)g_bd.st);
 }
