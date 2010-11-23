@@ -14,12 +14,16 @@ cif	check.c	/^void cif(int argc, char **argv)$/;"	f
 cip_bnn	init_path.c	/^void cip_bnn(int * npthr)$/;"	f
 cip_brn	init_path.c	/^void cip_brn(int * npthr)$/;"	f
 cnd	check.c	/^void cnd(char dn[32])$/;"	f
+copyc_b	init_path.c	/^void copyc_b(int * npthr)$/;"	f
 cuc_pa	init_path.c	/^void cuc_pa(int * ary, int max, int target, int flag)$/;"	f
 dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, double y2)$/;"	f
+diff_t	timer.c	/^double diff_t(void)$/;"	f
 ffi	memory.c	/^void ffi(void)$/;"	f
 fiad	init.c	/^void fiad(void)$/;"	f
 fin	finalize.c	/^void fin(void)$/;"	f
 fnyfp	memory.c	/^void fnyfp(void)$/;"	f
+g_st_t	timer.c	/^double g_st_t;$/;"	v
+gbs_bpn	read_data.c	/^void gbs_bpn(void)$/;"	f
 gdbl	read_data.c	/^int gdbl(char * rld)$/;"	f
 gdld1	read_data.c	/^void gdld1(char * rld)$/;"	f
 gdld2	read_data.c	/^void gdld2(char * rld)$/;"	f
@@ -27,9 +31,11 @@ gdld3	read_data.c	/^void gdld3(char * rld)$/;"	f
 gdld4	read_data.c	/^void gdld4(char * rld)$/;"	f
 gdna	read_data.c	/^void gdna(char * rld, int di, char * pn)$/;"	f
 gdnu	read_data.c	/^int gdnu(char * rld, int di)$/;"	f
+gminex_etb	search.c	/^void gminex_etb(int * path, int * ccs)$/;"	f
+gnc_eu	init_path.c	/^int gnc_eu(int sc, int * yet, int surplus)$/;"	f
 gnxn	read_data.c	/^int gnxn(int di, char * rld)$/;"	f
 gonoff	read_data.c	/^int gonoff(char * rld, int di)$/;"	f
-gpd	math.c	/^void gpd(int * path, int * npthr)$/;"	f
+gpd	math.c	/^double gpd(int * path, int * npthr)$/;"	f
 gplt	read_data.c	/^void gplt(char * rld)$/;"	f
 gplw	read_data.c	/^void gplw(char * rld)$/;"	f
 gpnth	read_data.c	/^void gpnth(char * rld)$/;"	f
@@ -37,10 +43,13 @@ gppw	read_data.c	/^void gppw(char * rld)$/;"	f
 gpst	read_data.c	/^void gpst(char * rld)$/;"	f
 gptt	read_data.c	/^void gptt(char * rld)$/;"	f
 grn	math.c	/^int grn(int max)$/;"	f
+guci_bc	init_path.c	/^int guci_bc(int city, int * ary, int max)$/;"	f
 init	init.c	/^void init(int argc, char **argv)$/;"	f
 initp	init_path.c	/^void initp(int * npthr)$/;"	f
 ipcm	read_data.c	/^void ipcm(char * rld)$/;"	f
+is_u	init_path.c	/^int is_u(int city, int * ary, int max)$/;"	f
 itpn	read_data.c	/^void itpn(char * rld)$/;"	f
+ma_tl	memory.c	/^void ma_tl(void)$/;"	f
 main	main.c	/^int main(int argc, char **argv)$/;"	f
 mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
 mtsplib	read_data.c	/^void mtsplib(void)$/;"	f
@@ -54,5 +63,7 @@ sgd	read_data.c	/^void sgd(void)$/;"	f
 smcm	read_data.c	/^void smcm(char * rld)$/;"	f
 smpim	read_data.c	/^void smpim(char * rld)$/;"	f
 ssti	read_data.c	/^void ssti(char * rld)$/;"	f
+st_t	timer.c	/^void st_t(void)$/;"	f
 threp	pthread.c	/^void * threp(void * arg)$/;"	f
+ts_proc	search.c	/^void ts_proc(int * npthr)$/;"	f
 wtres	read_data.c	/^void wtres(char * rld)$/;"	f

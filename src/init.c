@@ -10,6 +10,8 @@ void init(int argc, char **argv)
     mif(argc, argv);
     /* Memory Allocation about "struct g_bd" */
     ag_bd();
+    /* Memory Allocation about "struct tblist" */
+    ma_tl();
     /* Read TSPLIB's Problems & Store Data & Make Glaph Data */
     mtsplib();
     /* First Initialization of All Data */
@@ -26,5 +28,12 @@ void fiad(void)
         ig_p[i].csd = DBL_MAX;
         ig_p[i].bsd = DBL_MAX;
         ig_p[i].clt = 0;
+    }
+
+    for(i = 0; i < ig_p[0].stl; i++) {
+        g_tl.to_tl[i + 0] = EMPTY;
+        g_tl.to_tl[i + 1] = EMPTY;
+        g_tl.to_tl[i + 2] = EMPTY;
+        g_tl.to_tl[i + 3] = EMPTY;
     }
 }

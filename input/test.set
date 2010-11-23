@@ -1,5 +1,5 @@
-prob:eil51.tsp
-time[sec]:10
+prob:pr1002.tsp
+time[sec]:3
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
 result[simple/navi]:simple
@@ -15,5 +15,5 @@ p_nthread:1
 p_worse[%]:5
 p_wloop:8
 p_loop:100
-p_TLS:2
+p_TLS:N
 p_TLT:NNN

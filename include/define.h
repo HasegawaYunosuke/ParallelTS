@@ -11,3 +11,6 @@
 #define TYPE3 3
 #define TYPE4 4
 #define TYPE5 5
+
+/* Sign */
+#define EMPTY -99

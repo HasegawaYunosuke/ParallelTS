@@ -44,6 +44,7 @@ void init(int argc, char **argv); /* Initialize */
                 void gptt(char * rld); /* Get Parameter: Term of Tabu-list */
     void ag_bd(void); /* Allocate Global-Base-Data */
     void spara(void); /* Set Parameter data */
+    void ma_tl(void); /* Memory Allocation about "struct tblist" */
     void mtsplib(void); /* Management TSPLIB's Sample Problems */
         void rtsplib_sd(FILE * rfp); /* Read TSPLIB's problems & Store Data */
             void artsplibld(char * rld, int dli); /* Analysis Read TSPLIB's Line-Data */

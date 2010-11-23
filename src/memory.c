@@ -7,6 +7,7 @@ void ffi(void)
     g_amc_f.f_ipm = OFF;
     g_amc_f.f_ipm_csp = OFF;
     g_amc_f.f_ipm_bsp = OFF;
+    g_amc_f.f_to_tl = OFF;
 }
 
 void ag_bd(void)
@@ -95,5 +96,20 @@ void fnyfp(void)
 
     if(g_amc_f.f_ipm_bsp == ON) {
         g_amc_f.f_ipm_bsp = OFF;
+    }
+
+    if(g_amc_f.f_to_tl == ON) {
+        free(g_tl.to_tl);
+        g_amc_f.f_to_tl = OFF;
+    }
+}
+
+void ma_tl(void)
+{
+    if((g_tl.to_tl = (int *)malloc(sizeof(int) * 4 * ig_p[0].stl)) == NULL) {
+        oem("ma_tl", "Can't Allocate Memory", 0);
+    }
+    else {
+        g_amc_f.f_to_tl = ON;
     }
 }
