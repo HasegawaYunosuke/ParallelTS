@@ -14,3 +14,5 @@
 
 /* Sign */
 #define EMPTY -99
+#define TABUB 10
+#define TABUW 20

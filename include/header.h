@@ -68,7 +68,12 @@ void ptp(void); /* pthread_Procedure */
                     int is_u(int city, int * ary, int max); /* Is This Used City? (return YES/NO) */
                 int guci_bc(int city, int * ary, int max); /* Get Used City Index By City */
         void ts_proc(int * arg); /* Tabu Search Procedure */
-            void gminex_etb(int * path, int * ccs); /* Get Minimum Exchange Except Tabu */
+            void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr); /* Get Minimum Exchange Except Tabu */
+                int ch_tb(int * ccs); /* Check Tabu (return YES/NO) */
+                    void * ch_tb_c(void * ccs); /* Check Tabu Child Function */
+                int alw_wors(double b_diff, int * npthr); /* Allow exchanging toword Worse */
+            void ex_addtl(int * path, int * ccs, int * ccsi, int * npthr); /* Exchange Branches and Add Tabu List */
+                void addtl(int * ccs, int * npthr); /* Add Tabu List) */
 void fin(void); /* Finalize */
     void fnyfp(void); /* Free Not Yet Freed Pointer */
 #ifdef MPIMODE

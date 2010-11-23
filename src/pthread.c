@@ -5,6 +5,7 @@ void ptp(void)
     int i;
     int pid[g_bd.nth];
 
+    pthread_mutex_init(&g_tb_mutex, NULL);
     for(i = 0; i < g_bd.nth; i++) {
         pid[i] = i;
         pthread_create(&ig_p[i].ptn, NULL, threp, (void *)&pid[i]);

@@ -52,3 +52,9 @@ struct _base_mode g_bm; /* Global Base Mode */
 struct _individual_parameter * ig_p; /* Individual Global Parameter */
 struct _allocate_memory_check_flag g_amc_f; /* Global "_allocate_memory_check_flag" */
 struct _tabu_list g_tl; /* Global Tabu List */
+
+/* Global variable data */
+int g_tli; /* Global Tabu List Index */
+
+/* Global Mutex */
+pthread_mutex_t g_tb_mutex; /* Global Tabu Mutex */

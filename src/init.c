@@ -31,9 +31,11 @@ void fiad(void)
     }
 
     for(i = 0; i < ig_p[0].stl; i++) {
-        g_tl.to_tl[i + 0] = EMPTY;
-        g_tl.to_tl[i + 1] = EMPTY;
-        g_tl.to_tl[i + 2] = EMPTY;
-        g_tl.to_tl[i + 3] = EMPTY;
+        g_tl.to_tl[i * 4 + 0] = EMPTY;
+        g_tl.to_tl[i * 4 + 1] = EMPTY;
+        g_tl.to_tl[i * 4 + 2] = EMPTY;
+        g_tl.to_tl[i * 4 + 3] = EMPTY;
     }
+
+    g_tli = 0;
 }

@@ -6,10 +6,13 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 RBUFFSIZE	read_data.c	4;"	d	file:
 RLINESIZE	read_data.c	3;"	d	file:
+addtl	tabu.c	/^void addtl(int * ccs, int * npthr)$/;"	f
 ag_bd	memory.c	/^void ag_bd(void)$/;"	f
 aig_p	memory.c	/^void aig_p(void)$/;"	f
 arld	read_data.c	/^void arld(char * rld, int li)$/;"	f
 artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/;"	f
+ch_tb	tabu.c	/^int ch_tb(int * ccs)$/;"	f
+ch_tb_c	tabu.c	/^void ch_tb_c(void * css)$/;"	f
 cif	check.c	/^void cif(int argc, char **argv)$/;"	f
 cip_bnn	init_path.c	/^void cip_bnn(int * npthr)$/;"	f
 cip_brn	init_path.c	/^void cip_brn(int * npthr)$/;"	f
@@ -18,11 +21,13 @@ copyc_b	init_path.c	/^void copyc_b(int * npthr)$/;"	f
 cuc_pa	init_path.c	/^void cuc_pa(int * ary, int max, int target, int flag)$/;"	f
 dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, double y2)$/;"	f
 diff_t	timer.c	/^double diff_t(void)$/;"	f
+ex_addtl	search.c	/^void ex_addtl(int * path, int * ccs, int * ccsi, int * npthr)$/;"	f
 ffi	memory.c	/^void ffi(void)$/;"	f
 fiad	init.c	/^void fiad(void)$/;"	f
 fin	finalize.c	/^void fin(void)$/;"	f
 fnyfp	memory.c	/^void fnyfp(void)$/;"	f
 g_st_t	timer.c	/^double g_st_t;$/;"	v
+g_tli	tabu.c	/^int g_tli = 0; \/* Global Tabu List Index *\/$/;"	v
 gbs_bpn	read_data.c	/^void gbs_bpn(void)$/;"	f
 gdbl	read_data.c	/^int gdbl(char * rld)$/;"	f
 gdld1	read_data.c	/^void gdld1(char * rld)$/;"	f
@@ -31,7 +36,7 @@ gdld3	read_data.c	/^void gdld3(char * rld)$/;"	f
 gdld4	read_data.c	/^void gdld4(char * rld)$/;"	f
 gdna	read_data.c	/^void gdna(char * rld, int di, char * pn)$/;"	f
 gdnu	read_data.c	/^int gdnu(char * rld, int di)$/;"	f
-gminex_etb	search.c	/^void gminex_etb(int * path, int * ccs)$/;"	f
+gminex_etb	search.c	/^void gminex_etb(int * path, int * ccs, int * ccsi)$/;"	f
 gnc_eu	init_path.c	/^int gnc_eu(int sc, int * yet, int surplus)$/;"	f
 gnxn	read_data.c	/^int gnxn(int di, char * rld)$/;"	f
 gonoff	read_data.c	/^int gonoff(char * rld, int di)$/;"	f

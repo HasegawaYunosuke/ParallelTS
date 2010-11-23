@@ -99,7 +99,7 @@ void fnyfp(void)
     }
 
     if(g_amc_f.f_to_tl == ON) {
-        free(g_tl.to_tl);
+        //free(g_tl.to_tl);
         g_amc_f.f_to_tl = OFF;
     }
 }
