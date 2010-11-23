@@ -2,5 +2,6 @@
 
 void fin(void)
 {
+    out_r();
     fnyfp();
 }

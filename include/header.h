@@ -75,6 +75,9 @@ void ptp(void); /* pthread_Procedure */
             void ex_addtl(int * path, int * ccs, int * ccsi, int * npthr); /* Exchange Branches and Add Tabu List */
                 void addtl(int * ccs, int * npthr); /* Add Tabu List) */
 void fin(void); /* Finalize */
+    void out_r(void); /* Out-Put Result */
+        FILE * wfop(char * argv, char bfn[32]); /* Write File Open */
+        void pres(FILE * resfp); /* Printout Result */
     void fnyfp(void); /* Free Not Yet Freed Pointer */
 #ifdef MPIMODE
 void mpi_test(void);
