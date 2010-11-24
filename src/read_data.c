@@ -32,8 +32,6 @@ void rif_sd(FILE * rfd)
 
 void arld(char * rld, int li)
 {
-    /*DEL*/printf("%2d %s", li, rld);
-
     /* Input TSPLIB's problem name */
     if(li == 1) {
         itpn(rld);
