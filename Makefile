@@ -8,6 +8,7 @@ MPIFILE = mpi.c
 MPIFLAG = -DMPIMODE
 DEBUGFLAG1 = -DDEBUG1
 CC = gcc
+CCC = mpicc
 
 all: ${BASEFILE}
 	${CC} -c ${CPPFLAGS} $^
@@ -18,13 +19,13 @@ a: object/*.o
 	${CC} ${CPPFLAGS} $^ -o a.out
 
 mpi: ${BASEFILE} ${MPIFILE}
-	${CC} ${CPPFLAGS} ${MPIFLAG} $^ -o b.out
+	${CCC} ${CPPFLAGS} ${MPIFLAG} $^ -o b.out
 
 debug: ${BASEFILE}
 	${CC} ${CPPFLAGS} ${DEBUGFLAG1} $^ -o d.out
 
 debugmpi: ${BASEFILE} ${MPIFILE}
-	${CC} ${CPPFLAGS} ${MPIFLAG} ${DEBUGFLAG1} $^ -o dm.out
+	${CCC} ${CPPFLAGS} ${MPIFLAG} ${DEBUGFLAG1} $^ -o dm.out
 
 clean:
 	rm *.o

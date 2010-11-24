@@ -6,7 +6,11 @@ void out_r(void)
     char wfn[64];
 
     cnd("result");
+#ifdef MPIMODE
+    sprintf(wfn, "result/%s.%dsec.node_%d.res", g_bd.pn, g_bd.st, g_bd.mpi_id);
+#else
     sprintf(wfn, "result/%s.%dsec.res", g_bd.pn, g_bd.st);
+#endif
     wfd = wfop(wfn, "out_r");
     pres(wfd);
     fclose(wfd);

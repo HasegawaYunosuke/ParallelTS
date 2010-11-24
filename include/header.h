@@ -9,6 +9,9 @@
 #include <sys/time.h>
 #include "define.h"
 #include "globals.h"
+#ifdef MPIMODE
+#include <mpi.h>
+#endif
 
 void init(int argc, char **argv); /* Initialize */
     void ffi(void); /* First Flag Initialize */
@@ -81,4 +84,6 @@ void fin(void); /* Finalize */
     void fnyfp(void); /* Free Not Yet Freed Pointer */
 #ifdef MPIMODE
 void mpi_test(void);
+void mpi_ip(int argc, char **argv); /* MPI Initialize Procedure */
+void mpi_fin(void); /* MPI Finalize Procedure */
 #endif

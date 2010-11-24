@@ -3,16 +3,17 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_PROGRAM_VERSION	5.6	//
 RBUFFSIZE	read_data.c	4;"	d	file:
 RLINESIZE	read_data.c	3;"	d	file:
 addtl	tabu.c	/^void addtl(int * ccs, int * npthr)$/;"	f
 ag_bd	memory.c	/^void ag_bd(void)$/;"	f
 aig_p	memory.c	/^void aig_p(void)$/;"	f
+alw_wors	search.c	/^int alw_wors(double b_diff, int * npthr)$/;"	f
 arld	read_data.c	/^void arld(char * rld, int li)$/;"	f
 artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/;"	f
 ch_tb	tabu.c	/^int ch_tb(int * ccs)$/;"	f
-ch_tb_c	tabu.c	/^void ch_tb_c(void * css)$/;"	f
+ch_tb_c	tabu.c	/^void * ch_tb_c(void * css)$/;"	f
 cif	check.c	/^void cif(int argc, char **argv)$/;"	f
 cip_bnn	init_path.c	/^void cip_bnn(int * npthr)$/;"	f
 cip_brn	init_path.c	/^void cip_brn(int * npthr)$/;"	f
@@ -27,7 +28,6 @@ fiad	init.c	/^void fiad(void)$/;"	f
 fin	finalize.c	/^void fin(void)$/;"	f
 fnyfp	memory.c	/^void fnyfp(void)$/;"	f
 g_st_t	timer.c	/^double g_st_t;$/;"	v
-g_tli	tabu.c	/^int g_tli = 0; \/* Global Tabu List Index *\/$/;"	v
 gbs_bpn	read_data.c	/^void gbs_bpn(void)$/;"	f
 gdbl	read_data.c	/^int gdbl(char * rld)$/;"	f
 gdld1	read_data.c	/^void gdld1(char * rld)$/;"	f
@@ -36,7 +36,7 @@ gdld3	read_data.c	/^void gdld3(char * rld)$/;"	f
 gdld4	read_data.c	/^void gdld4(char * rld)$/;"	f
 gdna	read_data.c	/^void gdna(char * rld, int di, char * pn)$/;"	f
 gdnu	read_data.c	/^int gdnu(char * rld, int di)$/;"	f
-gminex_etb	search.c	/^void gminex_etb(int * path, int * ccs, int * ccsi)$/;"	f
+gminex_etb	search.c	/^void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr)$/;"	f
 gnc_eu	init_path.c	/^int gnc_eu(int sc, int * yet, int surplus)$/;"	f
 gnxn	read_data.c	/^int gnxn(int di, char * rld)$/;"	f
 gonoff	read_data.c	/^int gonoff(char * rld, int di)$/;"	f
@@ -57,9 +57,14 @@ itpn	read_data.c	/^void itpn(char * rld)$/;"	f
 ma_tl	memory.c	/^void ma_tl(void)$/;"	f
 main	main.c	/^int main(int argc, char **argv)$/;"	f
 mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
+mpi_fin	../mpi/mpi.c	/^void mpi_fin(void)$/;"	f
+mpi_ip	../mpi/mpi.c	/^void mpi_ip(int argc, char **argv)$/;"	f
+mpi_test	../mpi/mpi.c	/^void mpi_test(void)$/;"	f
 mtsplib	read_data.c	/^void mtsplib(void)$/;"	f
 mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/;"	f
 oem	error.c	/^void oem(char func[32], char ms[64], int da)$/;"	f
+out_r	result.c	/^void out_r(void)$/;"	f
+pres	result.c	/^void pres(FILE * resfp)$/;"	f
 ptp	pthread.c	/^void ptp(void)$/;"	f
 rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/;"	f
 rif_sd	read_data.c	/^void rif_sd(FILE * rfd)$/;"	f
@@ -71,4 +76,5 @@ ssti	read_data.c	/^void ssti(char * rld)$/;"	f
 st_t	timer.c	/^void st_t(void)$/;"	f
 threp	pthread.c	/^void * threp(void * arg)$/;"	f
 ts_proc	search.c	/^void ts_proc(int * npthr)$/;"	f
+wfop	file_manage.c	/^FILE * wfop(char * argv, char bfn[32])$/;"	f
 wtres	read_data.c	/^void wtres(char * rld)$/;"	f

@@ -18,6 +18,10 @@ void init(int argc, char **argv)
     fiad();
     /* Get Best Solution By Problem-Name */
     gbs_bpn();
+#ifdef MPIMODE
+    /* MPI Initialize Procedure*/
+    mpi_ip(argc, argv);
+#endif
 }
 
 void fiad(void)
@@ -29,6 +33,8 @@ void fiad(void)
         ig_p[i].bsd = DBL_MAX;
         ig_p[i].clt = 0;
     }
+
+    g_bd.mpi_id = 0;
 
     for(i = 0; i < ig_p[0].stl; i++) {
         g_tl.to_tl[i * 4 + 0] = EMPTY;
