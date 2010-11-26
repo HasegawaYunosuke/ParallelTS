@@ -8,8 +8,7 @@ void out_r(void)
     int i, sdn = g_bd.nth;
     int root = 0;
     double wait;
-    double sd[sdn];
-    double rd[(sdn * g_bd.np_ae)];
+    double sd[sdn]; double rd[(sdn * g_bd.np_ae)];
 #endif
 
     cnd("result");
@@ -18,24 +17,36 @@ void out_r(void)
     for(i = 0; i < g_bd.nth; i++) {
         sd[i] = ig_p[i].bsd;
     }
-    MPI_Barrier(MPI_COMM_WORLD);
     if(g_bd.mpi_id == 0) {
+        /*DEL*/printf("Bef Gather() at proc:%d\n", g_bd.mpi_id);
         MPI_Gather(sd, sdn, MPI_DOUBLE, rd, sdn, MPI_DOUBLE, root, MPI_COMM_WORLD);
+        /*DEL*/printf("Aft Gather() at proc:%d\n", g_bd.mpi_id);
         sprintf(wfn, "result/%s.%dsec.all_node.res", g_bd.pn, g_bd.st);
         wfd = wfop(wfn, "out_r");
         mpi_pres(wfd, rd, (sdn * g_bd.np_ae));
         fclose(wfd);
+        for(i = 0; i < g_bd.np_ae; i++) {
+            for(;;) {
+                if(MPI_Barrier(MPI_COMM_WORLD) == MPI_SUCCESS) {
+                    break;
+                }
+            }
+        }
+        /*DEL*/printf("Aft Barrier() at proc:%d\n", g_bd.mpi_id);
     }
     else {
-        if((wait = g_bd.st / 100) > 1) {
-            sleep((int)wait);
-        }
+        /*DEL*/printf("Bef Gather() at proc:%d\n", g_bd.mpi_id);
         MPI_Gather(sd, sdn, MPI_DOUBLE, rd, sdn, MPI_DOUBLE, root, MPI_COMM_WORLD);
-        if(wait > 1) {
-            sleep((int)wait);
+        /*DEL*/printf("Aft Gather() at proc:%d\n", g_bd.mpi_id);
+        for(i = 0; i < g_bd.np_ae; i++) {
+            for(;;) {
+                if(MPI_Barrier(MPI_COMM_WORLD) == MPI_SUCCESS) {
+                    break;
+                }
+            }
         }
+        /*DEL*/printf("Aft Barrier() at proc:%d\n", g_bd.mpi_id);
     }
-    //MPI_Barrier(MPI_COMM_WORLD);
 #else
     sprintf(wfn, "result/%s.%dsec.res", g_bd.pn, g_bd.st);
     wfd = wfop(wfn, "out_r");

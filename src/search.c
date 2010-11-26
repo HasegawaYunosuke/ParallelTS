@@ -37,8 +37,17 @@ void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr)
             bef = g_bd.bgd[(t_ccs[0] - 1)][(t_ccs[1] - 1)] + g_bd.bgd[(t_ccs[2] - 1)][(t_ccs[3] - 1)];
             aft = g_bd.bgd[(t_ccs[0] - 1)][(t_ccs[2] - 1)] + g_bd.bgd[(t_ccs[1] - 1)][(t_ccs[3] - 1)];
             diff = aft - bef;
-            if(diff < b_diff) {
 
+            /* Starting Timer Checker Procedure */
+            if(diff_t() > (double)g_bd.st) {
+                for(k = 0; k < 4; k++) {
+                    ccs[k] = EMPTY;
+                }
+                break;
+            }
+            /* End of Timer Checker Procedure */
+
+            else if(diff < b_diff) {
                 if(ch_tb(t_ccs) == NO) {
                     /* if Choiced Cities are NOT Tabu */
                     b_diff = diff;
@@ -78,9 +87,24 @@ void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr)
                 }
             }
         }
+        /* Starting Timer Checker Procedure */
+        if(diff_t() > (double)g_bd.st) {
+            for(k = 0; k < 4; k++) {
+                ccs[k] = EMPTY;
+            }
+            break;
+        }
+        /* End of Timer Checker Procedure */
     }
 
-    if(b_ccs[0] != EMPTY && alw_wors(b_diff, npthr) == YES) {
+    /* Starting Timer Checker Procedure */
+    if(diff_t() > (double)g_bd.st) {
+        for(k = 0; k < 4; k++) {
+            ccs[k] = EMPTY;
+        }
+    }
+    /* End of Timer Checker Procedure */
+    else if(b_ccs[0] != EMPTY && alw_wors(b_diff, npthr) == YES) {
         for(k = 0; k < 4; k++) {
             ccs[k] = b_ccs[k];
             ccsi[k] = b_ccsi[k];
@@ -98,9 +122,10 @@ void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr)
             ccsi[k] = hw_ccsi[k];
         }
     }
-    else {
+    /* Shortly Program Will be Terminated */
+    /*else {
         oem("gminex_etb", "Can't Choice Target Cities???", 0);
-    }
+    }*/
 }
 
 void ex_addtl(int * path, int * ccs, int * ccsi, int * npthr)

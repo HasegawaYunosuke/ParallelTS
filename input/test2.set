@@ -1,5 +1,5 @@
 prob:rat575.tsp
-time[sec]:1800
+time[sec]:3600
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
 result[simple/navi]:simple

@@ -20,15 +20,17 @@ double diff_t(void)
     rn = ((double)t.tv_sec + (double)t.tv_usec * 1e-6) - g_st_t;
 
 /*DEL*/
-/*#ifdef MPIMODE
-    if((int)rn % 30 == 0 && timerf == OFF) {
-        printf("Node %d Now:%f\n", g_bd.mpi_id, rn);
-        timerf = ON;
+#ifdef MPIMODE
+    if(pthread_equal(ig_p[0].ptn, pthread_self())) {
+        if((int)rn % 30 == 0 && timerf == OFF) {
+            printf("Node %d Now:%f\n", g_bd.mpi_id, rn);
+            timerf = ON;
+        }
+        else if((int)rn % 30 != 0 && timerf == ON) {
+            timerf = OFF;
+        }
     }
-    else if((int)rn % 30 != 0 && timerf == ON) {
-        timerf = OFF;
-    }
-#endif*/
+#endif
 /*DEL*/
 
     return rn;
