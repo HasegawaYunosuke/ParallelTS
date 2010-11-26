@@ -19,7 +19,10 @@ int ch_tb(int * ccs)
     pthread_mutex_unlock(&g_tb_mutex);
 
     for(i = 0; i < 4; i++) {
-        if(ccs_c[i][4] == YES) {
+        if(ccs_c[i][4] == TIMEUP) {
+            return TIMEUP;
+        }
+        else if(ccs_c[i][4] == YES) {
             return YES;
         }
     }
@@ -32,7 +35,11 @@ void * ch_tb_c(void * css)
     int i;
 
     for(i = 0; i < ig_p[0].stl; i++) {
-        if(g_tl.to_tl[4 * i] == EMPTY) {
+        if(diff_t() > (double)g_bd.st) {
+            ((int *)css)[4] = TIMEUP;
+            break;
+        }
+        else if(g_tl.to_tl[4 * i] == EMPTY) {
             break;
         }
         else if(g_tl.to_tl[4 * i] == ((int *)css)[0]) {

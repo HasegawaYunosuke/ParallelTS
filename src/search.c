@@ -17,6 +17,7 @@ void ts_proc(int * npthr)
 
 void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr)
 {
+    int ch_tb_rn = EMPTY; /* Check Tabu Return Number */
     int i, j, k;
     int t_ccs[4] = {EMPTY}; /* Temporary Choiced CitieS */
     int b_ccs[4] = {EMPTY}; /* Best Choiced CitieS */
@@ -48,7 +49,14 @@ void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr)
             /* End of Timer Checker Procedure */
 
             else if(diff < b_diff) {
-                if(ch_tb(t_ccs) == NO) {
+                ch_tb_rn = ch_tb(t_ccs);
+                if(ch_tb_rn == TIMEUP) {
+                    for(k = 0; k < 4; k++) {
+                        ccs[k] = EMPTY;
+                    }
+                    break;
+                }
+                else if(ch_tb_rn == NO) {
                     /* if Choiced Cities are NOT Tabu */
                     b_diff = diff;
                     if(b_diff < bbt_diff) {
@@ -61,7 +69,7 @@ void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr)
                     }
                     /* if Choiced Cities are Tabu */
                 }
-                else {
+                else if(ch_tb_rn == YES){
                     /* Toward Better */
                     if(diff < 0) {
                         if(diff < bbt_diff) {

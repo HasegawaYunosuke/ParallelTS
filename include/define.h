@@ -14,5 +14,6 @@
 
 /* Sign */
 #define EMPTY -99
+#define TIMEUP 666
 #define TABUB 10
 #define TABUW 20
