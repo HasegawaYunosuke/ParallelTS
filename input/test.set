@@ -1,5 +1,5 @@
-prob:rat575.tsp
-time[sec]:1800
+prob:eil51.tsp
+time[sec]:10
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
 result[simple/navi]:simple

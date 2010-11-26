@@ -26,6 +26,7 @@ void mpi_ip(int argc, char **argv)
 
 void mpi_fin(void)
 {
-    //MPI_Barrier(MPI_COMM_WORLD);
+    MPI_Barrier(MPI_COMM_WORLD);
     MPI_Finalize();
+    sleep(5);
 }

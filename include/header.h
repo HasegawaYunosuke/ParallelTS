@@ -86,4 +86,5 @@ void fin(void); /* Finalize */
 void mpi_test(void);
 void mpi_ip(int argc, char **argv); /* MPI Initialize Procedure */
 void mpi_fin(void); /* MPI Finalize Procedure */
+void mpi_pres(FILE * wfd, double * rd, int size);
 #endif

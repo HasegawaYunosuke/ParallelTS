@@ -34,7 +34,7 @@ void fiad(void)
         ig_p[i].clt = 0;
     }
 
-    g_bd.mpi_id = 0;
+    g_bd.mpi_id = EMPTY;
 
     for(i = 0; i < ig_p[0].stl; i++) {
         g_tl.to_tl[i * 4 + 0] = EMPTY;
@@ -44,4 +44,5 @@ void fiad(void)
     }
 
     g_tli = 0;
+    timerf = OFF;
 }

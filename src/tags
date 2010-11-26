@@ -59,6 +59,7 @@ main	main.c	/^int main(int argc, char **argv)$/;"	f
 mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
 mpi_fin	../mpi/mpi.c	/^void mpi_fin(void)$/;"	f
 mpi_ip	../mpi/mpi.c	/^void mpi_ip(int argc, char **argv)$/;"	f
+mpi_pres	result.c	/^void mpi_pres(FILE * wfd, double * rd, int size)$/;"	f
 mpi_test	../mpi/mpi.c	/^void mpi_test(void)$/;"	f
 mtsplib	read_data.c	/^void mtsplib(void)$/;"	f
 mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/;"	f

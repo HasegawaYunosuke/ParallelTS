@@ -6,10 +6,12 @@ void ts_proc(int * npthr)
     int ccsi[4] = {EMPTY}; /* Choiced Cities Indexes */
 
     gminex_etb(ig_p[*npthr].csp, ccs, ccsi, npthr);
-    ex_addtl(ig_p[*npthr].csp, ccs, ccsi, npthr);
-    ig_p[*npthr].csd = gpd(ig_p[*npthr].csp, npthr);
-    if(ig_p[*npthr].csd < ig_p[*npthr].bsd) {
-        copyc_b(npthr);
+    if(ccs[0] != EMPTY) {
+        ex_addtl(ig_p[*npthr].csp, ccs, ccsi, npthr);
+        ig_p[*npthr].csd = gpd(ig_p[*npthr].csp, npthr);
+        if(ig_p[*npthr].csd < ig_p[*npthr].bsd) {
+            copyc_b(npthr);
+        }
     }
 }
 

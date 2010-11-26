@@ -14,8 +14,22 @@ void st_t(void)
 double diff_t(void)
 {
     struct timeval t;
+    double rn; /* Return Number */
 
     gettimeofday(&t, NULL);
+    rn = ((double)t.tv_sec + (double)t.tv_usec * 1e-6) - g_st_t;
 
-    return (((double)t.tv_sec + (double)t.tv_usec * 1e-6) - g_st_t);
+/*DEL*/
+/*#ifdef MPIMODE
+    if((int)rn % 30 == 0 && timerf == OFF) {
+        printf("Node %d Now:%f\n", g_bd.mpi_id, rn);
+        timerf = ON;
+    }
+    else if((int)rn % 30 != 0 && timerf == ON) {
+        timerf = OFF;
+    }
+#endif*/
+/*DEL*/
+
+    return rn;
 }

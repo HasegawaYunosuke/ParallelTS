@@ -7,7 +7,7 @@ struct _base_data {
     double ** btsp; /* Base TSPLIB's x-y Data */
     double ** bgd; /* Base Graph Data */
 
-    int mpi_id; /* If Use MPI, It's ID. If Don't Use MPI, It's "0" */
+    int mpi_id; /* If Use MPI, It's ID. If Don't Use MPI, It's "EMPTY" */
     int np_ae; /* If Use MPI, It's Number of Processer at the Environment */
     int mpi_nl; /* If Use MPI, It's MPI Name Length */
     char * id_name; /* If Use MPI, It's MPI Name */
@@ -60,6 +60,7 @@ struct _tabu_list g_tl; /* Global Tabu List */
 
 /* Global variable data */
 int g_tli; /* Global Tabu List Index */
+int timerf;
 
 /* Global Mutex */
 pthread_mutex_t g_tb_mutex; /* Global Tabu Mutex */

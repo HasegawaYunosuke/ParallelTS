@@ -18,7 +18,9 @@ all: ${BASEFILE}
 a: object/*.o
 	${CC} ${CPPFLAGS} $^ -o a.out
 
-mpi: ${BASEFILE} ${MPIFILE}
+mpi: ${MPIFILE} ${BASEFILE}
+	${CCC} -c ${CPPFLAGS} ${MPIFLAG} $^
+	mv *.o object/
 	${CCC} ${CPPFLAGS} ${MPIFLAG} $^ -o b.out
 
 debug: ${BASEFILE}
