@@ -7,6 +7,7 @@ void out_r(void)
 #ifdef MPIMODE
     int i, sdn = g_bd.nth;
     int root = 0;
+    double wait;
     double sd[sdn];
     double rd[(sdn * g_bd.np_ae)];
 #endif
@@ -26,7 +27,9 @@ void out_r(void)
         fclose(wfd);
     }
     else {
-        sleep(1);
+        if((wait = g_bd.st / 100) > 1) {
+            sleep((int)wait);
+        }
         MPI_Gather(sd, sdn, MPI_DOUBLE, rd, sdn, MPI_DOUBLE, root, MPI_COMM_WORLD);
     }
     MPI_Barrier(MPI_COMM_WORLD);
