@@ -31,8 +31,11 @@ void out_r(void)
             sleep((int)wait);
         }
         MPI_Gather(sd, sdn, MPI_DOUBLE, rd, sdn, MPI_DOUBLE, root, MPI_COMM_WORLD);
+        if(wait > 1) {
+            sleep((int)wait);
+        }
     }
-    MPI_Barrier(MPI_COMM_WORLD);
+    //MPI_Barrier(MPI_COMM_WORLD);
 #else
     sprintf(wfn, "result/%s.%dsec.res", g_bd.pn, g_bd.st);
     wfd = wfop(wfn, "out_r");

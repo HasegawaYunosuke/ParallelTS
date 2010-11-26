@@ -10,7 +10,7 @@
 #include "define.h"
 #include "globals.h"
 #ifdef MPIMODE
-#include <mpi.h>
+#include "mpi.h"
 #endif
 
 void init(int argc, char **argv); /* Initialize */
