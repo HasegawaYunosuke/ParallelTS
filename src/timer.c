@@ -30,6 +30,16 @@ double diff_t(void)
             timerf = OFF;
         }
     }
+#else
+    if(pthread_equal(ig_p[0].ptn, pthread_self())) {
+        if((int)rn % 30 == 0 && timerf == OFF && g_bd.nth ==2) {
+            printf("Now:%fsec. Best:(%f,%f)\n", rn, ig_p[0].bsd, ig_p[1].bsd);
+            timerf = ON;
+        }
+        else if((int)rn % 30 != 0 && timerf == ON) {
+            timerf = OFF;
+        }
+    }
 #endif
 /*DEL*/
 
