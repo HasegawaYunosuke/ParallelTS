@@ -157,9 +157,11 @@ void ex_addtl(int * path, int * ccs, int * ccsi, int * npthr)
     }
 
     /* Add Tabu List */
-    pthread_mutex_lock(&g_tb_mutex);
-    addtl(ccs, npthr);
-    pthread_mutex_unlock(&g_tb_mutex);
+    if(diff_t() < (double)g_bd.st) {
+        pthread_mutex_lock(&g_tb_mutex);
+        addtl(ccs, npthr);
+        pthread_mutex_unlock(&g_tb_mutex);
+    }
 }
 
 int alw_wors(double b_diff, int * npthr)

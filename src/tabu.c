@@ -9,16 +9,8 @@ int ch_tb(int * ccs)
                        {ccs[1],ccs[0],ccs[3],ccs[2], EMPTY},
                        {ccs[3],ccs[2],ccs[1],ccs[0], EMPTY}};
 
-    pthread_mutex_lock(&g_tb_mutex);
     for(i = 0; i < 4; i++) {
-        pthread_create(&pid[i], NULL, ch_tb_c, (void *)ccs_c[i]);
-    }
-    for(i = 0; i < 4; i++) {
-        pthread_join(pid[i], NULL);
-    }
-    pthread_mutex_unlock(&g_tb_mutex);
-
-    for(i = 0; i < 4; i++) {
+        ch_tb_c((void *)ccs_c[i]);
         if(ccs_c[i][4] == TIMEUP) {
             return TIMEUP;
         }
@@ -57,27 +49,31 @@ void * ch_tb_c(void * css)
 
 void addtl(int * ccs, int * npthr)
 {
-    g_tl.to_tl[4 * g_tli + 0] = ccs[0];
-    g_tl.to_tl[4 * g_tli + 1] = ccs[2];
-    g_tl.to_tl[4 * g_tli + 2] = ccs[1];
-    g_tl.to_tl[4 * g_tli + 3] = ccs[3];
+    if(diff_t() < (double)g_bd.st) {
+        g_tl.to_tl[4 * g_tli + 0] = ccs[0];
+        g_tl.to_tl[4 * g_tli + 1] = ccs[2];
+        g_tl.to_tl[4 * g_tli + 2] = ccs[1];
+        g_tl.to_tl[4 * g_tli + 3] = ccs[3];
 
-    if(g_tli < ig_p[*npthr].stl - 1) {
-        g_tli = g_tli + 1;
-    }
-    else {
-        g_tli = 0;
-    }
+        if(g_tli < ig_p[*npthr].stl - 1) {
+            g_tli = g_tli + 1;
+        }
+        else {
+            g_tli = 0;
+        }
 
-    g_tl.to_tl[4 * g_tli + 0] = ccs[0];
-    g_tl.to_tl[4 * g_tli + 1] = ccs[1];
-    g_tl.to_tl[4 * g_tli + 2] = ccs[2];
-    g_tl.to_tl[4 * g_tli + 3] = ccs[3];
+        if(diff_t() < (double)g_bd.st) {
+            g_tl.to_tl[4 * g_tli + 0] = ccs[0];
+            g_tl.to_tl[4 * g_tli + 1] = ccs[1];
+            g_tl.to_tl[4 * g_tli + 2] = ccs[2];
+            g_tl.to_tl[4 * g_tli + 3] = ccs[3];
 
-    if(g_tli < ig_p[*npthr].stl - 1) {
-        g_tli = g_tli + 1;
-    }
-    else {
-        g_tli = 0;
+            if(g_tli < ig_p[*npthr].stl - 1) {
+                g_tli = g_tli + 1;
+            }
+            else {
+                g_tli = 0;
+            }
+        }
     }
 }
