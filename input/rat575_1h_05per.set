@@ -1,5 +1,5 @@
 prob:rat575.tsp
-time[sec]:100
+time[sec]:3600
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
 result[simple/navi]:simple
@@ -12,8 +12,8 @@ deb4[ON/OFF]:OFF
 
 
 p_nthread:2
-p_worse[%]:0.005
+p_worse[%]:0.05
 p_wloop:8
 p_loop:100
 p_TLS:5N
-p_TLT:N
+p_TLT:NNN
