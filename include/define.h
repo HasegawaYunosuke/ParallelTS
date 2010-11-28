@@ -17,3 +17,4 @@
 #define TIMEUP 666
 #define TABUB 10
 #define TABUW 20
+#define MPI_SEND_WANT 100

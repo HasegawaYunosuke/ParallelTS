@@ -46,7 +46,6 @@ gplw	read_data.c	/^void gplw(char * rld)$/;"	f
 gpnth	read_data.c	/^void gpnth(char * rld)$/;"	f
 gppw	read_data.c	/^void gppw(char * rld)$/;"	f
 gpst	read_data.c	/^void gpst(char * rld)$/;"	f
-gptt	read_data.c	/^void gptt(char * rld)$/;"	f
 grn	math.c	/^int grn(int max)$/;"	f
 guci_bc	init_path.c	/^int guci_bc(int city, int * ary, int max)$/;"	f
 init	init.c	/^void init(int argc, char **argv)$/;"	f
@@ -60,7 +59,9 @@ mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
 mpi_fin	../mpi/mpi.c	/^void mpi_fin(void)$/;"	f
 mpi_ip	../mpi/mpi.c	/^void mpi_ip(int argc, char **argv)$/;"	f
 mpi_pres	result.c	/^void mpi_pres(FILE * wfd, double * rd, int size)$/;"	f
+mpi_recvp	../mpi/mpi.c	/^void * mpi_recvp(void * arg)$/;"	f
 mpi_test	../mpi/mpi.c	/^void mpi_test(void)$/;"	f
+mpi_want	../mpi/mpi.c	/^void mpi_want(int npthr)$/;"	f
 mtsplib	read_data.c	/^void mtsplib(void)$/;"	f
 mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/;"	f
 oem	error.c	/^void oem(char func[32], char ms[64], int da)$/;"	f

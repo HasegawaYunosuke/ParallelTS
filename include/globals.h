@@ -16,6 +16,7 @@ struct _base_data {
 struct _base_mode {
     int mcm; /* Multi-core MODE (ON/OFF) */
     int mpim; /* MPI MODE (ON/OFF) */
+    int mpi_recvsw; /* MPI Recv Switch (ON/OFF) */
     int tres; /* Type of Result MODE (DEFAULT/TYPE1~5) */
     int ipcm; /* Initial Path Creating Mode (DEFAULT/TYPE1) */
     int dld1; /* Debug-Log-Data:type1 (ON/OFF) */
@@ -27,6 +28,8 @@ struct _base_mode {
 struct _individual_parameter {
     double pw; /* Percentage toward Worse (Previously Setting) */
     int lw; /* Loop times toward Worse (Previously Setting) */
+    int clw; /* Current Loop times toward Worse */
+    /*DEL*/int clw_max; /* Maximum Current Loop times toward Worse */
     int lt; /* Loop times (Previously Setting) */
     int clt; /* Current Loop times */
     int stl; /* Size of Tabu-List (Previously Setting) */
@@ -60,6 +63,10 @@ struct _tabu_list g_tl; /* Global Tabu List */
 /* Global variable data */
 int g_tli; /* Global Tabu List Index */
 int timerf;
+#ifdef MPIMODE
+pthread_t g_recv_pth; /* This is Used for Only-Recv-Thread */
+#endif
 
 /* Global Mutex */
 pthread_mutex_t g_tb_mutex; /* Global Tabu Mutex */
+pthread_mutex_t g_send_mutex; /* Global Send Mutex */

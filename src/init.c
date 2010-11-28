@@ -32,6 +32,7 @@ void fiad(void)
         ig_p[i].csd = DBL_MAX;
         ig_p[i].bsd = DBL_MAX;
         ig_p[i].clt = 0;
+        ig_p[i].clw = 0;
     }
 
     g_bd.mpi_id = EMPTY;

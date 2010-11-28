@@ -117,23 +117,38 @@ void gminex_etb(int * path, int * ccs, int * ccsi, int * npthr)
             ccs[k] = b_ccs[k];
             ccsi[k] = b_ccsi[k];
         }
+        /* Update Checker about Current Loop times toward Worse */
+        if(b_diff > 0) {
+            ig_p[*npthr].clw++;
+        }
+        else {
+            ig_p[*npthr].clw = 0;
+        }
     }
     else if(h_ccs[0] != EMPTY) {
         for(k = 0; k < 4; k++) {
             ccs[k] = h_ccs[k];
             ccsi[k] = h_ccsi[k];
         }
+        /* Update Checker about Current Loop times toward Worse */
+        ig_p[*npthr].clw = 0;
     }
     else if(hw_ccs[0] != EMPTY){
         for(k = 0; k < 4; k++) {
             ccs[k] = hw_ccs[k];
             ccsi[k] = hw_ccsi[k];
         }
+        /* Update Checker about Current Loop times toward Worse */
+        ig_p[*npthr].clw++;
     }
     /* Shortly Program Will be Terminated */
     /*else {
         oem("gminex_etb", "Can't Choice Target Cities???", 0);
     }*/
+
+    if(ig_p[*npthr].clw > ig_p[*npthr].clw_max) {
+        ig_p[*npthr].clw_max = ig_p[*npthr].clw;
+    }
 }
 
 void ex_addtl(int * path, int * ccs, int * ccsi, int * npthr)

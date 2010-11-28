@@ -8,7 +8,8 @@ void out_r(void)
     int i, sdn = g_bd.nth;
     int root = 0;
     double wait;
-    double sd[sdn]; double rd[(sdn * g_bd.np_ae)];
+    double sd[sdn];
+    double rd[(sdn * g_bd.np_ae)];
 #endif
 
     cnd("result");
@@ -79,9 +80,9 @@ void mpi_pres(FILE * wfd, double * rd, int size)
     if(g_bm.tres == DEFAULT) {
         for(i = 0; i < size; i = i + g_bd.nth) {
             for(j = i; j < (i + g_bd.nth - 1); j++) {
-                fprintf(wfd, "%f,", rd[j]);
+                fprintf(wfd, "%16.6f,%16.6f,", rd[j], (rd[j] - g_bd.kn_bs) / g_bd.kn_bs * 100);
             }
-            fprintf(wfd, "%f\n", rd[(i + g_bd.nth - 1)]);
+            fprintf(wfd, "%16.6f,%16.6f\n", rd[(i + g_bd.nth - 1)], (rd[(i + g_bd.nth - 1)] - g_bd.kn_bs) / g_bd.kn_bs * 100);
         }
     }
     else if(g_bm.tres == TYPE1) {
