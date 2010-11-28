@@ -44,7 +44,6 @@ void init(int argc, char **argv); /* Initialize */
                     int gnxn(int di, char * rld); /* Get [Number] * [N(ex:tsp-size)] */
                 void gplt(char * rld); /* Get Parameter: Loop times */
                 void gpst(char * rld); /* Get Parameter: Size of Tabu-list */
-                void gptt(char * rld); /* Get Parameter: Term of Tabu-list */
     void ag_bd(void); /* Allocate Global-Base-Data */
     void spara(void); /* Set Parameter data */
     void ma_tl(void); /* Memory Allocation about "struct tblist" */

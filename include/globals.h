@@ -30,7 +30,6 @@ struct _individual_parameter {
     int lt; /* Loop times (Previously Setting) */
     int clt; /* Current Loop times */
     int stl; /* Size of Tabu-List (Previously Setting) */
-    int ttl; /* Term of Tabu-List (Previously Setting) */
     pthread_t ptn; /* pthread Number */
     int * csp; /* Current Solution Path */
     double csd; /* Current Solution Distance */

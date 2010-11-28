@@ -101,10 +101,6 @@ void arld(char * rld, int li)
     else if(li == 18) {
         gpst(rld);
     }
-    /* The Term of Validity of Tabu-List */
-    else if(li == 19) {
-        gptt(rld);
-    }
 }
 
 void itpn(char * rld)
@@ -477,25 +473,6 @@ void gpst(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gpst", ms, 0);
-    }
-}
-
-void gptt(char * rld)
-{
-    int i;
-    int ttl; /* Part of Number */
-    int di = -1; /* Data Index */
-    char ms[32]; /* Message */
-
-    if((di = gdbl(rld)) >= 0) {
-        ttl = gnxn(di, rld);
-        for(i = 0; i < g_bd.nth; i++) {
-            ig_p[i].ttl = ttl;
-        }
-    }
-    else {
-        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
-        oem("gptt", ms, 0);
     }
 }
 
