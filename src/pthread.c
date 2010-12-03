@@ -30,6 +30,10 @@ void * threp(void * arg)
                 mpi_want(*(int *)arg);
             }
         }
+
+        if(diff_t() < (double)(g_bd.st - 10)) {
+            ga_proc((int *)arg);
+        }
 #endif
     } while (diff_t() < (double)g_bd.st);
 }

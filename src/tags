@@ -19,6 +19,7 @@ cip_bnn	init_path.c	/^void cip_bnn(int * npthr)$/;"	f
 cip_brn	init_path.c	/^void cip_brn(int * npthr)$/;"	f
 cnd	check.c	/^void cnd(char dn[32])$/;"	f
 copyc_b	init_path.c	/^void copyc_b(int * npthr)$/;"	f
+cpthr4gp	../mpi/mpi.c	/^void * cpthr4gp(void * arg)$/;"	f
 cuc_pa	init_path.c	/^void cuc_pa(int * ary, int max, int target, int flag)$/;"	f
 dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, double y2)$/;"	f
 diff_t	timer.c	/^double diff_t(void)$/;"	f
@@ -28,6 +29,7 @@ fiad	init.c	/^void fiad(void)$/;"	f
 fin	finalize.c	/^void fin(void)$/;"	f
 fnyfp	memory.c	/^void fnyfp(void)$/;"	f
 g_st_t	timer.c	/^double g_st_t;$/;"	v
+ga_proc	../mpi/mpi.c	/^void ga_proc(int * pthr)$/;"	f
 gbs_bpn	read_data.c	/^void gbs_bpn(void)$/;"	f
 gdbl	read_data.c	/^int gdbl(char * rld)$/;"	f
 gdld1	read_data.c	/^void gdld1(char * rld)$/;"	f
@@ -40,6 +42,7 @@ gminex_etb	search.c	/^void gminex_etb(int * path, int * ccs, int * ccsi, int * n
 gnc_eu	init_path.c	/^int gnc_eu(int sc, int * yet, int surplus)$/;"	f
 gnxn	read_data.c	/^int gnxn(int di, char * rld)$/;"	f
 gonoff	read_data.c	/^int gonoff(char * rld, int di)$/;"	f
+gp4ga_bhd	../mpi/mpi.c	/^int gp4ga_bhd(int pthr, int * sols, int * mysol)$/;"	f
 gpd	math.c	/^double gpd(int * path, int * npthr)$/;"	f
 gplt	read_data.c	/^void gplt(char * rld)$/;"	f
 gplw	read_data.c	/^void gplw(char * rld)$/;"	f
@@ -66,6 +69,7 @@ mtsplib	read_data.c	/^void mtsplib(void)$/;"	f
 mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/;"	f
 oem	error.c	/^void oem(char func[32], char ms[64], int da)$/;"	f
 out_r	result.c	/^void out_r(void)$/;"	f
+pre_gacp	../mpi/mpi.c	/^void pre_gacp(int pthr, int * sols, int * mysol)$/;"	f
 pres	result.c	/^void pres(FILE * resfp)$/;"	f
 ptp	pthread.c	/^void ptp(void)$/;"	f
 rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/;"	f

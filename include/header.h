@@ -90,4 +90,7 @@ void mpi_want(int npthr); /* Want to Gather other Solutions for GA Procedure */
 void * mpi_recvp(void * arg); /* MPI_Recv Procedure */
 void mpi_pres(FILE * wfd, double * rd, int size);
 void * cpthr4gp(void * arg); /* Child Pthread for MPI_Gather() Procedure */
+void * cpthr4gp(void * arg); /* GA Procedure */
+void pre_gacp(int pthr, int * sols, int * mysol); /* Previous of GA: Copy Procedure */
+int gp4ga_bhd(int pthr, int * sols, int * mysol); /* Get Parent for GA Procedure By Humming Distance */
 #endif
