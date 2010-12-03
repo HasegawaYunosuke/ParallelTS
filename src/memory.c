@@ -8,6 +8,8 @@ void ffi(void)
     g_amc_f.f_ipm_csp = OFF;
     g_amc_f.f_ipm_bsp = OFF;
     g_amc_f.f_to_tl = OFF;
+    g_amc_f.f_bsp_mutex = OFF;
+    g_amc_f.f_MPI_sdp_sp = OFF;
 }
 
 void ag_bd(void)
@@ -101,6 +103,14 @@ void fnyfp(void)
     if(g_amc_f.f_to_tl == ON) {
         //free(g_tl.to_tl);
         g_amc_f.f_to_tl = OFF;
+    }
+
+    if(g_amc_f.f_bsp_mutex == ON) {
+        free(g_bsp_mutex);
+    }
+
+    if(g_amc_f.f_MPI_sdp_sp == ON) {
+        free(mpi_sdp.sp);
     }
 }
 

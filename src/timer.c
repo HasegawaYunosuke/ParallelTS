@@ -15,7 +15,7 @@ double diff_t(void)
 {
     struct timeval t;
     double rn; /* Return Number */
-    /*DEL*/int i, show_t = 30;
+    /*DEL*/int i, show_t = 10;
 
     gettimeofday(&t, NULL);
     rn = ((double)t.tv_sec + (double)t.tv_usec * 1e-6) - g_st_t;

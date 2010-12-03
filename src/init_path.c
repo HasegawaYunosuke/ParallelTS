@@ -119,8 +119,14 @@ void copyc_b(int * npthr)
 {
     int i;
 
+#ifdef MPIMODE
+    pthread_mutex_lock(&g_bsp_mutex[*npthr]);
+#endif
     for(i = 0; i < g_bd.ps; i++) {
         ig_p[*npthr].bsp[i] = ig_p[*npthr].csp[i];
     }
     ig_p[*npthr].bsd = ig_p[*npthr].csd;
+#ifdef MPIMODE
+    pthread_mutex_unlock(&g_bsp_mutex[*npthr]);
+#endif
 }

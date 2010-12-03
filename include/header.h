@@ -86,7 +86,8 @@ void fin(void); /* Finalize */
 void mpi_test(void);
 void mpi_ip(int argc, char **argv); /* MPI Initialize Procedure */
 void mpi_fin(void); /* MPI Finalize Procedure */
-void mpi_want(int npthr); /* Want to Gather other Solutions for GA procedure */
+void mpi_want(int npthr); /* Want to Gather other Solutions for GA Procedure */
 void * mpi_recvp(void * arg); /* MPI_Recv Procedure */
 void mpi_pres(FILE * wfd, double * rd, int size);
+void * cpthr4gp(void * arg); /* Child Pthread for MPI_Gather() Procedure */
 #endif

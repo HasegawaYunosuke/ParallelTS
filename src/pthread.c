@@ -17,15 +17,6 @@ void ptp(void)
 
 void * threp(void * arg)
 {
-    /*DEL*/
-    /*if(pthread_equal(ig_p[*(int *)arg].ptn, pthread_self())) {
-        printf("HYA HHA---!!!\n");
-    }
-    else {
-        printf("HIDEBUUUUUU!\n");
-    }*/
-    /*DEL*/
-
     srand(time(NULL)*(*(int *)arg + 1));
     initp((int *)arg);
     do {
@@ -34,12 +25,10 @@ void * threp(void * arg)
         } while ((ig_p[*(int *)arg].clw < ig_p[*(int *)arg].lw) && (diff_t() < (double)g_bd.st));
 #ifdef MPIMODE
         ig_p[*(int *)arg].clw = 0;
-        if(g_bm.mpim == ON) {
-            //pthread_mutex_lock(&g_send_mutex);
+        if(g_bm.mpim == ON && pthread_equal(ig_p[0].ptn, pthread_self())) {
             if(diff_t() < (double)(g_bd.st - 10)) {
                 mpi_want(*(int *)arg);
             }
-            //pthread_mutex_unlock(&g_send_mutex);
         }
 #endif
     } while (diff_t() < (double)g_bd.st);

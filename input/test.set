@@ -1,5 +1,5 @@
 prob:eil51.tsp
-time[sec]:180
+time[sec]:600
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
 result[simple/navi]:simple
@@ -11,7 +11,7 @@ deb4[ON/OFF]:OFF
 
 
 
-p_nthread:1
+p_nthread:2
 p_worse[%]:0.005
 p_wloop:6
 p_loop:100
