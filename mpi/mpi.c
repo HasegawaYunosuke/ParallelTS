@@ -441,7 +441,112 @@ void crossov(int pthr, int * sols, int * mysol, int cpi_ap)
         pm_crossov(cpi, opsol, mysol, pthr);
     }
     else if(ig_p[pthr].tGA == TYPE1) {
-        //od_crossov();
+        od_crossov(cpi, opsol, mysol, pthr);
+    }
+}
+
+void od_crossov(int * cpi, int * parent2, int * parent1, int pthr)
+{
+    int child[g_bd.ps]; /* Child Path */
+    int i, dp2[g_bd.ps]; /* Dummy Parent-2 */
+
+    /* Create Dummy Parent-2 */
+    for(i = 0; i < g_bd.ps; i++) {dp2[i] = EMPTY;}
+
+    /* Create Base Cities by cpi[] */
+    cbc_bcpi(cpi, child, parent1, dp2, pthr);
+
+    /* Global Timer */
+    if(diff_t() >= (double)(g_bd.st)) {return;}
+
+    /* Oder Crossover Procedure */
+    od_crosovp(cpi, child, parent1, parent2, pthr);
+
+    /* Global Timer */
+    if(diff_t() >= (double)(g_bd.st)) {return;}
+
+    if(csac(child) != YES) {
+        printf("FUCK!!\n");
+        for(i = 0; i < g_bd.ps; i++) {
+            if(i != (g_bd.ps - 1)) {
+                printf("%2d,", child[i]);
+            }
+            else {
+                printf("%2d\n", child[i]);
+            }
+        }
+    }
+}
+
+void od_crosovp(int * cpi, int * child, int * parent1, int * parent2, int pthr)
+{
+    int i, j, k, cpii = 0;
+    int shz[g_bd.ps]; /* Shuffle Zone */
+    int shzi = 0;
+    int jumpl = 0; /* Jump Lenghth */
+
+    /* Initialize Shuffle Zone */
+    for(i = 0; i < g_bd.ps; i++) {shz[i] = EMPTY;}
+
+    for(i = 0; i < g_bd.ps;) {
+        if(child[i] == EMPTY) {
+            for(shzi = 0; shzi < g_bd.ps; shzi++) {
+                shz[shzi] = parent1[(shzi + i)];
+                if((shzi + i + 1) != g_bd.ps) {
+                    if(child[(shzi + i + 1)] != EMPTY) {
+                        jumpl = shzi;
+                        break;
+                    }
+                }
+                else {
+                    jumpl = shzi;
+                    break;
+                }
+            }
+            for(j = 0; j < g_bd.ps; j++) {
+                for(k = 0; k < jumpl; k++) {
+                    if(parent2[j] == shz[k]) {
+                        child[(i + (jumpl - shzi))] = shz[k];
+                        shz[k] = EMPTY; shzi--;
+                        break;
+                    }
+                }
+                if(shzi < 0) {break;}
+            }
+            i += jumpl;
+        }
+        else {
+            i++;
+        }
+    }
+}
+
+void cbc_bcpi(int * cpi, int * child, int * parent1, int * parent2, int pthr)
+{
+    int i, cpii = 0; /* Cut Point Index's Index */
+    int copy_p1_child = OFF;
+
+    /* Create Base Child */
+    for(i = 0; i < g_bd.ps; i++) {
+        if(i == cpi[cpii]) {
+            /* Index Procedure */
+            if(cpii != ig_p[pthr].ncp) {
+                cpii++;
+            }
+
+            if(copy_p1_child == OFF) {
+                copy_p1_child = ON;
+            }
+            else {
+                copy_p1_child = OFF;
+            }
+        }
+        if(copy_p1_child == OFF) {
+            child[i] = parent1[i];
+        }
+        else {
+            child[i] = parent2[i];
+        }
     }
 }
 
