@@ -39,6 +39,8 @@ struct _individual_parameter {
     double csd; /* Current Solution Distance */
     int * bsp; /* Best Solution Path */
     double bsd; /* Best Solution Distance */
+    int ncp; /* Number of Cut-Point */
+    int tGA; /* The Type of GA */
 };
 
 struct _tabu_list {

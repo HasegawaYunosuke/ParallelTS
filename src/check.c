@@ -20,3 +20,25 @@ void cnd(char dn[32])
         closedir(dp);
     }
 }
+
+int csac(int * path)
+{
+    int i, j;
+    int sum = 0;
+
+    for(i = 0; i < g_bd.ps; i++) {
+        for(j = 0; j < g_bd.ps; j++) {
+            if(path[j] == (i + 1)) {
+                sum++;
+                break;
+            }
+        }
+    }
+
+    if(sum == g_bd.ps) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}

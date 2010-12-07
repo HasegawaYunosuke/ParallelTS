@@ -25,7 +25,7 @@ double diff_t(void)
     if(pthread_equal(ig_p[0].ptn, pthread_self())) {
         if((int)rn % show_t == 0 && timerf == OFF && rn > 1) {
             //printf("Node %d Now:%f\n", g_bd.mpi_id, rn);
-            printf("Node %d , clw_max == %d Now:%f\n", g_bd.mpi_id, ig_p[0].clw_max, rn);
+            printf("Node %d , clw_max == %d Now:%f Best:%f\n", g_bd.mpi_id, ig_p[0].clw_max, rn, ig_p[g_bd.mpi_bsd_pthr].bsd);
             timerf = ON;
         }
         else if((int)rn % show_t != 0 && timerf == ON) {

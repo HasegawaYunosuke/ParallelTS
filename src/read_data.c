@@ -101,6 +101,14 @@ void arld(char * rld, int li)
     else if(li == 18) {
         gpst(rld);
     }
+    /* The Number of Cut Point */
+    else if(li == 19) {
+        gpncp(rld);
+    }
+    /* The Type of GA */
+    else if(li == 20) {
+        gptGA(rld);
+    }
 }
 
 void itpn(char * rld)
@@ -473,6 +481,63 @@ void gpst(char * rld)
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gpst", ms, 0);
+    }
+}
+
+void gpncp(char * rld)
+{
+    int i;
+    int ncp; /* Size of Tabu List */
+    int di = -1; /* Data Index */
+    char ms[32]; /* Message */
+
+    if((di = gdbl(rld)) >= 0) {
+        ncp = gnxn(di, rld);
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].ncp = ncp;
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gpncp", ms, 0);
+    }
+}
+
+void gptGA(char * rld)
+{
+    int i;
+    int di = -1; /* Data Index */
+    int sdi = 0; /* String Data Index */
+    char sd[64]; /* String Data */
+    char ms[32]; /* Message */
+
+    if((di = gdbl(rld)) >= 0) {
+        for(i = di;; i++) {
+            if(rld[i] == '\n' || rld[i] == '\0') {
+                sd[sdi] = '\0';
+                break;
+            }
+            sd[sdi] = rld[i]; sdi++;
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gptGA", ms, 0);
+    }
+
+    if(strcmp(sd, "pm") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tGA = DEFAULT;
+        }
+    }
+    else if(strcmp(sd, "od") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tGA = TYPE1;
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
+        oem("wtres", ms, 0);
     }
 }
 
@@ -921,7 +986,7 @@ void gbs_bpn(void)
     else if(strcmp(g_bd.pn, "u159.tsp") == 0) {
         g_bd.kn_bs = 42080.0;
     }
-    else if(strcmp(g_bd.pn, "u1817.tsp") == 0) {
+    else if(strcmp(g_bd.pn, "uNumber of Cut Point 1817.tsp") == 0) {
         g_bd.kn_bs = 57201.0;
     }
     else if(strcmp(g_bd.pn, "u2152.tsp") == 0) {

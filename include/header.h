@@ -44,6 +44,8 @@ void init(int argc, char **argv); /* Initialize */
                     int gnxn(int di, char * rld); /* Get [Number] * [N(ex:tsp-size)] */
                 void gplt(char * rld); /* Get Parameter: Loop times */
                 void gpst(char * rld); /* Get Parameter: Size of Tabu-list */
+                void gpncp(char * rld); /* Get Parameter: Number of Cut-Point (For GA) */
+                void gptGA(char * rld); /* Get Parameter: Type of GA */
     void ag_bd(void); /* Allocate Global-Base-Data */
     void spara(void); /* Set Parameter data */
     void ma_tl(void); /* Memory Allocation about "struct tblist" */
@@ -82,6 +84,8 @@ void fin(void); /* Finalize */
         void pres(FILE * resfp); /* Printout Result */
     void fnyfp(void); /* Free Not Yet Freed Pointer */
 
+int csac(int * path); /* Check Sol-Path's Accuracy */
+
 #ifdef MPIMODE
 void mpi_test(void);
 void mpi_ip(int argc, char **argv); /* MPI Initialize Procedure */
@@ -89,8 +93,14 @@ void mpi_fin(void); /* MPI Finalize Procedure */
 void mpi_want(int npthr); /* Want to Gather other Solutions for GA Procedure */
 void * mpi_recvp(void * arg); /* MPI_Recv Procedure */
 void mpi_pres(FILE * wfd, double * rd, int size);
+void ga_proc(int * pthr); /* GA Pcoredure */
 void * cpthr4gp(void * arg); /* Child Pthread for MPI_Gather() Procedure */
 void * cpthr4gp(void * arg); /* GA Procedure */
 void pre_gacp(int pthr, int * sols, int * mysol); /* Previous of GA: Copy Procedure */
 int gp4ga_bhd(int pthr, int * sols, int * mysol); /* Get Parent for GA Procedure By Humming Distance */
+void crossov(int pthr, int * sols, int * mysol, int cpi_ap); /* Cross Over */
+    void ccp_br(int * cpi, int pthr); /* Choice Cut-Point By Random */
+    void pm_crossov(int * cpi, int * opsol, int * mysol, int pthr); /* Partially Matched Crossover */
+void cp_p2sol(int cpi_ap, int * sols, int * mysol); /* Coordinate Path Parent-2 Solution path */
+    void sdpcs(int * mysol, int * p4w, int * dp1, int * dp2); /* Set Dupplex Point Check Sheets */
 #endif

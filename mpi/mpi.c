@@ -109,6 +109,11 @@ void * cpthr4gp(void * arg)
     }
     pthread_mutex_unlock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
 
+    /* Check Sol-Path's Accuracy */
+    if(csac(sbuf) != YES) {
+        oem("cpthr4gp", "Detected Un-Collect Solution-Path Before MPI_Gather()'s Send", 0);
+    }
+
     /* Send the Best Solution of All Thread to Root PC:rbuf4tpc */
     MPI_Gather(sbuf, g_bd.ps, MPI_INT, rbuf4sol, g_bd.ps, MPI_INT, rbuf4tpc, MPI_COMM_WORLD);
 
@@ -165,8 +170,122 @@ void ga_proc(int * pthr)
 
     /* Set Data */
     pre_gacp(*pthr, sols, mysol);
-    if((cpi_ap = gp4ga_bhd(*pthr, sols, mysol)) != TIMEUP) {
-        if(cpi_ap >= 0) {
+    cpi_ap = gp4ga_bhd(*pthr, sols, mysol);
+    //cp_p2sol(cpi_ap, sols, mysol);
+    if(cpi_ap != TIMEUP && cpi_ap != EMPTY) {
+        crossov(*pthr, sols, mysol, cpi_ap);
+    }
+}
+
+void cp_p2sol(int cpi_ap, int * sols, int * mysol)
+{
+    int i, j; /* Current City, Next City */
+    int p4w[g_bd.ps]; /* Path for Work */
+    int dp1[g_bd.ps]; /* Duplex Point */
+    int dp2[g_bd.ps]; /* Duplex Point */
+
+    /* Initialize Data */
+    for(i = 0; i < g_bd.ps; i++) {
+        dp1[i] = EMPTY;
+        dp2[i] = EMPTY;
+        p4w[i] = sols[cpi_ap * g_bd.ps + i];
+    }
+
+    /* Set Dupplex Point Check Sheets */
+    sdpcs(mysol, p4w, dp1, dp2);
+
+    /*DEL*/
+    if(g_bd.mpi_id == 0 && pthread_equal(pthread_self(), ig_p[0].ptn)) {
+        printf("cpi_ap == %d\n", cpi_ap);
+
+        for(i = 0; i < g_bd.ps; i++) {
+            if(i != (g_bd.ps - 1)) {
+                if(dp1[i] == ON) {
+                    printf("*");
+                }
+                else {
+                    printf("-");
+                }
+            }
+            else {
+                if(dp1[i] == ON) {
+                    printf("*\n");
+                }
+                else {
+                    printf("-\n");
+                }
+            }
+        }
+        for(i = 0; i < g_bd.ps; i++) {
+            if(i != (g_bd.ps - 1)) {
+                if(dp2[i] == ON) {
+                    printf("*");
+                }
+                else {
+                    printf("-");
+                }
+            }
+            else {
+                if(dp2[i] == ON) {
+                    printf("*\n");
+                }
+                else {
+                    printf("-\n");
+                }
+            }
+        }
+        for(i = 0; i < g_bd.ps; i++) {
+            if(i != (g_bd.ps - 1)) {
+                printf("%2d,", mysol[i]);
+            }
+            else {
+                printf("%2d\n", mysol[i]);
+            }
+        }
+        for(i = 0; i < g_bd.ps; i++) {
+            if(i != (g_bd.ps - 1)) {
+                printf("%2d,", p4w[i]);
+            }
+            else {
+                printf("%2d\n", p4w[i]);
+            }
+        }
+    }
+    /*DEL*/
+}
+void sdpcs(int * mysol, int * p4w, int * dp1, int * dp2)
+{
+    int i, j, cc, nc;
+
+    for(i = 0; i < g_bd.ps; i++) {
+        /* Set Current & Next City */
+        if(i != (g_bd.ps - 1)) {
+            cc = mysol[i]; nc = mysol[(i + 1)];
+        }
+        else {
+            cc = mysol[i]; nc = mysol[0];
+        }
+
+        /* Mutching */
+        for(j = 0; j < g_bd.ps; j++) {
+            if(p4w[j] == cc) {
+                if(j == 0) {
+                    if(p4w[(g_bd.ps - 1)] == nc || p4w[1] == nc) {
+                        dp1[i] = ON; dp2[j] = ON;
+                    }
+                }
+                else if(j == (g_bd.ps - 1)) {
+                    if(p4w[(g_bd.ps - 2)] == nc || p4w[0] == nc) {
+                        dp1[i] = ON; dp2[j] = ON;
+                    }
+                }
+                else {
+                    if(p4w[(j - 1)] == nc || p4w[(j + 1)] == nc) {
+                        dp1[i] = ON; dp2[j] = ON;
+                    }
+                }
+                break;
+            }
         }
     }
 }
@@ -174,6 +293,7 @@ void ga_proc(int * pthr)
 void pre_gacp(int pthr, int * sols, int * mysol)
 {
     int i, j;
+    int ta[g_bd.ps]; /* Temporary Arrary */
 
     if(diff_t() < (double)(g_bd.st)) {
         pthread_mutex_lock(&g_bsp_mutex[pthr]);
@@ -187,9 +307,21 @@ void pre_gacp(int pthr, int * sols, int * mysol)
         if(diff_t() < (double)(g_bd.st)) {
             pthread_mutex_lock(&mpi_sdp_mutex[i]);
             for(j = 0; j < g_bd.ps; j++) {
-                sols[i * g_bd.ps + j] = mpi_sdp.sp[i * g_bd.ps + j];
+                ta[j] = mpi_sdp.sp[(i * g_bd.ps + j)];
             }
             pthread_mutex_unlock(&mpi_sdp_mutex[i]);
+
+            /* Check Recved Array's Accuracy */
+            if(csac(ta) == YES) {
+                for(j = 0; j < g_bd.ps; j++) {
+                    sols[(i * g_bd.ps + j)] = ta[j];
+                }
+            }
+            else {
+                for(j = 0; j < g_bd.ps; j++) {
+                    sols[(i * g_bd.ps + j)] = EMPTY;
+                }
+            }
         }
         else {
             break;
@@ -203,75 +335,241 @@ int gp4ga_bhd(int pthr, int * sols, int * mysol)
     int cc, nc; /* Current, Next City */
     int sum = 0;
     int asum = 0;
+    int nusol = 0;
+    int cii = 0; /* Choiced INdexes's Index */
+    int ci[g_bd.np_ae]; /* Choiced Indexes */
+    int ta[g_bd.ps]; /* Temporary Arrary */
     double hds[g_bd.np_ae]; /* Humming Distances */
     double ave_hd; /* Average of Humming Distance */
 
     /* Global Timer */
     if(diff_t() >= (double)(g_bd.st)) {return TIMEUP;}
 
-    /* "sols"'s Data Checking */
+    /* "sols"'s Data Checking & Data Initialize */
     for(i = 0; i < g_bd.np_ae; i++) {
-        if(sols[g_bd.ps * i] == 0) {return -1;}
+        ci[i] = EMPTY;
     }
 
     for(i = 0; i < g_bd.np_ae; i++) {
-        /* Compare with Each "i"th Sol-Path */
         for(j = 0; j < g_bd.ps; j++) {
+            if((ta[j] = sols[(i * g_bd.ps + j)]) == EMPTY) {
+                break;
+            }
+        }
+        if(ta[0] != EMPTY && csac(ta) == YES) {
+            /* Compare with Each "i"th Sol-Path */
+            for(j = 0; j < g_bd.ps; j++) {
 
-            /* Global Timer */
-            if(diff_t() >= (double)(g_bd.st)) {break;}
+                /* Global Timer */
+                if(diff_t() >= (double)(g_bd.st)) {break;}
 
-            /* Set Target Branch: cc, nc */
-            if(j != (g_bd.ps - 1)) {
-                cc = mysol[j]; nc = mysol[j + 1];
+                /* Set Target Branch: cc, nc */
+                if(j != (g_bd.ps - 1)) {
+                    cc = mysol[j]; nc = mysol[(j + 1)];
+                }
+                else {
+                    cc = mysol[j]; nc = mysol[0];
+                }
+
+                /* Match to Other Sol-Paths */
+                for(k = 0; k < g_bd.ps; k++) {
+                    if(ta[k] == cc) {
+                        if(k == 0) {
+                            if(ta[(g_bd.ps - 1)] == nc || ta[1] == nc) {
+                                sum++;
+                            }
+                        }
+                        else if(k == (g_bd.ps - 1)) {
+                            if(ta[(k - 1)] == nc || ta[0] == nc) {
+                                sum++;
+                            }
+                        }
+                        else {
+                            if(ta[(k - 1)] == nc || ta[(k + 1)] == nc) {
+                                sum++;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            hds[i] = (double)sum / (double)g_bd.ps;
+            asum += sum;
+            sum = 0;
+            nusol++;
+        }
+        else {
+            hds[i] = -1;
+            sum = 0;
+        }
+    }
+
+    if(nusol != 0) {
+        /* Average of Humming Distance [%] */
+        ave_hd = ((double)asum / (double)nusol) / (double)g_bd.ps;
+
+        for(i = 0; i < g_bd.np_ae; i++) {
+            if(hds[i] > 0 && hds[i] < ave_hd) {
+                ci[cii] = i;
+                cii++;
+            }
+        }
+
+        return (ci[(rand() % cii)]);
+    }
+    else {
+        return EMPTY;
+    }
+}
+
+void crossov(int pthr, int * sols, int * mysol, int cpi_ap)
+{
+    int i;
+    int opsol[g_bd.ps]; /* Other Parent Solution */
+    int cpi[(ig_p[pthr].ncp)]; /* Cut Point Index */
+
+    /* Copy the Choiced Solution Path to Temporary Path */
+    for(i = 0; i < g_bd.ps; i++) {
+        opsol[i] = sols[(cpi_ap * g_bd.ps + i)];
+    }
+
+    /* Choice Cut Point By Random */
+    ccp_br(cpi, pthr);
+
+    /* Partially Matched Crossover */
+    if(ig_p[pthr].tGA == DEFAULT) {
+        pm_crossov(cpi, opsol, mysol, pthr);
+    }
+    else if(ig_p[pthr].tGA == TYPE1) {
+        //od_crossov();
+    }
+}
+
+void pm_crossov(int * cpi, int * parent2, int * parent1, int pthr)
+{
+    int i, j, sj;
+    int child[g_bd.ps]; /* Child Path */
+    int cpii = 0; /* Cut Point Index's Index */
+    int copy_p1_child = OFF;
+    int ntc = 0; /* Number of Target City */
+
+    /* Create Base Child */
+    for(i = 0; i < g_bd.ps; i++) {
+        if(i == cpi[cpii]) {
+            /* Index Procedure */
+            if(cpii != ig_p[pthr].ncp) {
+                cpii++;
+            }
+
+            if(copy_p1_child == OFF) {
+                copy_p1_child = ON;
             }
             else {
-                cc = mysol[j]; nc = mysol[0];
+                copy_p1_child = OFF;
+            }
+        }
+        if(copy_p1_child == OFF) {
+            child[i] = parent1[i];
+        }
+        else {
+            child[i] = parent2[i];
+        }
+    }
+
+    /* Global Timer */
+    if(diff_t() >= (double)(g_bd.st)) {return;}
+
+    cpii = 0;
+    copy_p1_child = OFF;
+
+    for(i = 0; i < g_bd.ps; i++) {
+        if(i == cpi[cpii]) {
+            /* Index Procedure */
+            if(cpii != ig_p[pthr].ncp) {
+                cpii++;
             }
 
-            /* Match to Other Sol-Paths */
-            for(k = 0; k < g_bd.ps; k++) {
-                if(sols[i * g_bd.np_ae + k] == cc) {
-                    if(k != (g_bd.ps - 1) && k != 0) {
-                        if(sols[i * g_bd.np_ae + k - 1] == nc || sols[i * g_bd.np_ae + k + 1] == nc) {
-                            sum++;
-                        }
-                    }
-                    else if(k == 0) {
-                        if(sols[i * g_bd.np_ae + g_bd.ps - 1] == nc || sols[i * g_bd.np_ae + k + 1] == nc) {
-                            sum++;
-                        }
-                    }
-                    else if(k == (g_bd.ps - 1)) {
-                        if(sols[i * g_bd.np_ae + k - 1] == nc || sols[i * g_bd.np_ae] == nc) {
-                            sum++;
-                        }
-                    }
+            if(copy_p1_child == OFF) {
+                copy_p1_child = ON;
+            }
+            else {
+                copy_p1_child = OFF;
+            }
+        }
+
+        if(copy_p1_child == ON) {
+            ntc = 0;
+            for(j = 0; j < g_bd.ps; j++) {
+                if(j != i && child[j] == child[i]) {
+                    ntc++;
+                    sj = j;
                     break;
                 }
             }
-
-        }
-        hds[i] = (double)sum / (double)g_bd.ps;
-        asum += sum;
-        sum = 0;
-    }
-
-    /* Average of Humming Distance [%] */
-    ave_hd = ((double)asum / (double)g_bd.np_ae) / (double)g_bd.ps;
-
-    /*DEL*/
-    if(g_bd.mpi_id == 0 && pthr == 0) {
-        for(i = 0; i < g_bd.np_ae; i++) {
-            if(hds[i] < ave_hd) {
-                printf("*hds[%d] == %f\n", i, hds[i]);
+            if(ntc == 0) {
+                child[i] = parent1[i];
             }
-            else {
-                printf("hds[%d] == %f\n", i, hds[i]);
+            else if(ntc == 1) {
+                child[sj] = parent1[i];
             }
         }
     }
-    /*DEL*/
+
+    /* Global Timer */
+    if(diff_t() >= (double)(g_bd.st)) {return;}
+
+    if(csac(child) == YES) {
+        /* Update Current Sol-Path */
+        for(i = 0; i < g_bd.ps; i++) {
+            ig_p[pthr].csp[i] = child[i];
+        }
+        ig_p[pthr].csd = gpd(ig_p[pthr].csp, &pthr);
+    }
+}
+
+/* 1 >= cpi[*] >= ps */
+void ccp_br(int * cpi, int pthr)
+{
+    int i, test;
+    int haba = 80;
+    int bef;
+
+    if(ig_p[pthr].ncp == 1) {
+        cpi[0] = g_bd.ps - g_bd.ps / 3;
+    }
+    else if(ig_p[pthr].ncp == 2) {
+        /*if((test = (rand() % (g_bd.ps - haba))) == 0) {
+            test = 1;
+        }
+        cpi[0] = test;
+        cpi[1] = test + haba;*/
+        if((test = (rand() % (g_bd.ps / 2))) == 0) {
+            test = 1;
+        }
+        cpi[0] = test;
+        bef = cpi[0];
+        for(i = 1; i < ig_p[pthr].ncp; i++) {
+            if((test = (rand() % (g_bd.ps - bef))) == 0) {
+                test = 1;
+            }
+            cpi[i] = bef + test;
+            bef = cpi[i];
+        }
+    }
+    else {
+        if((test = (rand() % (g_bd.ps / 2))) == 0) {
+            test = 1;
+        }
+        cpi[0] = test;
+        bef = cpi[0];
+        for(i = 1; i < ig_p[pthr].ncp; i++) {
+            if((test = (rand() % (g_bd.ps - bef))) == 0) {
+                test = 1;
+            }
+            cpi[i] = bef + test;
+            bef = cpi[i];
+        }
+    }
 }
 
 void mpi_fin(void)
