@@ -295,11 +295,11 @@ void pre_gacp(int pthr, int * sols, int * mysol)
     int ta[g_bd.ps]; /* Temporary Arrary */
 
     if(diff_t() < (double)(g_bd.st)) {
-        pthread_mutex_lock(&g_bsp_mutex[pthr]);
+        pthread_mutex_lock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
         for(i = 0; i < g_bd.ps; i++) {
-            mysol[i] = ig_p[pthr].bsp[i];
+            mysol[i] = ig_p[g_bd.mpi_bsd_pthr].bsp[i];
         }
-        pthread_mutex_unlock(&g_bsp_mutex[pthr]);
+        pthread_mutex_unlock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
     }
 
     for(i = 0; i < g_bd.np_ae; i++) {
