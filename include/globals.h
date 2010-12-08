@@ -12,6 +12,7 @@ struct _base_data {
     int mpi_nl; /* If Use MPI, It's MPI Name Length */
     int mpi_bsd_pthr; /* MPI Best Solution Distance Pthread */
     char * id_name; /* If Use MPI, It's MPI Name */
+    double uhd4GAsm; /* Upper Humming-Distance for GA's Swap-Mutation */
 };
 
 struct _base_mode {
@@ -24,6 +25,7 @@ struct _base_mode {
     int dld2; /* Debug-Log-Data:type2 (ON/OFF) */
     int dld3; /* Debug-Log-Data:type3 (ON/OFF) */
     int dld4; /* Debug-Log-Data:type4 (ON/OFF) */
+    int GAsm; /* GA's Swap-Mutation MODE (ON/OFF) */
 };
 
 struct _individual_parameter {
@@ -41,6 +43,10 @@ struct _individual_parameter {
     double bsd; /* Best Solution Distance */
     int ncp; /* Number of Cut-Point */
     int tGA; /* The Type of GA */
+    int nGAsm; /* Number of Swap-Mutation */
+    int cnGAsm; /* Current Number of Swap-Mutation */
+    double bef_bsd4GAsm; /* Before Best Solution Distance for GA's Swap-Mutation */
+    double cave_hd; /* Current Average of Humming-Distance */
 };
 
 struct _tabu_list {

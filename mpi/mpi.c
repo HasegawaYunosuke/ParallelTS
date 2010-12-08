@@ -143,7 +143,6 @@ void mpi_want(int npthr)
         }
         /* Recv Solutions From all of Other PC */
         MPI_Gather(sbuf, nsend, MPI_INT, rbuf4sol, nsend, MPI_INT, g_bd.mpi_id, MPI_COMM_WORLD);
-        /*DEL*/printf("Send By %d-%d\n", g_bd.mpi_id, npthr);
     }
 
     /* Store Gatered Data to "struct _mpi_shared_data_pool" */
@@ -407,6 +406,7 @@ int gp4ga_bhd(int pthr, int * sols, int * mysol)
     if(nusol != 0) {
         /* Average of Humming Distance [%] */
         ave_hd = ((double)asum / (double)nusol) / (double)g_bd.ps;
+        ig_p[pthr].cave_hd = ave_hd * 100;
 
         for(i = 0; i < g_bd.np_ae; i++) {
             if(hds[i] > 0 && hds[i] < ave_hd) {
@@ -440,8 +440,17 @@ void crossov(int pthr, int * sols, int * mysol, int cpi_ap)
     if(ig_p[pthr].tGA == DEFAULT) {
         pm_crossov(cpi, opsol, mysol, pthr);
     }
+    /* Order Clossover */
     else if(ig_p[pthr].tGA == TYPE1) {
         od_crossov(cpi, opsol, mysol, pthr);
+    }
+    else if(ig_p[pthr].tGA == TYPE2) {
+        if(pthr == g_bd.mpi_bsd_pthr) {
+            od_crossov(cpi, opsol, mysol, pthr);
+        }
+        else {
+            pm_crossov(cpi, opsol, mysol, pthr);
+        }
     }
 }
 
@@ -465,16 +474,12 @@ void od_crossov(int * cpi, int * parent2, int * parent1, int pthr)
     /* Global Timer */
     if(diff_t() >= (double)(g_bd.st)) {return;}
 
-    if(csac(child) != YES) {
-        printf("FUCK!!\n");
+    /* Update Current Sol-Path */
+    if(csac(child) == YES) {
         for(i = 0; i < g_bd.ps; i++) {
-            if(i != (g_bd.ps - 1)) {
-                printf("%2d,", child[i]);
-            }
-            else {
-                printf("%2d\n", child[i]);
-            }
+            ig_p[pthr].csp[i] = child[i];
         }
+        ig_p[pthr].csd = gpd(ig_p[pthr].csp, &pthr);
     }
 }
 
@@ -492,13 +497,8 @@ void od_crosovp(int * cpi, int * child, int * parent1, int * parent2, int pthr)
         if(child[i] == EMPTY) {
             for(shzi = 0; shzi < g_bd.ps; shzi++) {
                 shz[shzi] = parent1[(shzi + i)];
-                if((shzi + i + 1) != g_bd.ps) {
-                    if(child[(shzi + i + 1)] != EMPTY) {
-                        jumpl = shzi;
-                        break;
-                    }
-                }
-                else {
+                if((shzi + i + 1) == g_bd.ps || child[(shzi + i + 1)] != EMPTY) {
+                    shzi++;
                     jumpl = shzi;
                     break;
                 }
@@ -513,7 +513,7 @@ void od_crosovp(int * cpi, int * child, int * parent1, int * parent2, int pthr)
                 }
                 if(shzi < 0) {break;}
             }
-            i += jumpl;
+            i += (jumpl + 1);
         }
         else {
             i++;
@@ -674,6 +674,67 @@ void ccp_br(int * cpi, int pthr)
             cpi[i] = bef + test;
             bef = cpi[i];
         }
+    }
+}
+
+int chman(int pthr)
+{
+    if(ig_p[pthr].bef_bsd4GAsm == ig_p[pthr].bsd) {
+        ig_p[pthr].cnGAsm++;
+        if(ig_p[pthr].cnGAsm >= ig_p[pthr].nGAsm && ig_p[pthr].cave_hd >= g_bd.uhd4GAsm) {
+            ig_p[pthr].cnGAsm = 0;
+            return YES;
+        }
+        else {
+            return NO;
+        }
+    }
+    else {
+        ig_p[pthr].bef_bsd4GAsm = ig_p[pthr].bsd;
+        ig_p[pthr].cnGAsm = 0;
+        return NO;
+    }
+}
+
+void rand_sm(int * pthr)
+{
+    int csp[g_bd.ps]; /* Copy Solution-Path */
+    int i, nsm; /* Number of Swap-Mutation */
+    int ri1, ri2; /* Random Index1, 2 */
+    int tc; /* Temporary City */
+
+    /* Set Send Data */
+    pthread_mutex_lock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
+    for(i = 0; i < g_bd.ps; i++) {
+        csp[i] = ig_p[g_bd.mpi_bsd_pthr].bsp[i];
+    }
+    pthread_mutex_unlock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
+
+    /* Decide Num of Swap */
+    if(g_bd.uhd4GAsm <= 80) {
+        nsm = (int)((100 - g_bd.uhd4GAsm) / 25 * g_bd.ps);
+    }
+    else {
+        nsm = (int)((100 - g_bd.uhd4GAsm) / 100 * g_bd.ps);
+    }
+
+    /* Swap-MUtation Procedure */
+    for(i = 0; i < nsm; i++) {
+        ri1 = rand() % g_bd.ps;
+        do {
+            ri2 = rand() % g_bd.ps;
+        } while(ri1 == ri2);
+        tc = csp[ri1];
+        csp[ri1] = csp[ri2];
+        csp[ri2] = tc;
+    }
+
+    /* Update */
+    if(csac(csp) == YES) {
+        for(i = 0; i < g_bd.ps; i++) {
+            ig_p[*pthr].csp[i] = csp[i];
+        }
+        ig_p[*pthr].csd = gpd(ig_p[*pthr].csp, pthr);
     }
 }
 

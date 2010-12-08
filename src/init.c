@@ -31,6 +31,7 @@ void fiad(void)
     for(i = 0; i < g_bd.nth; i++) {
         ig_p[i].csd = DBL_MAX;
         ig_p[i].bsd = DBL_MAX;
+        ig_p[i].bef_bsd4GAsm = DBL_MAX;
         ig_p[i].clt = 0;
         ig_p[i].clw = 0;
     }

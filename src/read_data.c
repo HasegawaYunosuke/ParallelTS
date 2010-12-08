@@ -109,6 +109,13 @@ void arld(char * rld, int li)
     else if(li == 20) {
         gptGA(rld);
     }
+    /* The Number of GA's Swap-Mutation */
+    else if(li == 21) {
+        gpnGAsm(rld);
+    }
+    else if(li == 22) {
+        gpuhd4GAsm(rld);
+    }
 }
 
 void itpn(char * rld)
@@ -535,9 +542,55 @@ void gptGA(char * rld)
             ig_p[i].tGA = TYPE1;
         }
     }
+    else if(strcmp(sd, "both") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tGA = TYPE2;
+        }
+    }
     else {
         sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
         oem("wtres", ms, 0);
+    }
+}
+
+void gpnGAsm(char * rld)
+{
+    int i, di = -1; /* Data Index */
+    int nGAsm; /* Number of GA's Swap Mutation */
+    char ms[32]; /* Message */
+
+    if((di = gdbl(rld)) >= 0) {
+        if((nGAsm = gdnu(rld, di)) == 0) {
+            g_bm.GAsm = OFF;
+        }
+        else {
+            g_bm.GAsm = ON;
+            for(i = 0; i < g_bd.nth; i++) {
+                ig_p[i].nGAsm = nGAsm;
+                ig_p[i].cnGAsm = 0;
+            }
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gpnGAsm", ms, 0);
+    }
+}
+
+void gpuhd4GAsm(char * rld)
+{
+    int i;
+    int di = -1; /* Data Index */
+    double uhd4GAsm; /* Upper Humming-Distance for GA's Swap-Mutation [%] */
+    char ms[32]; /* Message */
+
+    if((di = gdbl(rld)) >= 0) {
+        uhd4GAsm = (double)gdnu(rld, di);
+        g_bd.uhd4GAsm = uhd4GAsm;
+    }
+    else {
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gpuhd4GAsm", ms, 0);
     }
 }
 

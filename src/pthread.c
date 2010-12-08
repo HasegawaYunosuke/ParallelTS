@@ -31,8 +31,22 @@ void * threp(void * arg)
             }
         }
 
-        if(diff_t() < (double)(g_bd.st - 10)) {
-            ga_proc((int *)arg);
+        if(g_bm.GAsm == ON) {
+            if(chman(*(int *)arg) == YES) {
+                if(diff_t() < (double)(g_bd.st - 10)) {
+                    rand_sm((int *)arg);
+                }
+            }
+            else {
+                if(diff_t() < (double)(g_bd.st - 10)) {
+                    ga_proc((int *)arg);
+                }
+            }
+        }
+        else {
+            if(diff_t() < (double)(g_bd.st - 10)) {
+                ga_proc((int *)arg);
+            }
         }
 #endif
     } while (diff_t() < (double)g_bd.st);

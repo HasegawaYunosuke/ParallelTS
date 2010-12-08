@@ -46,6 +46,8 @@ void init(int argc, char **argv); /* Initialize */
                 void gpst(char * rld); /* Get Parameter: Size of Tabu-list */
                 void gpncp(char * rld); /* Get Parameter: Number of Cut-Point (For GA) */
                 void gptGA(char * rld); /* Get Parameter: Type of GA */
+                void gpnGAsm(char * rld); /* Get Parameter: Number of GA's Swap-Mutation */
+                void gpuhd4GAsm(char * rld); /* Get Parameter: Upper Humming-Distance for GA's Swap-Mutation [%] */
     void ag_bd(void); /* Allocate Global-Base-Data */
     void spara(void); /* Set Parameter data */
     void ma_tl(void); /* Memory Allocation about "struct tblist" */
@@ -99,8 +101,12 @@ void * cpthr4gp(void * arg); /* GA Procedure */
 void pre_gacp(int pthr, int * sols, int * mysol); /* Previous of GA: Copy Procedure */
 int gp4ga_bhd(int pthr, int * sols, int * mysol); /* Get Parent for GA Procedure By Humming Distance */
 void crossov(int pthr, int * sols, int * mysol, int cpi_ap); /* Cross Over */
+    void rand_sm(int * pthr); /* Random Swap Mutation */
     void ccp_br(int * cpi, int pthr); /* Choice Cut-Point By Random */
     void pm_crossov(int * cpi, int * opsol, int * mysol, int pthr); /* Partially Matched Crossover */
+    void od_crossov(int * cpi, int * parent2, int * parent1, int pthr); /* Order Clossover */
+        void cbc_bcpi(int * cpi, int * child, int * parent1, int * parent2, int pthr); /* Create Base Cities by cpi[] */
+        void od_crosovp(int * cpi, int * child, int * parent1, int * parent2, int pthr); /* Oder Crossover Procedure */
 void cp_p2sol(int cpi_ap, int * sols, int * mysol); /* Coordinate Path Parent-2 Solution path */
     void sdpcs(int * mysol, int * p4w, int * dp1, int * dp2); /* Set Dupplex Point Check Sheets */
 #endif
