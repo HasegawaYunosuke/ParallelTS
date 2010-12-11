@@ -34,7 +34,19 @@ void * threp(void * arg)
         if(g_bm.GAsm == ON) {
             if(chman(*(int *)arg) == YES) {
                 if(diff_t() < (double)(g_bd.st - 10)) {
-                    rand_sm((int *)arg);
+                    if(ig_p[*(int *)arg].tGA == TYPE3) {
+                        ig_p[*(int *)arg].tGA = DEFAULT;
+                        ga_proc((int *)arg);
+                        ig_p[*(int *)arg].tGA = TYPE3;
+                    }
+                    else if(ig_p[*(int *)arg].tGA == TYPE4) {
+                        ig_p[*(int *)arg].tGA = TYPE1;
+                        ga_proc((int *)arg);
+                        ig_p[*(int *)arg].tGA = TYPE4;
+                    }
+                    else {
+                        rand_sm((int *)arg);
+                    }
                 }
             }
             else {

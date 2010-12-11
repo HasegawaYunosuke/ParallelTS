@@ -295,11 +295,14 @@ void pre_gacp(int pthr, int * sols, int * mysol)
     int ta[g_bd.ps]; /* Temporary Arrary */
 
     if(diff_t() < (double)(g_bd.st)) {
-        pthread_mutex_lock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
+        //pthread_mutex_lock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
+        pthread_mutex_lock(&g_bsp_mutex[pthr]);
         for(i = 0; i < g_bd.ps; i++) {
-            mysol[i] = ig_p[g_bd.mpi_bsd_pthr].bsp[i];
+            //mysol[i] = ig_p[g_bd.mpi_bsd_pthr].bsp[i];
+            mysol[i] = ig_p[pthr].bsp[i];
         }
-        pthread_mutex_unlock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
+        //pthread_mutex_unlock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
+        pthread_mutex_unlock(&g_bsp_mutex[pthr]);
     }
 
     for(i = 0; i < g_bd.np_ae; i++) {
@@ -437,11 +440,11 @@ void crossov(int pthr, int * sols, int * mysol, int cpi_ap)
     ccp_br(cpi, pthr);
 
     /* Partially Matched Crossover */
-    if(ig_p[pthr].tGA == DEFAULT) {
+    if(ig_p[pthr].tGA == DEFAULT || ig_p[pthr].tGA == TYPE4) {
         pm_crossov(cpi, opsol, mysol, pthr);
     }
     /* Order Clossover */
-    else if(ig_p[pthr].tGA == TYPE1) {
+    else if(ig_p[pthr].tGA == TYPE1 || ig_p[pthr].tGA == TYPE3) {
         od_crossov(cpi, opsol, mysol, pthr);
     }
     else if(ig_p[pthr].tGA == TYPE2) {
