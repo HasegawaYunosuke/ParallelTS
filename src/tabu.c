@@ -62,7 +62,7 @@ void addtl(int * ccs, int * npthr)
             g_tli = 0;
         }
 
-        if(diff_t() < (double)g_bd.st) {
+        /*if(diff_t() < (double)g_bd.st) {
             g_tl.to_tl[4 * g_tli + 0] = ccs[0];
             g_tl.to_tl[4 * g_tli + 1] = ccs[1];
             g_tl.to_tl[4 * g_tli + 2] = ccs[2];
@@ -74,6 +74,6 @@ void addtl(int * ccs, int * npthr)
             else {
                 g_tli = 0;
             }
-        }
+        }*/
     }
 }
