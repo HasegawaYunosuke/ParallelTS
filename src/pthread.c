@@ -45,7 +45,7 @@ void * threp(void * arg)
                         ig_p[*(int *)arg].tGA = TYPE4;
                     }
                     else {
-                        rand_sm((int *)arg);
+                        //rand_sm((int *)arg);
                     }
                 }
             }
