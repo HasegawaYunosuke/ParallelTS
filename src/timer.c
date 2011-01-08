@@ -15,7 +15,8 @@ double diff_t(void)
 {
     struct timeval t;
     double rn; /* Return Number */
-    /*DEL*/int i, show_t = 10;
+    int i, show_t = 10;
+    pthread_t debugp;
 
     gettimeofday(&t, NULL);
     rn = ((double)t.tv_sec + (double)t.tv_usec * 1e-6) - g_st_t;
@@ -30,7 +31,8 @@ double diff_t(void)
 
             /* DEBUG1 MODE PROCEDURE START */
             if(g_bm.dld1 == ON) {
-                dld1func(rn);
+                //dld1func(rn);
+                pthread_create(&debugp, NULL, dld1func, (void *)&rn);
             }
             /* DEBUG1 MODE PROCEDURE END */
 

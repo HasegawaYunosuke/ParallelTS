@@ -61,9 +61,13 @@ void init(int argc, char **argv); /* Initialize */
             double dif_2p(double x1, double y1, double x2, double y2); /* Difference between 2-Point */
     void fiad(void); /* First Initialization of All Data */
     void gbs_bpn(void); /* Get Best Solution By Problem-Name */
+    void deb_init(void); /* Debug Initialize */
+        void ddeb_lfn(void); /* Decide Debug Log-File-Name */
 void st_t(void); /* Start Timer */
 void ptp(void); /* pthread_Procedure */
                     double diff_t(void); /* Difference of Time (How Long the Search start) */
+                        void * dld1func(void * temp_rn);
+                            void odld1(FILE * fdp, double rn);
     void * threp(void * arg); /* Thread Procedure */
         void initp(int * npthr); /* Initialize Path */
             void cip_brn(int * npthr); /* Create Initial-Path By Random */

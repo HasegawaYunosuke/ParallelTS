@@ -20,7 +20,7 @@ void ddeb_lfn(void)
     char base_lfn[128];
     char mode_lfn1[16];
 
-    sprintf(temp_lfn, "debug/%s.%d.%d",
+    sprintf(base_lfn, "debug/%s.%d.%d",
         g_bd.pn,/*Program Name*/
         g_bd.st,/*Search Time*/
         g_bd.nth/*Num of Thread*/
@@ -35,22 +35,25 @@ void ddeb_lfn(void)
     }
 #ifdef MPIMODE
     sprintf(d1st.dld1_lfn, "%s.%s.node_%d_of_%d.deblog",
-        temp_lfn,
+        base_lfn,
         mode_lfn1,
         g_bd.np_ae,
         g_bd.mpi_id
     );
 #else
     sprintf(d1st.dld1_lfn, "%s.%s.deblog",
-        temp_lfn,
-        mode_lfn1,
+        base_lfn,
+        mode_lfn1
     );
 #endif
 }
 
-void dld1func(double rn)
+void * dld1func(void * temp_rn)
 {
     FILE * fdp; /* File Discpriter */
+    double rn;
+
+    rn = *(double *)temp_rn;
     fdp = wfop(d1st.dld1_lfn, "deb_init");
     odld1(fdp, rn);
     fclose(fdp);
@@ -61,7 +64,7 @@ void odld1(FILE * fdp, double rn)
     int i;
     int ctls; /* Current Tabu-List Size */
 
-    ctls = g_bd.g_bd.tl_lc * ig_p[0].stl + g_tli;
+    ctls = g_bd.tl_lc * ig_p[0].stl + g_tli;
 
     /* Timer */
     fprintf(fdp, "%f,", rn);

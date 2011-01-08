@@ -104,11 +104,11 @@ void fnyfp(void)
         //free(g_tl.to_tl);
         g_amc_f.f_to_tl = OFF;
     }
-
+#ifdef MPIMODE
     if(g_amc_f.f_bsp_mutex == ON) {
         free(g_bsp_mutex);
     }
-
+#endif
     if(g_amc_f.f_MPI_sdp_sp == ON) {
         free(mpi_sdp.sp);
     }

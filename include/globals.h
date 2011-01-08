@@ -7,6 +7,8 @@ struct _base_data {
     double ** btsp; /* Base TSPLIB's x-y Data */
     double ** bgd; /* Base Graph Data */
 
+    int tl_lc; /* Tabu list Loop Counter */
+
     int mpi_id; /* If Use MPI, It's ID. If Don't Use MPI, It's "EMPTY" */
     int np_ae; /* If Use MPI, It's Number of Processer at the Environment */
     int mpi_nl; /* If Use MPI, It's MPI Name Length */
