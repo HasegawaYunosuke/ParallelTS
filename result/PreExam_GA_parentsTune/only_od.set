@@ -1,5 +1,5 @@
 prob:rat575.tsp
-time[sec]:3600
+time[sec]:3602
 multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
 result[simple/navi]:simple
@@ -17,8 +17,6 @@ p_wloop:6
 p_loop:100
 TLS:5N
 p_ncp:2
-p_tcp[rand/nondouble]:rand
-p_tGA[PM/PM+ODm/OD/OD+PMm/BOTH]:BOTH
-p_nGAsw:30
-p_tGAsw[rand/srand/ndrand/GA]:rand
-p_uhd4GAsm:95
+p_tGA[pm/od/both]:od
+p_nGAsw:10
+p_uhd4GAsm:90

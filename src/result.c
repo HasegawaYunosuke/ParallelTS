@@ -3,13 +3,14 @@
 void out_r(void)
 {
     FILE * wfd;
-    char wfn[64];
+    char wfn[256];
 #ifdef MPIMODE
     int i, sdn = g_bd.nth;
     int root = 0;
     double wait;
     double sd[sdn];
     double rd[(sdn * g_bd.np_ae)];
+    char parameters[256];
 #endif
 
     cnd("result");
@@ -19,10 +20,9 @@ void out_r(void)
         sd[i] = ig_p[i].bsd;
     }
     if(g_bd.mpi_id == 0) {
-        /*DEL*/printf("Bef Gather() at proc:%d\n", g_bd.mpi_id);
         MPI_Gather(sd, sdn, MPI_DOUBLE, rd, sdn, MPI_DOUBLE, root, MPI_COMM_WORLD);
-        /*DEL*/printf("Aft Gather() at proc:%d\n", g_bd.mpi_id);
-        sprintf(wfn, "result/%s.%dsec.all_node.res", g_bd.pn, g_bd.st);
+        set_pn(parameters);
+        sprintf(wfn, "result/%s.%dsec.%s.node_%d.res", g_bd.pn, g_bd.st, parameters, g_bd.mpi_id);
         wfd = wfop(wfn, "out_r");
         mpi_pres(wfd, rd, (sdn * g_bd.np_ae));
         fclose(wfd);
@@ -33,12 +33,9 @@ void out_r(void)
                 }
             }
         }
-        /*DEL*/printf("Aft Barrier() at proc:%d\n", g_bd.mpi_id);
     }
     else {
-        /*DEL*/printf("Bef Gather() at proc:%d\n", g_bd.mpi_id);
         MPI_Gather(sd, sdn, MPI_DOUBLE, rd, sdn, MPI_DOUBLE, root, MPI_COMM_WORLD);
-        /*DEL*/printf("Aft Gather() at proc:%d\n", g_bd.mpi_id);
         for(i = 0; i < g_bd.np_ae; i++) {
             for(;;) {
                 if(MPI_Barrier(MPI_COMM_WORLD) == MPI_SUCCESS) {
@@ -46,7 +43,6 @@ void out_r(void)
                 }
             }
         }
-        /*DEL*/printf("Aft Barrier() at proc:%d\n", g_bd.mpi_id);
     }
 #else
     sprintf(wfn, "result/%s.%dsec.res", g_bd.pn, g_bd.st);

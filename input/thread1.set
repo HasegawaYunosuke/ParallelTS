@@ -1,7 +1,7 @@
 prob:rat575.tsp
 time[sec]:3600
 multi[ON/OFF]:ON
-MPI[ON/OFF]:ON
+MPI[ON/OFF]:OFF
 result[simple/navi]:simple
 initpa[rand/nn]:nn
 deb1[ON/OFF]:OFF
@@ -11,7 +11,7 @@ deb4[ON/OFF]:OFF
 
 
 
-p_nthread:2
+p_nthread:1
 p_worse[%]:0.005
 p_wloop:6
 p_loop:100
@@ -20,5 +20,5 @@ p_ncp:2
 p_tcp[rand/nondouble]:rand
 p_tGA[PM/PM+ODm/OD/OD+PMm/BOTH]:BOTH
 p_nGAsw:30
-p_tGAsw[rand/srand/ndrand/GA]:rand
+p_tGAsw[rand/srand/ndrand/GA]:ndrand
 p_uhd4GAsm:95

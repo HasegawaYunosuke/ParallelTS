@@ -13,6 +13,7 @@ alw_wors	search.c	/^int alw_wors(double b_diff, int * npthr)$/;"	f
 arld	read_data.c	/^void arld(char * rld, int li)$/;"	f
 artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/;"	f
 cbc_bcpi	../mpi/mpi.c	/^void cbc_bcpi(int * cpi, int * child, int * parent1, int * parent2, int pthr)$/;"	f
+ccp_bndp	../mpi/mpi.c	/^void ccp_bndp(int * cpi, int pthr, int * mysol, int * othersol)$/;"	f
 ccp_br	../mpi/mpi.c	/^void ccp_br(int * cpi, int pthr)$/;"	f
 ch_tb	tabu.c	/^int ch_tb(int * ccs)$/;"	f
 ch_tb_c	tabu.c	/^void * ch_tb_c(void * css)$/;"	f
@@ -29,6 +30,7 @@ csac	check.c	/^int csac(int * path)$/;"	f
 cuc_pa	init_path.c	/^void cuc_pa(int * ary, int max, int target, int flag)$/;"	f
 dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, double y2)$/;"	f
 diff_t	timer.c	/^double diff_t(void)$/;"	f
+dns	../mpi/mpi.c	/^int dns(void)$/;"	f
 ex_addtl	search.c	/^void ex_addtl(int * path, int * ccs, int * ccsi, int * npthr)$/;"	f
 ffi	memory.c	/^void ffi(void)$/;"	f
 fiad	init.c	/^void fiad(void)$/;"	f
@@ -58,8 +60,11 @@ gpnth	read_data.c	/^void gpnth(char * rld)$/;"	f
 gppw	read_data.c	/^void gppw(char * rld)$/;"	f
 gpst	read_data.c	/^void gpst(char * rld)$/;"	f
 gptGA	read_data.c	/^void gptGA(char * rld)$/;"	f
+gptGAsm	read_data.c	/^void gptGAsm(char * rld)$/;"	f
+gptcp	read_data.c	/^void gptcp(char * rld)$/;"	f
 gpuhd4GAsm	read_data.c	/^void gpuhd4GAsm(char * rld)$/;"	f
 grn	math.c	/^int grn(int max)$/;"	f
+gstedpis_ndp	../mpi/mpi.c	/^int gstedpis_ndp(int * dp, int * stedpis, int pthr)$/;"	f
 guci_bc	init_path.c	/^int guci_bc(int city, int * ary, int max)$/;"	f
 init	init.c	/^void init(int argc, char **argv)$/;"	f
 initp	init_path.c	/^void initp(int * npthr)$/;"	f
@@ -84,15 +89,18 @@ out_r	result.c	/^void out_r(void)$/;"	f
 pm_crossov	../mpi/mpi.c	/^void pm_crossov(int * cpi, int * parent2, int * parent1, int pthr)$/;"	f
 pre_gacp	../mpi/mpi.c	/^void pre_gacp(int pthr, int * sols, int * mysol)$/;"	f
 pres	result.c	/^void pres(FILE * resfp)$/;"	f
+proc_rGA	../mpi/mpi.c	/^void proc_rGA(void * arg)$/;"	f
 ptp	pthread.c	/^void ptp(void)$/;"	f
 rand_sm	../mpi/mpi.c	/^void rand_sm(int * pthr)$/;"	f
 rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/;"	f
 rif_sd	read_data.c	/^void rif_sd(FILE * rfd)$/;"	f
 rtsplib_sd	read_data.c	/^void rtsplib_sd(FILE * rfp)$/;"	f
 sdpcs	../mpi/mpi.c	/^void sdpcs(int * mysol, int * p4w, int * dp1, int * dp2)$/;"	f
+set_pn	../mpi/mpi.c	/^void set_pn(char * parameters)$/;"	f
 sgd	read_data.c	/^void sgd(void)$/;"	f
 smcm	read_data.c	/^void smcm(char * rld)$/;"	f
 smpim	read_data.c	/^void smpim(char * rld)$/;"	f
+srand_sm	../mpi/mpi.c	/^void srand_sm(int * pthr)$/;"	f
 ssti	read_data.c	/^void ssti(char * rld)$/;"	f
 st_t	timer.c	/^void st_t(void)$/;"	f
 threp	pthread.c	/^void * threp(void * arg)$/;"	f

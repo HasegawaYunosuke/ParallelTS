@@ -18,48 +18,17 @@ void ptp(void)
 void * threp(void * arg)
 {
     srand(time(NULL)*(*(int *)arg + 1));
+    /* Create Initial-Path */
     initp((int *)arg);
     do {
         do {
+            /* Tabu-Search Procedure */
             ts_proc((int *)arg);
         } while ((ig_p[*(int *)arg].clw < ig_p[*(int *)arg].lw) && (diff_t() < (double)g_bd.st));
-#ifdef MPIMODE
-        ig_p[*(int *)arg].clw = 0;
-        if(g_bm.mpim == ON && pthread_equal(ig_p[0].ptn, pthread_self())) {
-            if(diff_t() < (double)(g_bd.st - 10)) {
-                mpi_want(*(int *)arg);
-            }
-        }
 
-        if(g_bm.GAsm == ON) {
-            if(chman(*(int *)arg) == YES) {
-                if(diff_t() < (double)(g_bd.st - 10)) {
-                    if(ig_p[*(int *)arg].tGA == TYPE3) {
-                        ig_p[*(int *)arg].tGA = DEFAULT;
-                        ga_proc((int *)arg);
-                        ig_p[*(int *)arg].tGA = TYPE3;
-                    }
-                    else if(ig_p[*(int *)arg].tGA == TYPE4) {
-                        ig_p[*(int *)arg].tGA = TYPE1;
-                        ga_proc((int *)arg);
-                        ig_p[*(int *)arg].tGA = TYPE4;
-                    }
-                    else {
-                        rand_sm((int *)arg);
-                    }
-                }
-            }
-            else {
-                if(diff_t() < (double)(g_bd.st - 10)) {
-                    ga_proc((int *)arg);
-                }
-            }
-        }
-        else {
-            if(diff_t() < (double)(g_bd.st - 10)) {
-                ga_proc((int *)arg);
-            }
-        }
+#ifdef MPIMODE
+        /* Procedure related GA */
+        proc_rGA(arg);
 #endif
     } while (diff_t() < (double)g_bd.st);
 }

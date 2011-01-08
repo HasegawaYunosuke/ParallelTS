@@ -105,15 +105,23 @@ void arld(char * rld, int li)
     else if(li == 19) {
         gpncp(rld);
     }
-    /* The Type of GA */
+    /* The Type of Decision of GA's Cut-Point */
     else if(li == 20) {
+        gptcp(rld);
+    }
+    /* The Type of GA */
+    else if(li == 21) {
         gptGA(rld);
     }
     /* The Number of GA's Swap-Mutation */
-    else if(li == 21) {
+    else if(li == 22) {
         gpnGAsm(rld);
     }
-    else if(li == 22) {
+    else if(li == 23) {
+        gptGAsm(rld);
+    }
+    /* The Parcentage of the Dead-Line before starting Swap-Mutation */
+    else if(li == 24) {
         gpuhd4GAsm(rld);
     }
 }
@@ -510,6 +518,44 @@ void gpncp(char * rld)
     }
 }
 
+void gptcp(char * rld)
+{
+    int i;
+    int di = -1; /* Data Index */
+    int sdi = 0; /* String Data Index */
+    char sd[64]; /* String Data */
+    char ms[32]; /* Message */
+
+    if((di = gdbl(rld)) >= 0) {
+        for(i = di;; i++) {
+            if(rld[i] == '\n' || rld[i] == '\0') {
+                sd[sdi] = '\0';
+                break;
+            }
+            sd[sdi] = rld[i]; sdi++;
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gptcp", ms, 0);
+    }
+
+    if(strcmp(sd, "rand") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tcp = DEFAULT;
+        }
+    }
+    else if(strcmp(sd, "nondouble") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tcp = TYPE1;
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
+        oem("gptcp", ms, 0);
+    }
+}
+
 void gptGA(char * rld)
 {
     int i;
@@ -532,27 +578,27 @@ void gptGA(char * rld)
         oem("gptGA", ms, 0);
     }
 
-    if(strcmp(sd, "pm") == 0) {
+    if(strcmp(sd, "PM") == 0) {
         for(i = 0; i < g_bd.nth; i++) {
             ig_p[i].tGA = DEFAULT;
         }
     }
-    else if(strcmp(sd, "od") == 0) {
+    else if(strcmp(sd, "OD") == 0) {
         for(i = 0; i < g_bd.nth; i++) {
             ig_p[i].tGA = TYPE1;
         }
     }
-    else if(strcmp(sd, "both") == 0) {
+    else if(strcmp(sd, "BOTH") == 0) {
         for(i = 0; i < g_bd.nth; i++) {
             ig_p[i].tGA = TYPE2;
         }
     }
-    else if(strcmp(sd, "od2") == 0) {
+    else if(strcmp(sd, "OD+PMm") == 0) {
         for(i = 0; i < g_bd.nth; i++) {
             ig_p[i].tGA = TYPE3;
         }
     }
-    else if(strcmp(sd, "pm2") == 0) {
+    else if(strcmp(sd, "PM+ODm") == 0) {
         for(i = 0; i < g_bd.nth; i++) {
             ig_p[i].tGA = TYPE4;
         }
@@ -578,12 +624,61 @@ void gpnGAsm(char * rld)
             for(i = 0; i < g_bd.nth; i++) {
                 ig_p[i].nGAsm = nGAsm;
                 ig_p[i].cnGAsm = 0;
+                ig_p[i].mm = OFF;
             }
         }
     }
     else {
         sprintf(ms, "Wrong Data Format:\"%s\"", rld);
         oem("gpnGAsm", ms, 0);
+    }
+}
+
+void gptGAsm(char * rld)
+{
+    int i;
+    int di = -1; /* Data Index */
+    int sdi = 0; /* String Data Index */
+    char sd[64]; /* String Data */
+    char ms[32]; /* Message */
+
+    if((di = gdbl(rld)) >= 0) {
+        for(i = di;; i++) {
+            if(rld[i] == '\n' || rld[i] == '\0') {
+                sd[sdi] = '\0';
+                break;
+            }
+            sd[sdi] = rld[i]; sdi++;
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Data Format:\"%s\"", rld);
+        oem("gptGAsm", ms, 0);
+    }
+
+    if(strcmp(sd, "rand") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tGAsm = DEFAULT;
+        }
+    }
+    else if(strcmp(sd, "srand") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tGAsm = TYPE1;
+        }
+    }
+    else if(strcmp(sd, "ndrand") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tGAsm = TYPE3;
+        }
+    }
+    else if(strcmp(sd, "GA") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tGAsm = TYPE2;
+        }
+    }
+    else {
+        sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
+        oem("gptGAsm", ms, 0);
     }
 }
 

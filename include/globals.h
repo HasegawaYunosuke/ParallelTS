@@ -42,8 +42,11 @@ struct _individual_parameter {
     int * bsp; /* Best Solution Path */
     double bsd; /* Best Solution Distance */
     int ncp; /* Number of Cut-Point */
+    int tcp; /* Type of Cut-Point */
+    int mm; /* Mutation Mode */
     int tGA; /* The Type of GA */
     int nGAsm; /* Number of Swap-Mutation */
+    int tGAsm; /* Type of Swap-Mutation */
     int cnGAsm; /* Current Number of Swap-Mutation */
     double bef_bsd4GAsm; /* Before Best Solution Distance for GA's Swap-Mutation */
     double cave_hd; /* Current Average of Humming-Distance */

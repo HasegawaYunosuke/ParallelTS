@@ -295,14 +295,14 @@ void pre_gacp(int pthr, int * sols, int * mysol)
     int ta[g_bd.ps]; /* Temporary Arrary */
 
     if(diff_t() < (double)(g_bd.st)) {
-        //pthread_mutex_lock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
-        pthread_mutex_lock(&g_bsp_mutex[pthr]);
+        pthread_mutex_lock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
+        //pthread_mutex_lock(&g_bsp_mutex[pthr]);
         for(i = 0; i < g_bd.ps; i++) {
-            //mysol[i] = ig_p[g_bd.mpi_bsd_pthr].bsp[i];
-            mysol[i] = ig_p[pthr].bsp[i];
+            mysol[i] = ig_p[g_bd.mpi_bsd_pthr].bsp[i];
+            //mysol[i] = ig_p[pthr].bsp[i];
         }
-        //pthread_mutex_unlock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
-        pthread_mutex_unlock(&g_bsp_mutex[pthr]);
+        pthread_mutex_unlock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
+        //pthread_mutex_unlock(&g_bsp_mutex[pthr]);
     }
 
     for(i = 0; i < g_bd.np_ae; i++) {
@@ -355,6 +355,7 @@ int gp4ga_bhd(int pthr, int * sols, int * mysol)
     for(i = 0; i < g_bd.np_ae; i++) {
         for(j = 0; j < g_bd.ps; j++) {
             if((ta[j] = sols[(i * g_bd.ps + j)]) == EMPTY) {
+                ta[0] = EMPTY;
                 break;
             }
         }
@@ -407,18 +408,33 @@ int gp4ga_bhd(int pthr, int * sols, int * mysol)
     }
 
     if(nusol != 0) {
-        /* Average of Humming Distance [%] */
-        ave_hd = ((double)asum / (double)nusol) / (double)g_bd.ps;
-        ig_p[pthr].cave_hd = ave_hd * 100;
+        if(nusol > 1 && g_bd.np_ae > 2) {
+            /* Average of Humming Distance [%] */
+            ave_hd = ((double)asum / (double)nusol) / (double)g_bd.ps;
+            ig_p[pthr].cave_hd = ave_hd * 100;
 
-        for(i = 0; i < g_bd.np_ae; i++) {
-            if(hds[i] > 0 && hds[i] < ave_hd) {
-                ci[cii] = i;
-                cii++;
+            for(i = 0; i < g_bd.np_ae; i++) {
+                if(hds[i] > 0 && hds[i] < ave_hd) {
+                    ci[cii] = i;
+                    cii++;
+                }
+            }
+
+            if(cii == 0) {
+                printf("(nusol,np_ae) == (%d, %d) :::At gp4ga_bhd()\n", nusol, g_bd.np_ae);
+                return EMPTY;
+            }
+            else {
+                return (ci[(rand() % cii)]);
             }
         }
-
-        return (ci[(rand() % cii)]);
+        else {
+            for(i = 0; i < g_bd.np_ae; i++) {
+                if(hds[i] > 0) {
+                    return i;
+                }
+            }
+        }
     }
     else {
         return EMPTY;
@@ -436,8 +452,18 @@ void crossov(int pthr, int * sols, int * mysol, int cpi_ap)
         opsol[i] = sols[(cpi_ap * g_bd.ps + i)];
     }
 
+    /* Choice Cut Point By Non-Double-Point (as Mutation) */
+    if(ig_p[pthr].mm == ON && ig_p[pthr].tGAsm == TYPE2 && ig_p[pthr].ncp <= 2) {
+        ccp_bndp(cpi, pthr, mysol, opsol);
+    }
+    /* Choice Cut Point By Non-Double-Point (as Crossover) */
+    else if(ig_p[pthr].tcp == TYPE1 && ig_p[pthr].ncp <= 2) {
+        ccp_bndp(cpi, pthr, mysol, opsol);
+    }
     /* Choice Cut Point By Random */
-    ccp_br(cpi, pthr);
+    else {
+        ccp_br(cpi, pthr);
+    }
 
     /* Partially Matched Crossover */
     if(ig_p[pthr].tGA == DEFAULT || ig_p[pthr].tGA == TYPE4) {
@@ -483,6 +509,9 @@ void od_crossov(int * cpi, int * parent2, int * parent1, int pthr)
             ig_p[pthr].csp[i] = child[i];
         }
         ig_p[pthr].csd = gpd(ig_p[pthr].csp, &pthr);
+        if(ig_p[pthr].csd < ig_p[pthr].bsd) {
+            copyc_b(&pthr);
+        }
     }
 }
 
@@ -632,6 +661,9 @@ void pm_crossov(int * cpi, int * parent2, int * parent1, int pthr)
             ig_p[pthr].csp[i] = child[i];
         }
         ig_p[pthr].csd = gpd(ig_p[pthr].csp, &pthr);
+        if(ig_p[pthr].csd < ig_p[pthr].bsd) {
+            copyc_b(&pthr);
+        }
     }
 }
 
@@ -639,18 +671,12 @@ void pm_crossov(int * cpi, int * parent2, int * parent1, int pthr)
 void ccp_br(int * cpi, int pthr)
 {
     int i, test;
-    int haba = 80;
     int bef;
 
     if(ig_p[pthr].ncp == 1) {
         cpi[0] = g_bd.ps - g_bd.ps / 3;
     }
     else if(ig_p[pthr].ncp == 2) {
-        /*if((test = (rand() % (g_bd.ps - haba))) == 0) {
-            test = 1;
-        }
-        cpi[0] = test;
-        cpi[1] = test + haba;*/
         if((test = (rand() % (g_bd.ps / 2))) == 0) {
             test = 1;
         }
@@ -677,6 +703,99 @@ void ccp_br(int * cpi, int pthr)
             cpi[i] = bef + test;
             bef = cpi[i];
         }
+    }
+}
+
+void ccp_bndp(int * cpi, int pthr, int * mysol, int * othersol)
+{
+    int i, j; /* Current City, Next City */
+    int dp1[g_bd.ps]; /* Duplex Point */
+    int dp2[g_bd.ps]; /* Duplex Point */
+    int stedpis[2] = {EMPTY}; /* Start & End Dupplex-Point's Indexes */
+
+    /* Initialize Data */
+    for(i = 0; i < g_bd.ps; i++) {
+        dp1[i] = EMPTY; dp2[i] = EMPTY;
+    }
+
+    /* Set Dupplex Point Check Sheets (Set "ON") */
+    sdpcs(mysol, othersol, dp1, dp2);
+
+    /* Search the Longest Dupplex Point */
+    if(gstedpis_ndp(dp1, stedpis, pthr) == YES) {
+        if(ig_p[pthr].ncp == 1) {
+            cpi[0] = stedpis[0];
+        }
+        else if(ig_p[pthr].ncp == 2) {
+            cpi[0] = stedpis[0]; cpi[1] = stedpis[1];
+        }
+    }
+    else {
+        ccp_br(cpi, pthr);
+    }
+}
+
+int gstedpis_dp(int * dp, int * stedpis, int pthr)
+{
+    int i, j, pol = 25;/* The Parcentage of Length */
+    int l; /* Length */
+    int sum = 0;
+    int max = 0;
+
+    l = (int)((double)g_bd.ps * ((double)g_bd.ps / 100.0));
+
+    /* Get Muximum Population of Part of Path */
+    for(i = 0; i < (g_bd.ps - l); i++) {
+        sum = 0;
+        for(j = i; j < l; j++) {
+            if(dp[i] != EMPTY) {
+                sum++;
+            }
+        }
+        if(sum > max) {
+            max = sum;
+            stedpis[0] = i; /* Start Point's Index */
+            stedpis[1] = i + l;
+        }
+    }
+
+    if(ig_p[pthr].ncp == 1 || ig_p[pthr].ncp == 2) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
+int gstedpis_ndp(int * dp, int * stedpis, int pthr)
+{
+    int i, j, pol = 25;/* The Parcentage of Length */
+    int l; /* Length */
+    int sum = 0;
+    int max = 0;
+
+    l = (int)((double)g_bd.ps * ((double)g_bd.ps / 100.0));
+
+    /* Get Muximum Population of Part of Path */
+    for(i = 0; i < (g_bd.ps - l); i++) {
+        sum = 0;
+        for(j = i; j < l; j++) {
+            if(dp[i] == EMPTY) {
+                sum++;
+            }
+        }
+        if(sum > max) {
+            max = sum;
+            stedpis[0] = i; /* Start Point's Index */
+            stedpis[1] = i + l;
+        }
+    }
+
+    if(ig_p[pthr].ncp == 1 || ig_p[pthr].ncp == 2) {
+        return YES;
+    }
+    else {
+        return NO;
     }
 }
 
@@ -699,6 +818,76 @@ int chman(int pthr)
     }
 }
 
+void proc_rGA(void * arg)
+{
+    int pthr = *(int *)arg; /* the Number of Pthread */
+
+    ig_p[pthr].clw = 0;
+
+    /* Send Request & Gather other Sol-Paths by Leader Thread */
+    if(g_bm.mpim == ON && pthr == 0) {
+        /*T*/if(diff_t() < (double)(g_bd.st - 10)) {
+            mpi_want(pthr);
+        }
+    }
+
+    /* Something Mutation (Falling in Manneri)*/
+    if(g_bm.GAsm == ON && chman(pthr) == YES) {
+        /*T*/if(diff_t() < (double)(g_bd.st - 10)) {
+            /* If the Type of GA is "OD+PMm" or "PM+ODm" */
+            if(ig_p[pthr].tGA == TYPE3) {
+                ig_p[pthr].tGA = DEFAULT;
+                    ga_proc(&pthr);
+                ig_p[pthr].tGA = TYPE3;
+            }
+            else if(ig_p[pthr].tGA == TYPE4) {
+                ig_p[pthr].tGA = TYPE1;
+                    ga_proc(&pthr);
+                ig_p[pthr].tGA = TYPE4;
+            }
+            else {
+                /* Mutation by Randomly-Swap */
+                if(ig_p[pthr].tGAsm == DEFAULT) {
+                    rand_sm(&pthr);
+                }
+                /* Mutation by Smart-Randomly-Swap */
+                else if(ig_p[pthr].tGAsm == TYPE1 || ig_p[pthr].tGAsm == TYPE3) {
+                    srand_sm(&pthr);
+                }
+                /* Mutation by Smart-GA */
+                else if(ig_p[pthr].tGAsm == TYPE2) {
+                    ig_p[pthr].mm = ON;
+                        ga_proc(&pthr);
+                    ig_p[pthr].mm = OFF;
+                }
+                else {
+                    rand_sm(&pthr);
+                }
+            }
+        }
+    }
+    /* Normal GA procedure */
+    else {
+        /*T*/if(diff_t() < (double)(g_bd.st - 10)) {
+            ga_proc(&pthr);
+        }
+    }
+}
+
+int dns(void)
+{
+    int nsm;
+
+    if(g_bd.uhd4GAsm <= 80) {
+        nsm = (int)((100 - g_bd.uhd4GAsm) / 25 * g_bd.ps);
+    }
+    else {
+        nsm = (int)((100 - g_bd.uhd4GAsm) / 100 * g_bd.ps);
+    }
+
+    return nsm;
+}
+
 void rand_sm(int * pthr)
 {
     int csp[g_bd.ps]; /* Copy Solution-Path */
@@ -714,12 +903,7 @@ void rand_sm(int * pthr)
     pthread_mutex_unlock(&g_bsp_mutex[g_bd.mpi_bsd_pthr]);
 
     /* Decide Num of Swap */
-    if(g_bd.uhd4GAsm <= 80) {
-        nsm = (int)((100 - g_bd.uhd4GAsm) / 25 * g_bd.ps);
-    }
-    else {
-        nsm = (int)((100 - g_bd.uhd4GAsm) / 100 * g_bd.ps);
-    }
+    nsm = dns();
 
     /* Swap-MUtation Procedure */
     for(i = 0; i < nsm; i++) {
@@ -741,7 +925,184 @@ void rand_sm(int * pthr)
     }
 }
 
+void srand_sm(int * pthr)
+{
+    int i;
+    int sols[(g_bd.ps * g_bd.np_ae)]; /* Recv Buffer for Gater Solution */
+    int mysol[g_bd.ps];
+    int opsol[g_bd.ps]; /* Other Parent Solution */
+    int cpi_ap;
+    int dp1[g_bd.ps]; /* Duplex Point */
+    int dp2[g_bd.ps]; /* Duplex Point */
+    int stedpis[2] = {EMPTY}; /* Start & End Dupplex-Point's Indexes */
+    int len, nsm, ri1, ri2, tc;
+
+    pre_gacp(*pthr, sols, mysol);
+    cpi_ap = gp4ga_bhd(*pthr, sols, mysol);
+
+    /* Copy the Choiced Solution Path to Temporary Path */
+    for(i = 0; i < g_bd.ps; i++) {
+        opsol[i] = sols[(cpi_ap * g_bd.ps + i)];
+    }
+
+    /* Initialize Data */
+    for(i = 0; i < g_bd.ps; i++) {
+        dp1[i] = EMPTY; dp2[i] = EMPTY;
+    }
+
+    /* Set Dupplex Point Check Sheets (Set "ON") */
+    sdpcs(mysol, opsol, dp1, dp2);
+
+    /* Search the Longest Dupplex Point */
+    if(ig_p[(*pthr)].tGAsm == TYPE1) {
+        if(gstedpis_ndp(dp1, stedpis, *pthr) == YES) {
+            if(ig_p[*pthr].ncp == 1) {
+                len = g_bd.ps - stedpis[0];
+            }
+            else if(ig_p[*pthr].ncp == 2) {
+                len = stedpis[1] - stedpis[0];
+            }
+            nsm = dns();
+            for(i = 0; i < nsm; i++) {
+                ri1 = rand() % len;
+                do {
+                    ri2 = rand() % len;
+                } while(ri1 == ri2);
+                ri1 += stedpis[0]; ri2 += stedpis[0];
+                tc = mysol[ri1];
+                mysol[ri1] = mysol[ri2];
+                mysol[ri2] = tc;
+            }
+
+            /* Update */
+            if(csac(mysol) == YES) {
+                for(i = 0; i < g_bd.ps; i++) {
+                    ig_p[*pthr].csp[i] = mysol[i];
+                }
+                ig_p[*pthr].csd = gpd(ig_p[*pthr].csp, pthr);
+                /*DEL*/printf("DEL:srand_sm() is Done. Node.%d-%d\n", g_bd.mpi_id, *pthr);
+                if(ig_p[*pthr].csd < ig_p[*pthr].bsd) {
+                    copyc_b(pthr);
+                }
+            }
+        }
+        else {
+            rand_sm(pthr);
+        }
+    }
+    else if(ig_p[(*pthr)].tGAsm == TYPE3) {
+        if(gstedpis_dp(dp1, stedpis, *pthr) == YES) {
+            if(ig_p[*pthr].ncp == 1) {
+                len = g_bd.ps - stedpis[0];
+            }
+            else if(ig_p[*pthr].ncp == 2) {
+                len = stedpis[1] - stedpis[0];
+            }
+            nsm = dns();
+            for(i = 0; i < nsm; i++) {
+                ri1 = rand() % len;
+                do {
+                    ri2 = rand() % len;
+                } while(ri1 == ri2);
+                ri1 += stedpis[0]; ri2 += stedpis[0];
+                tc = mysol[ri1];
+                mysol[ri1] = mysol[ri2];
+                mysol[ri2] = tc;
+            }
+
+            /* Update */
+            if(csac(mysol) == YES) {
+                for(i = 0; i < g_bd.ps; i++) {
+                    ig_p[*pthr].csp[i] = mysol[i];
+                }
+                ig_p[*pthr].csd = gpd(ig_p[*pthr].csp, pthr);
+                /*DEL*/printf("DEL:srand_sm() is Done. Node.%d-%d\n", g_bd.mpi_id, *pthr);
+                if(ig_p[*pthr].csd < ig_p[*pthr].bsd) {
+                    copyc_b(pthr);
+                }
+            }
+        }
+        else {
+            rand_sm(pthr);
+        }
+    }
+}
+
 void mpi_fin(void)
 {
     MPI_Finalize();
+}
+
+void set_pn(char * parameters)
+{
+    char initpa[8];
+    char tcp[16];
+    char tGA[16];
+    char tGAsm[16];
+    char GAsm[64];
+
+    /* Initialize-Path */
+    if(g_bm.ipcm == DEFAULT) {
+        strcpy(initpa, "IP_rand");
+    }
+    else if(g_bm.ipcm == TYPE1) {
+        strcpy(initpa, "IP_nn");
+    }
+
+    /* Type of Cut-Point (GA) */
+    if(ig_p[0].tcp == DEFAULT) {
+        strcpy(tcp, "TCP_rand");
+    }
+    else if(ig_p[0].tcp == TYPE1) {
+        strcpy(tcp, "TCP_nondoulbe");
+    }
+
+    /* Type of GA */
+    if(ig_p[0].tGA == DEFAULT) {
+        strcpy(tGA, "TGA_PM");
+    }
+    else if(ig_p[0].tGA == TYPE1) {
+        strcpy(tGA, "TGA_OD");
+    }
+    else if(ig_p[0].tGA == TYPE2) {
+        strcpy(tGA, "TGA_BOTH");
+    }
+    else if(ig_p[0].tGA == TYPE3) {
+        strcpy(tGA, "TGA_OD+PMm");
+    }
+    else if(ig_p[0].tGA == TYPE4) {
+        strcpy(tGA, "TGA_PM+ODm");
+    }
+
+    /* Mutation */
+    if(ig_p[0].nGAsm == 0) {
+        strcpy(GAsm, "GAsm_OFF");
+    }
+    else {
+        /* Type of GA Swap-Mutation */
+        if(ig_p[0].tGAsm == DEFAULT) {
+            strcpy(tGAsm, "rand");
+        }
+        else if(ig_p[0].tGAsm == TYPE1) {
+            strcpy(tGAsm, "srand");
+        }
+        else if(ig_p[0].tGAsm == TYPE2) {
+            strcpy(tGAsm, "GA");
+        }
+        else if(ig_p[0].tGAsm == TYPE3) {
+            strcpy(tGAsm, "ndrand");
+        }
+
+        sprintf(GAsm, "tGAsm_%s.nGAsm_%d.uhd4GAsm_%d", tGAsm, ig_p[0].nGAsm, (int)g_bd.uhd4GAsm);
+    }
+
+    /* Connect */
+    if(g_bm.mpim == ON) {
+        sprintf(parameters, "np_ae_%d.p_nthread_%d.p_wloop_%d.TLS_%d.p_ncp_%d.%s.%s.%s.%s",
+                    g_bd.np_ae, g_bd.nth, ig_p[0].pw, ig_p[0].lw, ig_p[0].stl, ig_p[0].ncp, initpa, tcp, tGA, GAsm);
+    }
+    else {
+        sprintf(parameters, "np_ae_%d.p_nthread_%d.p_wloop_%d.TLS_%d.TS_only",
+                    g_bd.np_ae, g_bd.nth, ig_p[0].pw, ig_p[0].lw, ig_p[0].stl);
+    }
 }
