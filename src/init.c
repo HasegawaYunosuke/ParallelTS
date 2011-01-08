@@ -22,6 +22,8 @@ void init(int argc, char **argv)
     /* MPI Initialize Procedure*/
     mpi_ip(argc, argv);
 #endif
+    /* Debug Initialize */
+    deb_init();
 }
 
 void fiad(void)
@@ -46,5 +48,6 @@ void fiad(void)
     }
 
     g_tli = 0;
+    g_bd.tl_lc = 0;
     timerf = OFF;
 }

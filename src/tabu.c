@@ -60,6 +60,7 @@ void addtl(int * ccs, int * npthr)
         }
         else {
             g_tli = 0;
+            g_bd.tl_lc++;
         }
 
         if(diff_t() < (double)g_bd.st) {
@@ -73,6 +74,7 @@ void addtl(int * ccs, int * npthr)
             }
             else {
                 g_tli = 0;
+                g_bd.tl_lc++;
             }
         }
     }

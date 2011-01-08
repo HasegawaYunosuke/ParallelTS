@@ -8,6 +8,7 @@ void mif(int argc, char **argv)
     FILE * rfd; /* Readonly-File Disctpriter */
 
     cnd("tsplib");
+    cnd("debug");
     rfd = rfop(argv[1], "mif");
     rif_sd(rfd);
     fclose(rfd);

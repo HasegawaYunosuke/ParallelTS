@@ -27,6 +27,13 @@ double diff_t(void)
             //printf("Node %d Now:%f\n", g_bd.mpi_id, rn);
             printf("Node %d , clw_max == %d Now:%f Best:%f\n", g_bd.mpi_id, ig_p[0].clw_max, rn, ig_p[g_bd.mpi_bsd_pthr].bsd);
             timerf = ON;
+
+            /* DEBUG1 MODE PROCEDURE START */
+            if(g_bm.dld1 == ON) {
+                dld1func(rn);
+            }
+            /* DEBUG1 MODE PROCEDURE END */
+
         }
         else if((int)rn % show_t != 0 && timerf == ON) {
             timerf = OFF;
