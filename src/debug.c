@@ -64,6 +64,7 @@ void odld1(FILE * fdp, double rn)
     int i;
     int ctls; /* Current Tabu-List Size */
     int intmax = INT_MAX;
+    double bsd;
 
     if((int)(intmax / ig_p[0].stl) < g_bd.tl_lc) {
         ctls = intmax - 1;
@@ -75,9 +76,11 @@ void odld1(FILE * fdp, double rn)
     /* Timer */
     fprintf(fdp, "%f,", rn);
 
-    /* Each Thread's Best Solution */
+    /* Each Thread's Best Solution & Gap between My-Sol and Known Best Sol */
     for(i = 0; i < g_bd.nth; i++) {
-        fprintf(fdp, "%f,", ig_p[i].bsd);
+        bsd = ig_p[i].bsd;
+        fprintf(fdp, "%f,", bsd);
+        fprintf(fdp, "%f,", (bsd - g_bd.kn_bs) / g_bd.kn_bs * 100);
     }
 
     fprintf(fdp, "%d\n", ctls);
