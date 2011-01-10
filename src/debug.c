@@ -10,9 +10,11 @@ void deb_init(void)
 {
     FILE * tfdp; /* Temporary File Discpriter */
 
-    ddeb_lfn();
-    tfdp = wfop(d1st.dld1_lfn, "deb_init");
-    fclose(tfdp);
+    if(g_bm.dld1 == ON) {
+        ddeb_lfn();
+        tfdp = wfop(d1st.dld1_lfn, "deb_init");
+        fclose(tfdp);
+    }
 }
 
 void ddeb_lfn(void)
