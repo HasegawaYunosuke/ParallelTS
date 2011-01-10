@@ -12,32 +12,29 @@ aig_p	memory.c	/^void aig_p(void)$/;"	f
 alw_wors	search.c	/^int alw_wors(double b_diff, int * npthr)$/;"	f
 arld	read_data.c	/^void arld(char * rld, int li)$/;"	f
 artsplibld	read_data.c	/^void artsplibld(char * rld, int dli)$/;"	f
-cbc_bcpi	../mpi/mpi.c	/^void cbc_bcpi(int * cpi, int * child, int * parent1, int * parent2, int pthr)$/;"	f
-ccp_bndp	../mpi/mpi.c	/^void ccp_bndp(int * cpi, int pthr, int * mysol, int * othersol)$/;"	f
-ccp_br	../mpi/mpi.c	/^void ccp_br(int * cpi, int pthr)$/;"	f
 ch_tb	tabu.c	/^int ch_tb(int * ccs)$/;"	f
 ch_tb_c	tabu.c	/^void * ch_tb_c(void * css)$/;"	f
-chman	../mpi/mpi.c	/^int chman(int pthr)$/;"	f
 cif	check.c	/^void cif(int argc, char **argv)$/;"	f
 cip_bnn	init_path.c	/^void cip_bnn(int * npthr)$/;"	f
 cip_brn	init_path.c	/^void cip_brn(int * npthr)$/;"	f
 cnd	check.c	/^void cnd(char dn[32])$/;"	f
 copyc_b	init_path.c	/^void copyc_b(int * npthr)$/;"	f
-cp_p2sol	../mpi/mpi.c	/^void cp_p2sol(int cpi_ap, int * sols, int * mysol)$/;"	f
-cpthr4gp	../mpi/mpi.c	/^void * cpthr4gp(void * arg)$/;"	f
-crossov	../mpi/mpi.c	/^void crossov(int pthr, int * sols, int * mysol, int cpi_ap)$/;"	f
 csac	check.c	/^int csac(int * path)$/;"	f
 cuc_pa	init_path.c	/^void cuc_pa(int * ary, int max, int target, int flag)$/;"	f
+d1st	debug.c	/^struct dld1st d1st;$/;"	v	typeref:struct:dld1st
+ddeb_lfn	debug.c	/^void ddeb_lfn(void)$/;"	f
+deb_init	debug.c	/^void deb_init(void)$/;"	f
 dif_2p	math.c	/^double dif_2p(double x1, double y1, double x2, double y2)$/;"	f
 diff_t	timer.c	/^double diff_t(void)$/;"	f
-dns	../mpi/mpi.c	/^int dns(void)$/;"	f
+dld1_lfn	debug.c	/^    char dld1_lfn[256]; \/* DEBUG1 Log-File-Name *\/$/;"	m	struct:dld1st	file:
+dld1func	debug.c	/^void * dld1func(void * temp_rn)$/;"	f
+dld1st	debug.c	/^struct dld1st {$/;"	s	file:
 ex_addtl	search.c	/^void ex_addtl(int * path, int * ccs, int * ccsi, int * npthr)$/;"	f
 ffi	memory.c	/^void ffi(void)$/;"	f
 fiad	init.c	/^void fiad(void)$/;"	f
 fin	finalize.c	/^void fin(void)$/;"	f
 fnyfp	memory.c	/^void fnyfp(void)$/;"	f
 g_st_t	timer.c	/^double g_st_t;$/;"	v
-ga_proc	../mpi/mpi.c	/^void ga_proc(int * pthr)$/;"	f
 gbs_bpn	read_data.c	/^void gbs_bpn(void)$/;"	f
 gdbl	read_data.c	/^int gdbl(char * rld)$/;"	f
 gdld1	read_data.c	/^void gdld1(char * rld)$/;"	f
@@ -50,7 +47,6 @@ gminex_etb	search.c	/^void gminex_etb(int * path, int * ccs, int * ccsi, int * n
 gnc_eu	init_path.c	/^int gnc_eu(int sc, int * yet, int surplus)$/;"	f
 gnxn	read_data.c	/^int gnxn(int di, char * rld)$/;"	f
 gonoff	read_data.c	/^int gonoff(char * rld, int di)$/;"	f
-gp4ga_bhd	../mpi/mpi.c	/^int gp4ga_bhd(int pthr, int * sols, int * mysol)$/;"	f
 gpd	math.c	/^double gpd(int * path, int * npthr)$/;"	f
 gplt	read_data.c	/^void gplt(char * rld)$/;"	f
 gplw	read_data.c	/^void gplw(char * rld)$/;"	f
@@ -64,7 +60,6 @@ gptGAsm	read_data.c	/^void gptGAsm(char * rld)$/;"	f
 gptcp	read_data.c	/^void gptcp(char * rld)$/;"	f
 gpuhd4GAsm	read_data.c	/^void gpuhd4GAsm(char * rld)$/;"	f
 grn	math.c	/^int grn(int max)$/;"	f
-gstedpis_ndp	../mpi/mpi.c	/^int gstedpis_ndp(int * dp, int * stedpis, int pthr)$/;"	f
 guci_bc	init_path.c	/^int guci_bc(int city, int * ary, int max)$/;"	f
 init	init.c	/^void init(int argc, char **argv)$/;"	f
 initp	init_path.c	/^void initp(int * npthr)$/;"	f
@@ -74,33 +69,20 @@ itpn	read_data.c	/^void itpn(char * rld)$/;"	f
 ma_tl	memory.c	/^void ma_tl(void)$/;"	f
 main	main.c	/^int main(int argc, char **argv)$/;"	f
 mif	read_data.c	/^void mif(int argc, char **argv)$/;"	f
-mpi_fin	../mpi/mpi.c	/^void mpi_fin(void)$/;"	f
-mpi_ip	../mpi/mpi.c	/^void mpi_ip(int argc, char **argv)$/;"	f
 mpi_pres	result.c	/^void mpi_pres(FILE * wfd, double * rd, int size)$/;"	f
-mpi_recvp	../mpi/mpi.c	/^void * mpi_recvp(void * arg)$/;"	f
-mpi_test	../mpi/mpi.c	/^void mpi_test(void)$/;"	f
-mpi_want	../mpi/mpi.c	/^void mpi_want(int npthr)$/;"	f
 mtsplib	read_data.c	/^void mtsplib(void)$/;"	f
 mychmp	read_data.c	/^void mychmp(char * buf, char * mychmpbuf)$/;"	f
-od_crosovp	../mpi/mpi.c	/^void od_crosovp(int * cpi, int * child, int * parent1, int * parent2, int pthr)$/;"	f
-od_crossov	../mpi/mpi.c	/^void od_crossov(int * cpi, int * parent2, int * parent1, int pthr)$/;"	f
+odld1	debug.c	/^void odld1(FILE * fdp, double rn)$/;"	f
 oem	error.c	/^void oem(char func[32], char ms[64], int da)$/;"	f
 out_r	result.c	/^void out_r(void)$/;"	f
-pm_crossov	../mpi/mpi.c	/^void pm_crossov(int * cpi, int * parent2, int * parent1, int pthr)$/;"	f
-pre_gacp	../mpi/mpi.c	/^void pre_gacp(int pthr, int * sols, int * mysol)$/;"	f
 pres	result.c	/^void pres(FILE * resfp)$/;"	f
-proc_rGA	../mpi/mpi.c	/^void proc_rGA(void * arg)$/;"	f
 ptp	pthread.c	/^void ptp(void)$/;"	f
-rand_sm	../mpi/mpi.c	/^void rand_sm(int * pthr)$/;"	f
 rfop	file_manage.c	/^FILE * rfop(char * argv, char bfn[32])$/;"	f
 rif_sd	read_data.c	/^void rif_sd(FILE * rfd)$/;"	f
 rtsplib_sd	read_data.c	/^void rtsplib_sd(FILE * rfp)$/;"	f
-sdpcs	../mpi/mpi.c	/^void sdpcs(int * mysol, int * p4w, int * dp1, int * dp2)$/;"	f
-set_pn	../mpi/mpi.c	/^void set_pn(char * parameters)$/;"	f
 sgd	read_data.c	/^void sgd(void)$/;"	f
 smcm	read_data.c	/^void smcm(char * rld)$/;"	f
 smpim	read_data.c	/^void smpim(char * rld)$/;"	f
-srand_sm	../mpi/mpi.c	/^void srand_sm(int * pthr)$/;"	f
 ssti	read_data.c	/^void ssti(char * rld)$/;"	f
 st_t	timer.c	/^void st_t(void)$/;"	f
 threp	pthread.c	/^void * threp(void * arg)$/;"	f

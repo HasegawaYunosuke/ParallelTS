@@ -31,7 +31,6 @@ double diff_t(void)
 
             /* DEBUG1 MODE PROCEDURE START */
             if(g_bm.dld1 == ON) {
-                //dld1func(rn);
                 pthread_create(&debugp, NULL, dld1func, (void *)&rn);
             }
             /* DEBUG1 MODE PROCEDURE END */

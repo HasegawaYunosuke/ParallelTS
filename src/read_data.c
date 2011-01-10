@@ -948,7 +948,7 @@ void gbs_bpn(void)
         g_bd.kn_bs = 48912.0;
     }
     else if(strcmp(g_bd.pn, "dsj1000.tsp") == 0) {
-        g_bd.kn_bs = 18659688.0;
+        g_bd.kn_bs = 18660188.0;
     }
     else if(strcmp(g_bd.pn, "eil101.tsp") == 0) {
         g_bd.kn_bs = 629.0;

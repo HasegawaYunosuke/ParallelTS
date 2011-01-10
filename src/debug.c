@@ -63,8 +63,14 @@ void odld1(FILE * fdp, double rn)
 {
     int i;
     int ctls; /* Current Tabu-List Size */
+    int intmax = INT_MAX;
 
-    ctls = g_bd.tl_lc * ig_p[0].stl + g_tli;
+    if((int)(intmax / ig_p[0].stl) < g_bd.tl_lc) {
+        ctls = intmax - 1;
+    }
+    else {
+        ctls = g_bd.tl_lc * ig_p[0].stl + g_tli;
+    }
 
     /* Timer */
     fprintf(fdp, "%f,", rn);

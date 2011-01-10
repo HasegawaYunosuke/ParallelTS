@@ -7,6 +7,7 @@
 #include <math.h>
 #include <float.h>
 #include <sys/time.h>
+#include <limits.h>
 #include "define.h"
 #include "globals.h"
 #ifdef MPIMODE
