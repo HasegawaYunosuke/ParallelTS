@@ -4,7 +4,7 @@ multi[ON/OFF]:ON
 MPI[ON/OFF]:ON
 result[simple/navi]:simple
 initpa[rand/nn]:nn
-deb1[ON/OFF]:ON
+deb1[ON/OFF]:OFF
 deb2[ON/OFF]:OFF
 deb3[ON/OFF]:OFF
 deb4[ON/OFF]:OFF
