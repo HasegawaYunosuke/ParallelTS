@@ -832,7 +832,7 @@ void proc_rGA(void * arg)
     }
 
     /* Something Mutation (Falling in Manneri)*/
-    if(g_bm.GAsm == ON && chman(pthr) == YES) {
+    if(g_bm.mpim == ON && g_bm.GAsm == ON && chman(pthr) == YES) {
         /*T*/if(diff_t() < (double)(g_bd.st - 10)) {
             /* If the Type of GA is "OD+PMm" or "PM+ODm" */
             if(ig_p[pthr].tGA == TYPE3) {
@@ -867,10 +867,14 @@ void proc_rGA(void * arg)
         }
     }
     /* Normal GA procedure */
-    else {
+    else if(g_bm.mpim == ON) {
         /*T*/if(diff_t() < (double)(g_bd.st - 10)) {
             ga_proc(&pthr);
         }
+    }
+    /* TS Only procedure */
+    else {
+        rand_sm(&pthr);
     }
 }
 

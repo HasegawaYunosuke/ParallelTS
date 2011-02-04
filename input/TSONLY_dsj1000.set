@@ -1,5 +1,5 @@
 prob:dsj1000.tsp
-time[sec]:31
+time[sec]:7200
 multi[ON/OFF]:ON
 MPI[ON/OFF]:OFF
 result[simple/navi]:simple
