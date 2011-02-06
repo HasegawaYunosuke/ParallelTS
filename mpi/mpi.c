@@ -169,7 +169,14 @@ void ga_proc(int * pthr)
 
     /* Set Data */
     pre_gacp(*pthr, sols, mysol);
-    cpi_ap = gp4ga_bhd(*pthr, sols, mysol);
+    /* Choice GA's parent by Random */
+    if(ig_p[*pther].tGA == TYPE5) {
+        cpi_ap = gp4ga_br(*pthr, sols, mysol);
+    }
+    /* Choice GA's parent by Humming Distance */
+    else {
+        cpi_ap = gp4ga_bhd(*pthr, sols, mysol);
+    }
     //cp_p2sol(cpi_ap, sols, mysol);
     if(cpi_ap != TIMEUP && cpi_ap != EMPTY) {
         crossov(*pthr, sols, mysol, cpi_ap);
@@ -328,6 +335,56 @@ void pre_gacp(int pthr, int * sols, int * mysol)
         else {
             break;
         }
+    }
+}
+
+int gp4ga_br(int pthr, int * sols, int * mysol)
+{
+    int i, j, k;
+    int cc, nc; /* Current, Next City */
+    int sum = 0;
+    int asum = 0;
+    int nusol = 0;
+    int cii = 0; /* Choiced INdexes's Index */
+    int ci[g_bd.np_ae]; /* Choiced Indexes */
+    int ta[g_bd.ps]; /* Temporary Arrary */
+    double hds[g_bd.np_ae]; /* Humming Distances */
+    double ave_hd; /* Average of Humming Distance */
+
+    /* Global Timer */
+    if(diff_t() >= (double)(g_bd.st)) {return TIMEUP;}
+
+    /* "sols"'s Data Checking & Data Initialize */
+    if(g_bd.np_ae > 2) {
+        for(i = 0; i < g_bd.np_ae; i++) {
+            ci[i] = EMPTY;
+        }
+
+        for(i = 0; i < g_bd.np_ae; i++) {
+            for(j = 0; j < g_bd.ps; j++) {
+                ta[j] = sols[(i * g_bd.ps + j)]
+                if(csac(ta) == YES) {
+                    ci[cii] = i;
+                    cii++;
+                }
+            }
+        }
+
+        k = rand() % cii;
+        for(j = 0; j < g_bd.ps; j++) {
+            ta[j] = sols[(k * g_bd.ps + j)]
+        }
+        if(csac(ta) == YES) {
+            printf("DEL:YES\n");
+        }
+        else {
+            printf("DEL:NO\n");
+        }
+
+        return ci[k];
+    }
+    else if(g_bd.np_ae < 2) {
+        return EMPTY;
     }
 }
 

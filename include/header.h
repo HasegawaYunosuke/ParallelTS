@@ -107,6 +107,7 @@ void * cpthr4gp(void * arg); /* Child Pthread for MPI_Gather() Procedure */
 void * cpthr4gp(void * arg); /* GA Procedure */
 void pre_gacp(int pthr, int * sols, int * mysol); /* Previous of GA: Copy Procedure */
 int gp4ga_bhd(int pthr, int * sols, int * mysol); /* Get Parent for GA Procedure By Humming Distance */
+int gp4ga_br(int pthr, int * sols, int * mysol); /* Get Parent for GA Procedure By Random */
 void crossov(int pthr, int * sols, int * mysol, int cpi_ap); /* Cross Over */
     int dns(void); /* Dicide Number of Swap */
     void rand_sm(int * pthr); /* Random Swap Mutation */

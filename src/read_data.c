@@ -604,6 +604,11 @@ void gptGA(char * rld)
             ig_p[i].tGA = TYPE4;
         }
     }
+    else if(strcmp(sd, "RCBOTH") == 0) {
+        for(i = 0; i < g_bd.nth; i++) {
+            ig_p[i].tGA = TYPE5;
+        }
+    }
     else {
         sprintf(ms, "Wrong Result Mode:\"%s\"", sd);
         oem("wtres", ms, 0);
