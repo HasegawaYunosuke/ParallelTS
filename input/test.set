@@ -1,7 +1,7 @@
-prob:dsj1000.tsp
-time[sec]:31
+prob:rat575.tsp
+time[sec]:300
 multi[ON/OFF]:ON
-MPI[ON/OFF]:OFF
+MPI[ON/OFF]:ON
 result[simple/navi]:simple
 initpa[rand/nn]:nn
 deb1[ON/OFF]:OFF
@@ -18,7 +18,7 @@ p_loop:100
 TLS:5N
 p_ncp:2
 p_tcp[rand/nondouble]:rand
-p_tGA[PM/PM+ODm/OD/OD+PMm/BOTH/RCBOTH]:BOTH
+p_tGA[PM/PM+ODm/OD/OD+PMm/BOTH/RCBOTH]:RCBOTH
 p_nGAsw:30
 p_tGAsw[rand/srand/ndrand/GA]:rand
 p_uhd4GAsm:95

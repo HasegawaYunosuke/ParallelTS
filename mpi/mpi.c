@@ -170,7 +170,7 @@ void ga_proc(int * pthr)
     /* Set Data */
     pre_gacp(*pthr, sols, mysol);
     /* Choice GA's parent by Random */
-    if(ig_p[*pther].tGA == TYPE5) {
+    if(ig_p[*pthr].tGA == TYPE5) {
         cpi_ap = gp4ga_br(*pthr, sols, mysol);
     }
     /* Choice GA's parent by Humming Distance */
@@ -362,28 +362,23 @@ int gp4ga_br(int pthr, int * sols, int * mysol)
 
         for(i = 0; i < g_bd.np_ae; i++) {
             for(j = 0; j < g_bd.ps; j++) {
-                ta[j] = sols[(i * g_bd.ps + j)]
-                if(csac(ta) == YES) {
-                    ci[cii] = i;
-                    cii++;
-                }
+                ta[j] = sols[(i * g_bd.ps + j)];
+            }
+            if(csac(ta) == YES) {
+                ci[cii] = i;
+                cii++;
             }
         }
 
-        k = rand() % cii;
-        for(j = 0; j < g_bd.ps; j++) {
-            ta[j] = sols[(k * g_bd.ps + j)]
-        }
-        if(csac(ta) == YES) {
-            printf("DEL:YES\n");
+        if(cii != 0) {
+            k = rand() % cii;
+            return ci[k];
         }
         else {
-            printf("DEL:NO\n");
+            return EMPTY;
         }
-
-        return ci[k];
     }
-    else if(g_bd.np_ae < 2) {
+    else {
         return EMPTY;
     }
 }
@@ -1133,6 +1128,9 @@ void set_pn(char * parameters)
     }
     else if(ig_p[0].tGA == TYPE4) {
         strcpy(tGA, "TGA_PM+ODm");
+    }
+    else if(ig_p[0].tGA == TYPE5) {
+        strcpy(tGA, "TGA_RCBOTH");
     }
 
     /* Mutation */

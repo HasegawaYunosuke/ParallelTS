@@ -57,6 +57,7 @@ gnc_eu	init_path.c	/^int gnc_eu(int sc, int * yet, int surplus)$/;"	f
 gnxn	read_data.c	/^int gnxn(int di, char * rld)$/;"	f
 gonoff	read_data.c	/^int gonoff(char * rld, int di)$/;"	f
 gp4ga_bhd	../mpi/mpi.c	/^int gp4ga_bhd(int pthr, int * sols, int * mysol)$/;"	f
+gp4ga_br	../mpi/mpi.c	/^int gp4ga_br(int pthr, int * sols, int * mysol)$/;"	f
 gpd	math.c	/^double gpd(int * path, int * npthr)$/;"	f
 gplt	read_data.c	/^void gplt(char * rld)$/;"	f
 gplw	read_data.c	/^void gplw(char * rld)$/;"	f
