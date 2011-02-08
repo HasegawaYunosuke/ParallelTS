@@ -525,7 +525,8 @@ void crossov(int pthr, int * sols, int * mysol, int cpi_ap)
     else if(ig_p[pthr].tGA == TYPE1 || ig_p[pthr].tGA == TYPE3) {
         od_crossov(cpi, opsol, mysol, pthr);
     }
-    else if(ig_p[pthr].tGA == TYPE2) {
+    /* Both Clossover */
+    else if(ig_p[pthr].tGA == TYPE2 || ig_p[pthr].tGA == TYPE5) {
         if(pthr == g_bd.mpi_bsd_pthr) {
             od_crossov(cpi, opsol, mysol, pthr);
         }
